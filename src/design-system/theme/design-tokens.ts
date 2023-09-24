@@ -9,7 +9,7 @@ export const tokens = {
   buttonPrimaryTextColor: colors.white,
   buttonSecondaryBackgroundColor: colors.secondary,
   buttonSecondaryTextColor: colors.black,
-  buttonBorderRadius: radius["100px"],
+  buttonBorderRadius: radius.full,
   /**
    * @type Input
    */

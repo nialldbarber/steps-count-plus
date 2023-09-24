@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "expo-user-management",
-    "slug": "expo-user-management",
+    "name": "step-count-plus",
+    "slug": "step-count-plus",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,16 +15,26 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.stepcountplus"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.anonymous.stepcountplus"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "@config-plugins/detox"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "876ffebc-e79c-48e3-b6b5-85093d562da8"
+      }
     }
   }
 }

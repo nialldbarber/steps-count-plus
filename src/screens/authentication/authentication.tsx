@@ -5,11 +5,11 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  View,
 } from "react-native";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { supabase } from "@/database/supabase";
 import { Button, Input, Stack } from "@/design-system/components";
@@ -40,20 +40,31 @@ type SignInSchema = z.infer<typeof signInSchema>;
 
 export default function Authentication() {
   const { navigate } = useNavigation<SignUpScreenNavigationProp>();
-
-  const [outcome, setOutcome] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const { register } = useForm<SignInSchema>();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<SignInSchema>({
+    resolver: zodResolver(signInSchema),
+  });
 
   /**
    * Email
    */
-  async function signInWithEmail() {
+  async function onSubmit({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }) {
     setIsLoading(true);
-    const { data, error } = await supabase.auth.signInWithPassword({
+
+    const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
@@ -96,22 +107,44 @@ export default function Authentication() {
       <ScrollView>
         <Stack margin="12px">
           <Stack gutter="15px">
-            <Input
-              text={email}
-              onChangeText={(text) => setEmail(text)}
-              keyboardType="email-address"
-              placeholder="Enter your email address"
-              autoCapitalize="none"
+            <Controller
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <Input
+                  text={value}
+                  onChangeText={(text) => onChange(text)}
+                  keyboardType="email-address"
+                  placeholder="Enter your email address"
+                  autoCapitalize="none"
+                />
+              )}
+              name="email"
             />
-            <Input
-              text={password}
-              onChangeText={(text) => setPassword(text)}
-              placeholder="Enter a password"
-              secureTextEntry
+            {errors.email && (
+              <Text style={{ color: "red" }}>{errors.email?.message}</Text>
+            )}
+            <Controller
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <Input
+                  text={value}
+                  onChangeText={(text) => onChange(text)}
+                  placeholder="Enter a password"
+                  secureTextEntry
+                />
+              )}
+              name="password"
             />
+            {errors.password && (
+              <Text style={{ color: "red" }}>{errors.password.message}</Text>
+            )}
             {isLoading && <Text>Loading...</Text>}
-            <Button onPress={signInWithEmail}>Log in</Button>
-            <Button variant="secondary" onPress={() => navigate("SignUp")}>
+            <Button onPress={handleSubmit(onSubmit)}>Log in</Button>
+            <Button
+              variant="secondary"
+              onPress={() => navigate("SignUp")}
+              testID="create-new-account"
+            >
               Create new account
             </Button>
           </Stack>

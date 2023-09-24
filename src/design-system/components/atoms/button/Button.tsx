@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Appearance, Pressable, StyleSheet, Text } from "react-native";
 import type { PressableProps, TextStyle, ViewStyle } from "react-native";
 import Animated, {
   useAnimatedStyle,
@@ -7,6 +7,8 @@ import Animated, {
 } from "react-native-reanimated";
 import { space } from "@/design-system/layouts/space";
 import { tokens } from "@/design-system/theme/design-tokens";
+
+const colorScheme = Appearance.getColorScheme();
 
 type Variant = "primary" | "secondary" | "tertiary" | "link" | "destructive";
 
@@ -17,7 +19,10 @@ interface ButtonProps extends PressableProps {
 
 const buttonStyles: Record<Variant, ViewStyle> = {
   primary: {
-    backgroundColor: tokens.buttonPrimaryBackgroundColor,
+    backgroundColor:
+      colorScheme === "light"
+        ? tokens.buttonPrimaryBackgroundColor
+        : tokens.buttonSecondaryBackgroundColor,
   },
   secondary: {
     backgroundColor: tokens.buttonSecondaryBackgroundColor,

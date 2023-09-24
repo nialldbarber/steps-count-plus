@@ -1,4 +1,5 @@
 import { colors } from "../color/palettes";
+import { radius } from "../layouts/radius";
 
 export const tokens = {
   /**
@@ -8,6 +9,7 @@ export const tokens = {
   buttonPrimaryTextColor: colors.white,
   buttonSecondaryBackgroundColor: colors.secondary,
   buttonSecondaryTextColor: colors.black,
+  buttonBorderRadius: radius["100px"],
   /**
    * @type Input
    */

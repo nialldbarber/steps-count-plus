@@ -4,11 +4,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import type { Session } from "@supabase/supabase-js";
 import { supabase } from "@/database/supabase";
 import { AuthenticationScreen } from "@/screens/authentication";
+import SignUpScreen from "@/screens/authentication/sign-up";
 import { HomeScreen } from "@/screens/home";
 
 export type RootStackParamList = {
   Home: undefined;
   Authentication: undefined;
+  SignUp: undefined;
 };
 
 const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
@@ -32,13 +34,17 @@ export default function Navigation() {
         {session && session.user ? (
           <Screen name="Home" component={HomeScreen} />
         ) : (
-          <Screen
-            name="Authentication"
-            component={AuthenticationScreen}
-            options={{
-              animationTypeForReplace: session && session.user ? "pop" : "push",
-            }}
-          />
+          <>
+            <Screen
+              name="Authentication"
+              component={AuthenticationScreen}
+              options={{
+                animationTypeForReplace:
+                  session && session.user ? "pop" : "push",
+              }}
+            />
+            <Screen name="SignUp" component={SignUpScreen} />
+          </>
         )}
       </Navigator>
     </NavigationContainer>

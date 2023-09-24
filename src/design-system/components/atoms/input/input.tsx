@@ -5,10 +5,16 @@ import { tokens } from "@/design-system/theme/design-tokens";
 
 interface InputProps extends TextInputProps {
   text: string;
+  isError?: boolean;
   onChangeText: (text: any) => void;
 }
 
-export default function Input({ text, onChangeText, ...rest }: InputProps) {
+export default function Input({
+  text,
+  isError,
+  onChangeText,
+  ...rest
+}: InputProps) {
   const styles = StyleSheet.create({
     container: {
       backgroundColor: tokens.inputBackgroundColor,

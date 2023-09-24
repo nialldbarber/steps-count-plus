@@ -9,7 +9,7 @@ export const greyColors = {
 } as const;
 
 export const coreColors = {
-  primary: "#0284c7",
+  primary: "#0063e1",
   secondary: "#84E1BC",
   tertiary: "",
   destructive: "#ef4444",

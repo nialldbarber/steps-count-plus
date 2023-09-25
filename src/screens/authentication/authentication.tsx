@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Alert,
   SafeAreaView,
@@ -15,35 +14,22 @@ import { supabase } from "@/database/supabase";
 import { Button, Input, Stack } from "@/design-system/components";
 import type { RootStackParamList } from "@/navigation/navigation-container/navigation-container";
 
-type SignUpScreenNavigationProp = StackNavigationProp<
+type SignUpScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
   "SignUp"
 >;
 
-const signInSchema = z
-  .object({
-    email: z.string().email("Invalid email").min(1, "Email is required"),
-    password: z
-      .string()
-      .min(1, "Password is required")
-      .min(8, "Password must have more than 8 characters"),
-    confirmPassword: z.string().min(1, "Password confirmation is required"),
-    terms: z.literal(true, {
-      errorMap: () => ({ message: "You must accept the terms and conditions" }),
-    }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    path: ["confirmPassword"],
-    message: "Passwords do not match",
-  });
+const signInSchema = z.object({
+  email: z.string().email("Invalid email").min(1, "Email is required"),
+  password: z
+    .string()
+    .min(1, "Password is required")
+    .min(8, "Password must have more than 8 characters"),
+});
 type SignInSchema = z.infer<typeof signInSchema>;
 
 export default function Authentication() {
   const { navigate } = useNavigation<SignUpScreenNavigationProp>();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-
   const {
     control,
     handleSubmit,
@@ -52,9 +38,6 @@ export default function Authentication() {
     resolver: zodResolver(signInSchema),
   });
 
-  /**
-   * Email
-   */
   async function onSubmit({
     email,
     password,
@@ -62,46 +45,14 @@ export default function Authentication() {
     email: string;
     password: string;
   }) {
-    setIsLoading(true);
-
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
     if (error) Alert.alert(error.message);
-    setIsLoading(false);
   }
 
-  // async function signUpWithEmail() {
-  //   setIsLoading(true);
-  //   const { data, error } = await supabase.auth.signUp({
-  //     email,
-  //     password,
-  //   });
-
-  //   if (error) Alert.alert(error.message);
-
-  //   console.log(data);
-
-  //   setIsLoading(false);
-  // }
-
-  /**
-   * Google
-   */
-
-  /**
-   * Facebook
-   */
-
-  /**
-   * iOS
-   */
-
-  /**
-   * Android/PlayStore?
-   */
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -116,13 +67,12 @@ export default function Authentication() {
                   keyboardType="email-address"
                   placeholder="Enter your email address"
                   autoCapitalize="none"
+                  isError={errors.email}
+                  errorMessage={errors.email && errors.email?.message}
                 />
               )}
               name="email"
             />
-            {errors.email && (
-              <Text style={{ color: "red" }}>{errors.email?.message}</Text>
-            )}
             <Controller
               control={control}
               render={({ field: { onChange, value } }) => (
@@ -130,20 +80,22 @@ export default function Authentication() {
                   text={value}
                   onChangeText={(text) => onChange(text)}
                   placeholder="Enter a password"
+                  isError={errors.password}
+                  errorMessage={errors.password && errors.password.message}
                   secureTextEntry
                 />
               )}
               name="password"
             />
-            {errors.password && (
-              <Text style={{ color: "red" }}>{errors.password.message}</Text>
-            )}
-            {isLoading && <Text>Loading...</Text>}
-            <Button onPress={handleSubmit(onSubmit)}>Log in</Button>
+            {isSubmitting && <Text>Loading...</Text>}
+            <Button onPress={handleSubmit(onSubmit)} haptic="Medium">
+              Log in
+            </Button>
             <Button
               variant="secondary"
               onPress={() => navigate("SignUp")}
               testID="create-new-account"
+              haptic="Medium"
             >
               Create new account
             </Button>

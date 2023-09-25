@@ -16,7 +16,10 @@ export const coreColors = {
 } as const;
 
 export type BaseColors = keyof typeof baseColors;
+export type GreyColors = keyof typeof greyColors;
 export type CoreColors = keyof typeof coreColors;
+
+export type Colors = BaseColors | GreyColors | CoreColors;
 
 export const colors = {
   ...baseColors,

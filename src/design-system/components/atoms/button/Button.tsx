@@ -1,31 +1,35 @@
-import { Appearance, Pressable, StyleSheet, Text } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 import type { PressableProps, TextStyle, ViewStyle } from "react-native";
+import type {
+  ImpactFeedbackStyle,
+  NotificationFeedbackType,
+} from "expo-haptics";
+import * as Haptics from "expo-haptics";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
 } from "react-native-reanimated";
+import { Text } from "@/design-system/components/atoms/text";
 import { space } from "@/design-system/layouts/space";
 import { tokens } from "@/design-system/theme/design-tokens";
-
-const colorScheme = Appearance.getColorScheme();
 
 type Variant = "primary" | "secondary" | "tertiary" | "link" | "destructive";
 
 interface ButtonProps extends PressableProps {
   variant?: Variant;
+  haptic?: keyof typeof ImpactFeedbackStyle;
   children: string;
 }
 
 const buttonStyles: Record<Variant, ViewStyle> = {
   primary: {
-    backgroundColor:
-      colorScheme === "light"
-        ? tokens.buttonPrimaryBackgroundColor
-        : tokens.buttonSecondaryBackgroundColor,
+    backgroundColor: tokens.buttonPrimaryBackgroundColor,
   },
   secondary: {
-    backgroundColor: tokens.buttonSecondaryBackgroundColor,
+    backgroundColor: "transparent",
+    borderColor: tokens.buttonSecondaryBackgroundColor,
+    borderWidth: 2,
   },
   tertiary: {},
   link: {},
@@ -46,19 +50,18 @@ const textStyles: Record<Variant, TextStyle> = {
 
 export default function Button({
   variant = "primary",
+  haptic,
   children,
   ...rest
 }: ButtonProps) {
   const styles = StyleSheet.create({
     button: {
       alignItems: "center",
-      padding: space["16px"],
+      padding: space["20px"],
       borderRadius: tokens.buttonBorderRadius,
       ...buttonStyles[variant],
     },
     text: {
-      // TODO: add global font weights
-      fontWeight: "700",
       ...textStyles[variant],
     },
   });
@@ -80,10 +83,17 @@ export default function Button({
       <Pressable
         {...rest}
         style={styles.button}
-        onPressIn={() => onPress("in")}
+        onPressIn={() => {
+          onPress("in");
+          if (haptic !== undefined) {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle[haptic]);
+          }
+        }}
         onPressOut={() => onPress("out")}
       >
-        <Text style={styles.text}>{children}</Text>
+        <Text style={styles.text} weight="bold">
+          {children}
+        </Text>
       </Pressable>
     </Animated.View>
   );

@@ -1,0 +1,10 @@
+{
+  "extends": "@react-native-community",
+  "rules": {
+    "no-shadow": "off",
+    "no-console": "warn",
+    "quotes": "off",
+    "curly": "off",
+    "react/react-in-jsx-scope": "off"
+  }
+}

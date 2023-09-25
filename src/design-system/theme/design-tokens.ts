@@ -16,6 +16,12 @@ export const tokens = {
   inputBackgroundColor: colors.white,
   inputBorderColor: colors.greyOne,
   inputDestructiveBorderColor: colors.destructive,
+  /**
+   * @type Icon
+   */
+  goBackStroke: colors.black,
+  warningStroke: colors.destructive,
+  warningText: colors.destructive,
 } as const;
 
 export type Tokens = keyof typeof tokens;

@@ -39,11 +39,18 @@ export default function Navigation() {
               name="Authentication"
               component={AuthenticationScreen}
               options={{
+                headerShown: false,
                 animationTypeForReplace:
                   session && session.user ? "pop" : "push",
               }}
             />
-            <Screen name="SignUp" component={SignUpScreen} />
+            <Screen
+              name="SignUp"
+              component={SignUpScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
           </>
         )}
       </Navigator>

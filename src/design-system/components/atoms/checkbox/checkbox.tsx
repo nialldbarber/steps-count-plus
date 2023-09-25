@@ -1,5 +1,6 @@
-import { Pressable, View } from "react-native";
+import { Pressable } from "react-native";
 import type { PressableProps } from "react-native";
+import * as Haptics from "expo-haptics";
 import { Warning2 } from "iconsax-react-native";
 import type { FieldError } from "react-hook-form";
 import { Box } from "@/design-system/components/atoms/box";
@@ -26,6 +27,7 @@ export default function Checkbox({
   ...rest
 }: CheckboxProps) {
   const handleValueChange = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     const newValue = !value;
     if (onValueChange) {
       onValueChange(newValue);
@@ -33,32 +35,30 @@ export default function Checkbox({
   };
 
   return (
-    <Box>
-      <Pressable
-        onPress={handleValueChange}
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-        }}
-        {...rest}
+    <>
+      <Box
+        flexDirection="row"
+        justifyContent={errorAlign === "left" ? "flex-start" : "flex-end"}
       >
-        <Text>{label}</Text>
-        <View
-          style={{
-            width: 20,
-            height: 20,
-            backgroundColor: value ? "black" : "white",
-            borderWidth: 2,
-            borderColor: "black",
-            marginLeft: 10,
-          }}
-        />
-      </Pressable>
+        <Pressable onPress={handleValueChange} {...rest}>
+          <Box flexDirection="row" alignItems="center">
+            <Box
+              width="20px"
+              height="20px"
+              backgroundColor={value ? "black" : "white"}
+              borderWidth={2}
+              borderRadius={5}
+              borderColor="black"
+              marginRight="10px"
+            />
+            <Text size="14px">{label}</Text>
+          </Box>
+        </Pressable>
+      </Box>
       {isError && (
         <Box
           flexDirection="row"
           alignItems="center"
-          justifyContent={errorAlign === "left" ? "flex-start" : "flex-end"}
           marginTop="8px"
           marginRight="8px"
         >
@@ -69,6 +69,6 @@ export default function Checkbox({
           </Text>
         </Box>
       )}
-    </Box>
+    </>
   );
 }

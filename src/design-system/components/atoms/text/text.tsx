@@ -1,5 +1,6 @@
 import { Text as NativeText, StyleSheet } from "react-native";
 import type { TextProps as NativeTextProps, TextStyle } from "react-native";
+import maxFontSizeMultiplier from "@/constants/maxFontSizeMultiplier";
 import { colors, type Colors } from "@/design-system/color/palettes";
 import { renderStringWithEmoji } from "@/design-system/lib/renderStringWithEmoji";
 import { typeHierarchy } from "@/design-system/typography/font-size";
@@ -39,7 +40,10 @@ export default function Text({
   });
 
   return (
-    <NativeText style={[styles.text, { ...style }]}>
+    <NativeText
+      style={[styles.text, { ...style }]}
+      maxFontSizeMultiplier={maxFontSizeMultiplier}
+    >
       {withEmoji ? renderStringWithEmoji(children) : children}
     </NativeText>
   );

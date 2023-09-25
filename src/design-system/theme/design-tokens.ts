@@ -3,6 +3,11 @@ import { radius } from "../layouts/radius";
 
 export const tokens = {
   /**
+   * @Screens
+   */
+  mainBackgroundColor: colors.white,
+  mainBackgroundColorDark: colors.black,
+  /**
    * @type Button
    */
   buttonPrimaryBackgroundColor: colors.primary,
@@ -13,7 +18,8 @@ export const tokens = {
   /**
    * @type Input
    */
-  inputBackgroundColor: colors.white,
+  inputBackgroundColor: colors.greyThree,
+  inputPlaceholderColor: colors.greyFour,
   inputBorderColor: colors.greyOne,
   inputDestructiveBorderColor: colors.destructive,
   /**
@@ -22,6 +28,11 @@ export const tokens = {
   goBackStroke: colors.black,
   warningStroke: colors.destructive,
   warningText: colors.destructive,
+  /**
+   * @type Loader
+   */
+  loaderPrimaryOutlineColor: colors.white,
+  loaderPrimaryActiveColor: colors.primaryDark,
 } as const;
 
 export type Tokens = keyof typeof tokens;

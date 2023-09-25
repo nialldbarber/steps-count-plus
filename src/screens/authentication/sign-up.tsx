@@ -1,17 +1,25 @@
-import {
-  Alert,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-} from "react-native";
+import { useEffect } from "react";
+import { Alert, SafeAreaView, ScrollView, StyleSheet } from "react-native";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
+//import { openInbox } from "react-native-email-link";
 import { z } from "zod";
 import GoBack from "@/components/go-back/go-back";
 import { supabase } from "@/database/supabase";
 import { Button, Input, Stack } from "@/design-system/components";
 import { Checkbox } from "@/design-system/components/atoms/checkbox";
+
+/**
+ * TODOS:
+ * * confirm password isn't working
+ * ? need to log out what happens, is there anything in hook form that i can use?
+ *
+ * * redirect from email just goes to localhost:3000
+ * ? this needs to go back to the app, perhaps that can be configured in supabase?
+ *
+ * * sign up with google
+ * ? I need to get a client token?
+ */
 
 const signUpSchema = z
   .object({
@@ -39,7 +47,7 @@ export default function Authentication() {
   const {
     control,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useForm<SignUpSchema>({
     resolver: zodResolver(signUpSchema),
   });
@@ -58,6 +66,12 @@ export default function Authentication() {
 
     if (error) Alert.alert(error.message);
   }
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      //openInbox();
+    }
+  }, [isSubmitSuccessful]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -122,8 +136,13 @@ export default function Authentication() {
               )}
               name="terms"
             />
-            {isSubmitting && <Text>Loading...</Text>}
-            <Button onPress={handleSubmit(onSubmit)}>Sign up</Button>
+            <Button
+              onPress={handleSubmit(onSubmit)}
+              haptic="Medium"
+              isLoading={isSubmitting}
+            >
+              Sign up
+            </Button>
           </Stack>
         </Stack>
       </ScrollView>

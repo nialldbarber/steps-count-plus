@@ -6,10 +6,13 @@ export const baseColors = {
 export const greyColors = {
   greyOne: "#e5e7eb",
   greyTwo: "#d1d5db",
+  greyThree: "#f7f7f7",
+  greyFour: "#717171",
 } as const;
 
 export const coreColors = {
   primary: "#0063e1",
+  primaryDark: "#045fd1",
   secondary: "#84E1BC",
   tertiary: "",
   destructive: "#ef4444",

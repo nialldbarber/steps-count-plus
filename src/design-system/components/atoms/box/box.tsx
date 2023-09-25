@@ -1,11 +1,24 @@
 import { useMemo, type ReactNode } from "react";
 import { View } from "react-native";
 import type { Colors } from "@/design-system/color/palettes";
-import { Height, heights, Width } from "@/design-system/layouts/size";
+import { Height, heights, Width, widths } from "@/design-system/layouts/size";
 import { space, type Space } from "@/design-system/layouts/space";
+
+function resolveToken<TokenName extends string, TokenValue, CustomValue>(
+  scale: Record<TokenName, TokenValue>,
+  value: TokenName | { custom: CustomValue } | undefined,
+) {
+  return value
+    ? typeof value === "object"
+      ? value.custom
+      : scale[value]
+    : undefined;
+}
 
 type BoxProps = {
   alignItems?: "flex-start" | "flex-end" | "center" | "stretch";
+  borderWidth?: number;
+  borderColor?: Colors;
   borderRadius?: number;
   borderTopLeftRadius?: number;
   borderTopRightRadius?: number;
@@ -13,12 +26,12 @@ type BoxProps = {
   borderBottomRightRadius?: number;
   bottom?: Space;
   children?: ReactNode;
+  flex?: number;
   flexBasis?: 0;
   flexDirection?: "row" | "row-reverse" | "column";
   flexGrow?: 0 | 1;
   flexShrink?: 0 | 1;
   flexWrap?: "wrap";
-  height?: Height;
   left?: Space;
   justifyContent?:
     | "flex-start"
@@ -43,8 +56,10 @@ type BoxProps = {
   position?: "absolute" | "relative";
   right?: Space;
   top?: Space;
-  width?: Width;
+  height?: Height | Space;
+  width?: Width | Space;
   overflow?: "hidden" | "visible" | "scroll";
+  backgroundColor?: Colors;
 } & (
   | {
       borderBottomRadius?: number;
@@ -72,6 +87,8 @@ type BoxProps = {
 
 export default function Box({
   alignItems,
+  borderWidth,
+  borderColor,
   borderRadius,
   borderBottomRadius,
   borderLeftRadius,
@@ -82,12 +99,12 @@ export default function Box({
   borderRightRadius,
   borderTopRadius,
   bottom,
+  flex,
   flexBasis,
   flexDirection,
   flexGrow,
   flexShrink,
   flexWrap,
-  height,
   left,
   justifyContent,
   margin,
@@ -107,13 +124,20 @@ export default function Box({
   position,
   right,
   top,
-  width,
+  width: _width,
+  height: _height,
   overflow,
+  backgroundColor,
   children,
 }: BoxProps) {
+  const width = resolveToken({ ...widths, ...space }, _width);
+  const height = resolveToken({ ...heights, ...space }, _height);
+
   const styles = useMemo(() => {
     return {
       alignItems,
+      borderWidth,
+      borderColor,
       borderBottomLeftRadius:
         borderBottomLeftRadius ??
         borderBottomRadius ??
@@ -134,15 +158,13 @@ export default function Box({
         borderTopRadius ??
         borderRightRadius ??
         borderRadius,
-      bottom,
+      flex,
       flexBasis,
       flexDirection,
       flexGrow,
       flexShrink,
       flexWrap,
-      height: heights[height],
       justifyContent,
-      left: space[left],
       margin: space[margin],
       marginBottom: space[marginBottom],
       marginHorizontal: space[marginHorizontal],
@@ -158,13 +180,20 @@ export default function Box({
       paddingTop: space[paddingTop],
       paddingVertical: space[paddingVertical],
       position,
-      right,
-      top,
+      top: space[top],
+      right: space[right],
+      left: space[left],
+      bottom: space[bottom],
+      height,
       width,
       overflow,
+      backgroundColor,
     };
   }, [
+    flex,
     alignItems,
+    borderWidth,
+    borderColor,
     borderBottomLeftRadius,
     borderBottomRadius,
     borderBottomRightRadius,
@@ -202,6 +231,7 @@ export default function Box({
     top,
     width,
     overflow,
+    backgroundColor,
   ]);
 
   // @ts-expect-error

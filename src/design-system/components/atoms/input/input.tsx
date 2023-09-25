@@ -26,11 +26,12 @@ export default function Input({
     container: {
       backgroundColor: tokens.inputBackgroundColor,
       borderWidth: 2,
-      padding: space["12px"],
-      borderColor: isError
-        ? tokens.inputDestructiveBorderColor
-        : tokens.inputBorderColor,
-      borderRadius: space["6px"],
+      padding: space["20px"],
+      borderColor: isError ? tokens.inputDestructiveBorderColor : "transparent",
+      borderRadius: space["15px"],
+    },
+    placeholderText: {
+      color: tokens.inputPlaceholderColor,
     },
   });
 
@@ -40,6 +41,7 @@ export default function Input({
         value={text}
         onChangeText={onChangeText}
         style={styles.container}
+        placeholderTextColor={styles.placeholderText.color}
         {...rest}
       />
       {isError && (

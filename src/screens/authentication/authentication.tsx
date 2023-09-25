@@ -1,10 +1,4 @@
-import {
-  Alert,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-} from "react-native";
+import { Alert, SafeAreaView, ScrollView, StyleSheet } from "react-native";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -12,6 +6,9 @@ import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { supabase } from "@/database/supabase";
 import { Button, Input, Stack } from "@/design-system/components";
+import { Box } from "@/design-system/components/atoms/box";
+import { Spacer } from "@/design-system/components/atoms/spacer";
+import { Text } from "@/design-system/components/atoms/text";
 import type { RootStackParamList } from "@/navigation/navigation-container/navigation-container";
 
 type SignUpScreenNavigationProp = NativeStackNavigationProp<
@@ -56,8 +53,14 @@ export default function Authentication() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
+        <Box alignItems="center" justifyContent="center">
+          <Box height="1/2" width="1/2" backgroundColor="black" />
+          <Text level="heading" size="26px">
+            StepCount+
+          </Text>
+        </Box>
         <Stack margin="12px">
-          <Stack gutter="15px">
+          <Stack gutter="12px">
             <Controller
               control={control}
               render={({ field: { onChange, value } }) => (
@@ -88,6 +91,7 @@ export default function Authentication() {
               name="password"
             />
             {isSubmitting && <Text>Loading...</Text>}
+            <Spacer height="20px" />
             <Button onPress={handleSubmit(onSubmit)} haptic="Medium">
               Log in
             </Button>

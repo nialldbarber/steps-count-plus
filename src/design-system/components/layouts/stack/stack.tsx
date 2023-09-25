@@ -1,8 +1,7 @@
 import { Children, type ReactNode } from "react";
-import { StyleSheet, View } from "react-native";
 import type { ViewProps } from "react-native";
 import flattenChildren from "react-flatten-children";
-import { space } from "@/design-system/layouts/space";
+import { Box } from "@/design-system/components/atoms/box";
 import type { Space } from "@/design-system/layouts/space";
 
 interface StackProps extends ViewProps {
@@ -12,34 +11,27 @@ interface StackProps extends ViewProps {
 }
 
 export default function Stack({
-  margin = space["0px"],
-  gutter = space["0px"],
+  margin = "0px",
+  gutter = "0px",
   children: childProp,
 }: StackProps) {
   const children = flattenChildren(childProp);
 
-  const styles = StyleSheet.create({
-    container: {
-      margin: space[margin],
-    },
-    gutter: {
-      paddingTop: space[gutter],
-      paddingBottom: space[gutter],
-    },
-    noGutter: {
-      paddingVertical: 0,
-    },
-  });
-
   return (
-    <View style={styles.container}>
+    <Box margin={margin}>
       {Children.map(children, (child, index) => {
         const first = index === 0;
         const last = index === children.length - 1;
-        const gutterStyles = first || last ? styles.noGutter : styles.gutter;
 
-        return <View style={gutterStyles}>{child}</View>;
+        return (
+          <Box
+            paddingTop={first ? "0px" : gutter}
+            paddingBottom={last ? "0px" : gutter}
+          >
+            {child}
+          </Box>
+        );
       })}
-    </View>
+    </Box>
   );
 }

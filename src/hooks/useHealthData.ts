@@ -36,8 +36,8 @@ export function useHealthData(date: Date) {
         console.log("Apple Health not available");
         return;
       }
-      AppleHealthKit.initHealthKit(permissions, (err) => {
-        if (err) {
+      AppleHealthKit.initHealthKit(permissions, (initErr) => {
+        if (initErr) {
           console.log("Error getting permissions");
           return;
         }

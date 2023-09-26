@@ -5,6 +5,7 @@
     "no-console": "warn",
     "quotes": "off",
     "curly": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "react/no-unstable-nested-components": "off"
   }
 }

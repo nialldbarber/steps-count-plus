@@ -2,6 +2,7 @@ import type { TextStyle } from "react-native";
 
 export type TextTypes = "heading" | "text";
 export type FontSizes =
+  | "10px"
   | "11px"
   | "12px"
   | "14px"
@@ -64,6 +65,11 @@ export const typeHierarchy: TypeHierarchyTypes = {
     },
   },
   text: {
+    "10px": {
+      fontSize: 10,
+      letterSpacing: 0.6,
+      lineHeight: 12,
+    },
     "11px": {
       fontSize: 11,
       letterSpacing: 0.6,

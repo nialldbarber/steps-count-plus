@@ -25,6 +25,12 @@ export const tokens = {
   /**
    * @type Icon
    */
+  bottomTabsDashboardStroke: colors.primary,
+  bottomTabsDashboardActiveStroke: colors.black,
+  bottomTabsChallengesStroke: colors.primary,
+  bottomTabsChallengesActiveStroke: colors.black,
+  bottomTabsCommunityStroke: colors.primary,
+  bottomTabsCommunityActiveStroke: colors.black,
   goBackStroke: colors.black,
   warningStroke: colors.destructive,
   warningText: colors.destructive,

@@ -1,7 +1,7 @@
 import { Children, type ReactNode } from "react";
 import type { ViewProps } from "react-native";
 import flattenChildren from "react-flatten-children";
-import { Box } from "@/design-system/components";
+import { Box } from "@/design-system/components/atoms/box";
 import type { Space } from "@/design-system/layouts/space";
 
 interface RowProps extends ViewProps {

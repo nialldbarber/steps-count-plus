@@ -3,7 +3,9 @@ import type { PressableProps } from "react-native";
 import * as Haptics from "expo-haptics";
 import { Warning2 } from "iconsax-react-native";
 import type { FieldError } from "react-hook-form";
-import { Box, Spacer, Text } from "@/design-system/components";
+import { Box } from "@/design-system/components/atoms/box";
+import { Spacer } from "@/design-system/components/atoms/spacer";
+import { Text } from "@/design-system/components/atoms/text";
 import { tokens } from "@/design-system/theme/design-tokens";
 
 interface CheckboxProps extends PressableProps {

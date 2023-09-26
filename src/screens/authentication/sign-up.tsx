@@ -6,13 +6,11 @@ import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import GoBack from "@/components/go-back/go-back";
 import { supabase } from "@/database/supabase";
-import {
-  Button,
-  Checkbox,
-  Input,
-  MainScreenLayout,
-  Stack,
-} from "@/design-system/components";
+import { Button } from "@/design-system/components/atoms/button";
+import { Checkbox } from "@/design-system/components/atoms/checkbox";
+import { Input } from "@/design-system/components/atoms/input";
+import { MainScreenLayout } from "@/design-system/components/layouts/main-screen";
+import { Stack } from "@/design-system/components/layouts/stack";
 
 /**
  * TODOS:

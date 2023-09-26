@@ -2,7 +2,9 @@ import { StyleSheet, TextInput } from "react-native";
 import type { TextInputProps } from "react-native";
 import { Warning2 } from "iconsax-react-native";
 import type { FieldError } from "react-hook-form";
-import { Box, Spacer, Text } from "@/design-system/components";
+import { Box } from "@/design-system/components/atoms/box";
+import { Spacer } from "@/design-system/components/atoms/spacer";
+import { Text } from "@/design-system/components/atoms/text";
 import { space } from "@/design-system/layouts/space";
 import { tokens } from "@/design-system/theme/design-tokens";
 

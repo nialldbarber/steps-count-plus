@@ -1,4 +1,7 @@
-import { Box, MainScreenLayout, Text } from "@/design-system/components";
+import { Box } from "@/design-system/components/atoms/box";
+import { Text } from "@/design-system/components/atoms/text";
+import { MainScreenLayout } from "@/design-system/components/layouts/main-screen";
+import { Stack } from "@/design-system/components/layouts/stack";
 import { useHealthData } from "@/hooks/useHealthData";
 
 export default function DashboardScreen() {
@@ -6,20 +9,20 @@ export default function DashboardScreen() {
 
   return (
     <MainScreenLayout>
-      <Box>
+      <Stack gutter="10px">
         <Text level="heading" size="30px" color="white">
-          this is something
+          StepsCount+
         </Text>
-        <Text level="heading" size="30px" color="white">
-          {steps.toString()}
+        <Text level="text" size="20px" color="white">
+          Steps: {steps.toString()}
         </Text>
-        <Text level="heading" size="30px" color="white">
-          {JSON.stringify(flights)}
+        <Text level="text" size="20px" color="white">
+          Flights: {JSON.stringify(flights)}
         </Text>
-        <Text level="heading" size="30px" color="white">
-          POOP: {JSON.stringify(distance)}
+        <Text level="text" size="20px" color="white">
+          Distance: {JSON.stringify(distance)}
         </Text>
-      </Box>
+      </Stack>
     </MainScreenLayout>
   );
 }

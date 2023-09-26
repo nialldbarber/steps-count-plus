@@ -5,14 +5,12 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { supabase } from "@/database/supabase";
-import {
-  Box,
-  Button,
-  Input,
-  Spacer,
-  Stack,
-  Text,
-} from "@/design-system/components";
+import { Box } from "@/design-system/components/atoms/box";
+import { Button } from "@/design-system/components/atoms/button";
+import { Input } from "@/design-system/components/atoms/input";
+import { Spacer } from "@/design-system/components/atoms/spacer";
+import { Text } from "@/design-system/components/atoms/text";
+import { Stack } from "@/design-system/components/layouts/stack";
 import type { RootStackParamList } from "@/navigation/navigation-container/navigation-container";
 
 type SignUpScreenNavigationProp = NativeStackNavigationProp<

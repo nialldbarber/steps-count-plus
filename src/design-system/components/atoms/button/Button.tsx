@@ -9,7 +9,9 @@ import Animated, {
   withSpring,
   withTiming,
 } from "react-native-reanimated";
-import { Box, Loader, Text } from "@/design-system/components";
+import { Box } from "@/design-system/components/atoms/box";
+import { Loader } from "@/design-system/components/atoms/loader";
+import { Text } from "@/design-system/components/atoms/text";
 import { space } from "@/design-system/layouts/space";
 import { tokens } from "@/design-system/theme/design-tokens";
 

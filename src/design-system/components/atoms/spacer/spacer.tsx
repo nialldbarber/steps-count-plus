@@ -1,5 +1,5 @@
 import type { ViewProps } from "react-native";
-import { Box } from "@/design-system/components";
+import { Box } from "@/design-system/components/atoms/box";
 import type { Space } from "@/design-system/layouts/space";
 
 interface SpacerProps extends ViewProps {

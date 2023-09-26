@@ -1,0 +1,75 @@
+import { Pressable } from "react-native";
+import type { PressableProps } from "react-native";
+import { Box } from "@/design-system/components/atoms/box";
+import { Text } from "@/design-system/components/atoms/text";
+import type { Theme } from "@/stores/theme";
+
+export type RadioButtonType = {
+  id: string;
+  label: string;
+  value: string;
+  status?: "checked" | "unchecked";
+};
+
+export type RadioButtonsProps = {
+  options: Array<RadioButtonType>;
+  defaultSelected: string;
+  onSelect: (checked: Theme) => void;
+};
+
+interface RadioButtonProps
+  extends PressableProps,
+    Pick<RadioButtonType, "label" | "value" | "status"> {
+  onSelect: (checked: Theme) => void;
+  isActive: boolean;
+}
+
+function RadioButton({ label, value, onSelect, isActive }: RadioButtonProps) {
+  const MODE_MAP: Record<string, string> = {
+    system: "⚙️",
+    light: "🌝",
+    dark: "🌚",
+  };
+
+  return (
+    <Pressable onPress={() => onSelect(value as Theme)}>
+      <Box
+        padding="20px"
+        marginVertical="15px"
+        borderWidth={1}
+        borderColor="destructive"
+        borderStyle="dashed"
+        backgroundColor={isActive ? "destructive" : "white"}
+        width="104px"
+      >
+        <Box alignItems="center">
+          <Text withEmoji size="20px">
+            {MODE_MAP[value]}
+          </Text>
+          <Text color={isActive ? "white" : "black"}>{label}</Text>
+        </Box>
+      </Box>
+    </Pressable>
+  );
+}
+
+export default function RadioButtons({
+  options,
+  defaultSelected,
+  onSelect,
+}: RadioButtonsProps) {
+  return (
+    <Box flexDirection="row" justifyContent="space-between">
+      {options.map(({ id, label, value, status }) => (
+        <RadioButton
+          key={id}
+          label={label}
+          value={value}
+          status={status}
+          onSelect={onSelect}
+          isActive={defaultSelected === value}
+        />
+      ))}
+    </Box>
+  );
+}

@@ -1,8 +1,9 @@
 import { useColorScheme } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { tokens } from "@/design-system/theme/design-tokens";
+import { appTheme, tokens } from "@/design-system/theme/design-tokens";
 import { Tabs } from "@/navigation/bottom-tabs";
 import { SettingsModalScreen } from "@/screens/settings";
+import { useThemeStore } from "@/stores/theme";
 
 //import { AuthenticationScreen } from "@/screens/authentication";
 //import SignUpScreen from "@/screens/authentication/sign-up";
@@ -19,13 +20,10 @@ const { Navigator, Group, Screen } =
   createNativeStackNavigator<RootStackParamList>();
 
 export default function Navigation() {
-  const theme = useColorScheme();
+  const { theme } = useThemeStore();
 
   const contentStyle = {
-    backgroundColor:
-      theme === "dark"
-        ? tokens.mainBackgroundColorDark
-        : tokens.mainBackgroundColor,
+    backgroundColor: appTheme[theme].mainBackgroundColor,
   };
 
   return (

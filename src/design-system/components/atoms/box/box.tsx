@@ -1,6 +1,6 @@
 import { useMemo, type ReactNode } from "react";
 import { View } from "react-native";
-import type { Colors } from "@/design-system/color/palettes";
+import { colors, type Colors } from "@/design-system/color/palettes";
 import { Height, heights, Width, widths } from "@/design-system/layouts/size";
 import { space, type Space } from "@/design-system/layouts/space";
 
@@ -18,6 +18,7 @@ function resolveToken<TokenName extends string, TokenValue, CustomValue>(
 type BoxProps = {
   alignItems?: "flex-start" | "flex-end" | "center" | "stretch";
   borderWidth?: number;
+  borderStyle?: "none" | "dotted" | "dashed" | "solid";
   borderColor?: Colors;
   borderRadius?: number;
   borderTopLeftRadius?: number;
@@ -60,6 +61,7 @@ type BoxProps = {
   width?: Width | Space;
   overflow?: "hidden" | "visible" | "scroll";
   backgroundColor?: Colors;
+  styles?: any;
 } & (
   | {
       borderBottomRadius?: number;
@@ -87,6 +89,7 @@ type BoxProps = {
 
 export default function Box({
   alignItems,
+  borderStyle,
   borderWidth,
   borderColor,
   borderRadius,
@@ -124,6 +127,7 @@ export default function Box({
   position,
   right,
   top,
+  styles: customStyles,
   width: _width,
   height: _height,
   overflow,
@@ -137,7 +141,8 @@ export default function Box({
     return {
       alignItems,
       borderWidth,
-      borderColor,
+      borderStyle,
+      borderColor: colors[borderColor],
       borderBottomLeftRadius:
         borderBottomLeftRadius ??
         borderBottomRadius ??
@@ -187,12 +192,13 @@ export default function Box({
       height,
       width,
       overflow,
-      backgroundColor,
+      backgroundColor: colors[backgroundColor],
     };
   }, [
     flex,
     alignItems,
     borderWidth,
+    borderStyle,
     borderColor,
     borderBottomLeftRadius,
     borderBottomRadius,
@@ -234,6 +240,5 @@ export default function Box({
     backgroundColor,
   ]);
 
-  // @ts-expect-error
-  return <View style={styles}>{children}</View>;
+  return <View style={[styles, customStyles]}>{children}</View>;
 }

@@ -3,10 +3,10 @@ import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Setting2 } from "iconsax-react-native";
 import type { Colors } from "@/design-system/color/palettes";
-import { colors } from "@/design-system/color/palettes";
-import { tokens } from "@/design-system/theme/design-tokens";
+import { appTheme } from "@/design-system/theme/design-tokens";
 import { hitSlopLarge } from "@/lib/hitSlop";
 import type { RootStackParamList } from "@/navigation/stack/stack";
+import { useThemeStore } from "@/stores/theme";
 
 type SettingsIconProps = {
   /**
@@ -22,20 +22,12 @@ type SettingsModalScreenNavigationProp = NativeStackNavigationProp<
 >;
 
 export default function SettingsIcon({ stroke }: SettingsIconProps) {
+  const { theme } = useThemeStore();
   const { navigate } = useNavigation<SettingsModalScreenNavigationProp>();
-
-  const getStrokeColor = () => {
-    if (stroke !== undefined) {
-      return colors[stroke];
-    }
-
-    return tokens.goBackStroke;
-  };
-  const strokeColor = getStrokeColor();
 
   return (
     <Pressable onPress={() => navigate("Settings")} hitSlop={hitSlopLarge}>
-      <Setting2 size="32" color="red" />
+      <Setting2 size="32" color={stroke ?? appTheme[theme].settingsStroke} />
     </Pressable>
   );
 }

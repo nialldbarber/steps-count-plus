@@ -1,12 +1,12 @@
-import { useColorScheme } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Fatrows, People, Rank } from "iconsax-react-native";
 import { ScreenHeader } from "@/components/screen-header";
-import { tokens } from "@/design-system/theme/design-tokens";
+import { appTheme, tokens } from "@/design-system/theme/design-tokens";
 import { typeHierarchy } from "@/design-system/typography/font-size";
 import { ChallengeScreen } from "@/screens/challenges";
 import { CommunityScreen } from "@/screens/community";
 import { DashboardScreen } from "@/screens/dashboard";
+import { useThemeStore } from "@/stores/theme";
 
 export type RootBottomTabsParamList = {
   Dashboard: undefined;
@@ -18,12 +18,8 @@ const { Navigator, Screen } =
   createBottomTabNavigator<RootBottomTabsParamList>();
 
 export default function Tabs() {
-  const theme = useColorScheme();
-
-  const backgroundColor =
-    theme === "dark"
-      ? tokens.mainBackgroundColorDark
-      : tokens.mainBackgroundColor;
+  const { theme } = useThemeStore();
+  const backgroundColor = appTheme[theme].mainBackgroundColor;
 
   return (
     <Navigator

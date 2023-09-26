@@ -16,6 +16,7 @@ module.exports = function (api) {
             "@/lib": "./src/lib",
             "@/navigation": "./src/navigation",
             "@/screens": "./src/screens",
+            "@/stores": "./src/stores",
           },
         },
       ],

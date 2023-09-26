@@ -13,7 +13,8 @@ import { Box } from "@/design-system/components/atoms/box";
 import { Loader } from "@/design-system/components/atoms/loader";
 import { Text } from "@/design-system/components/atoms/text";
 import { space } from "@/design-system/layouts/space";
-import { tokens } from "@/design-system/theme/design-tokens";
+import { appTheme } from "@/design-system/theme/design-tokens";
+import { useThemeStore } from "@/stores/theme";
 
 export type Variant =
   | "primary"
@@ -30,32 +31,6 @@ interface ButtonProps extends PressableProps {
   children: string;
 }
 
-const buttonStyles: Record<Variant, ViewStyle> = {
-  primary: {
-    backgroundColor: tokens.buttonPrimaryBackgroundColor,
-  },
-  secondary: {
-    backgroundColor: "transparent",
-    borderColor: tokens.buttonSecondaryBackgroundColor,
-    borderWidth: 2,
-  },
-  tertiary: {},
-  link: {},
-  destructive: {},
-};
-
-const textStyles: Record<Variant, TextStyle> = {
-  primary: {
-    color: tokens.buttonPrimaryTextColor,
-  },
-  secondary: {
-    color: tokens.buttonSecondaryTextColor,
-  },
-  tertiary: {},
-  link: {},
-  destructive: {},
-};
-
 export default function Button({
   variant = "primary",
   haptic,
@@ -64,14 +39,41 @@ export default function Button({
   children,
   ...rest
 }: ButtonProps) {
+  const { theme } = useThemeStore();
+
+  const buttonStyles: Record<Variant, ViewStyle> = {
+    primary: {
+      backgroundColor: appTheme[theme].buttonPrimaryBackgroundColor,
+    },
+    secondary: {
+      backgroundColor: "transparent",
+      borderColor: appTheme[theme].buttonSecondaryBackgroundColor,
+      borderWidth: 2,
+    },
+    tertiary: {},
+    link: {},
+    destructive: {},
+  };
+
+  const textStyles: Record<Variant, TextStyle> = {
+    primary: {
+      color: appTheme[theme].buttonPrimaryTextColor,
+    },
+    secondary: {
+      color: appTheme[theme].buttonSecondaryTextColor,
+    },
+    tertiary: {},
+    link: {},
+    destructive: {},
+  };
+
   const styles = StyleSheet.create({
     button: {
       position: "relative",
       alignItems: "center",
       height: space["60px"],
       justifyContent: "center",
-      // padding: space["20px"],
-      borderRadius: tokens.buttonBorderRadius,
+      borderRadius: appTheme[theme].buttonBorderRadius,
       ...buttonStyles[variant],
     },
     text: {
@@ -103,7 +105,7 @@ export default function Button({
     } else {
       loader.value = withTiming(0, { duration: 100 });
     }
-  }, [isLoading]);
+  }, [isLoading, loader]);
 
   return (
     <Animated.View style={animatedStyle}>

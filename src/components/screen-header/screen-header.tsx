@@ -9,6 +9,7 @@ export default function ScreenHeader({}: SettingsIconProps) {
     <Box
       flexDirection="row"
       alignItems="center"
+      // TODO: change this color
       backgroundColor="destructive"
       paddingTop="60px"
       paddingBottom="24px"
@@ -16,7 +17,7 @@ export default function ScreenHeader({}: SettingsIconProps) {
       justifyContent="space-between"
     >
       <SettingsIcon />
-      <Text color="white" level="heading" size="44px">
+      <Text level="heading" size="34px">
         this is a header
       </Text>
     </Box>

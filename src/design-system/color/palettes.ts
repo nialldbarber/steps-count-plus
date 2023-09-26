@@ -8,6 +8,7 @@ export const greyColors = {
   greyTwo: "#d1d5db",
   greyThree: "#f7f7f7",
   greyFour: "#717171",
+  greyFive: "#eef1ee",
 } as const;
 
 export const coreColors = {

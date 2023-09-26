@@ -1,4 +1,3 @@
-import { Box } from "@/design-system/components/atoms/box";
 import { Text } from "@/design-system/components/atoms/text";
 import { MainScreenLayout } from "@/design-system/components/layouts/main-screen";
 import { Stack } from "@/design-system/components/layouts/stack";
@@ -10,16 +9,16 @@ export default function DashboardScreen() {
   return (
     <MainScreenLayout>
       <Stack gutter="10px">
-        <Text level="heading" size="30px" color="white">
+        <Text level="heading" size="30px">
           StepsCount+
         </Text>
-        <Text level="text" size="20px" color="white">
+        <Text level="text" size="20px">
           Steps: {steps.toString()}
         </Text>
-        <Text level="text" size="20px" color="white">
+        <Text level="text" size="20px">
           Flights: {JSON.stringify(flights)}
         </Text>
-        <Text level="text" size="20px" color="white">
+        <Text level="text" size="20px">
           Distance: {JSON.stringify(distance)}
         </Text>
       </Stack>

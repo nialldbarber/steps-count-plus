@@ -21,12 +21,14 @@ interface CardProps extends ViewProps {
  * * custom backgrounds but mainly set ones
  *
  * * especially error states!
+ *
+ * * add height and width
  */
 
 export default function Card({
   cardTypes = "info",
-  width = "full",
-  height = "full",
+  width,
+  height,
   children,
 }: CardProps) {
   const { theme } = useThemeStore();
@@ -48,9 +50,5 @@ export default function Card({
     },
   });
 
-  return (
-    <Box width={width} height={height} styles={styles.container}>
-      {children}
-    </Box>
-  );
+  return <Box styles={styles.container}>{children}</Box>;
 }

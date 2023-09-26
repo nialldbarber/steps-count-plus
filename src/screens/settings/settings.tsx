@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useColorScheme } from "react-native";
+import * as Haptics from "expo-haptics";
 import { Close } from "@/components/icons/close";
 import { Box } from "@/design-system/components/atoms/box";
 import { Card } from "@/design-system/components/atoms/card";
+import { Spacer } from "@/design-system/components/atoms/spacer";
 import { Text } from "@/design-system/components/atoms/text";
 import { MainScreenLayout } from "@/design-system/components/layouts/main-screen";
 import { Stack } from "@/design-system/components/layouts/stack";
@@ -24,6 +26,7 @@ export default function SettingsModalScreen() {
   ];
 
   function handleSetTheme(item: Theme & "system") {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     const _theme = item === "system" ? systemTheme : item;
     setSelectedTheme(item);
     setTheme(_theme as Theme);
@@ -38,7 +41,7 @@ export default function SettingsModalScreen() {
         </Text>
       </Box>
       <Stack margin="10px">
-        <Card cardTypes="info" height="4/5">
+        <Card cardTypes="info">
           <Text level="heading" color={appTheme[theme].cardInfoColor}>
             App theme (select your choice)
           </Text>
@@ -48,9 +51,12 @@ export default function SettingsModalScreen() {
             onSelect={handleSetTheme}
           />
         </Card>
-        <Text level="heading" size="34px" color="destructive">
-          {theme}
-        </Text>
+        <Spacer height="30px" />
+        <Card>
+          <Text level="heading" color={appTheme[theme].cardInfoColor}>
+            km / miles
+          </Text>
+        </Card>
       </Stack>
     </MainScreenLayout>
   );

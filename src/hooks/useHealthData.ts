@@ -67,6 +67,22 @@ export function useHealthData(date: Date) {
       }
       setSteps(results.value);
     });
+
+    AppleHealthKit.getFlightsClimbed(options, (err, results) => {
+      if (err) {
+        console.log("Error getting the steps:", err);
+        return;
+      }
+      setFlights(results.value);
+    });
+
+    AppleHealthKit.getDistanceWalkingRunning(options, (err, results) => {
+      if (err) {
+        console.log("Error getting the steps:", err);
+        return;
+      }
+      setDistance(results.value);
+    });
   });
 
   return { steps, flights, distance };

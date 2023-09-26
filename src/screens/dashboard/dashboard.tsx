@@ -19,7 +19,7 @@ export default function DashboardScreen() {
           Flights: {JSON.stringify(flights)}
         </Text>
         <Text level="text" size="20px">
-          Distance: {JSON.stringify(distance)}
+          Distance: {`${(distance / 1000).toFixed(2)} km`}
         </Text>
       </Stack>
     </MainScreenLayout>

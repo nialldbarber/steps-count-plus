@@ -1,13 +1,18 @@
 import { useEffect } from "react";
-import { Alert, SafeAreaView, ScrollView, StyleSheet } from "react-native";
+import { Alert } from "react-native";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 //import { openInbox } from "react-native-email-link";
 import { z } from "zod";
 import GoBack from "@/components/go-back/go-back";
 import { supabase } from "@/database/supabase";
-import { Button, Input, Stack } from "@/design-system/components";
-import { Checkbox } from "@/design-system/components/atoms/checkbox";
+import {
+  Button,
+  Checkbox,
+  Input,
+  MainScreenLayout,
+  Stack,
+} from "@/design-system/components";
 
 /**
  * TODOS:
@@ -74,84 +79,76 @@ export default function Authentication() {
   }, [isSubmitSuccessful]);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <GoBack />
-        <Stack margin="12px">
-          <Stack gutter="15px">
-            <Controller
-              control={control}
-              render={({ field: { onChange, value } }) => (
-                <Input
-                  text={value}
-                  onChangeText={(text) => onChange(text)}
-                  keyboardType="email-address"
-                  placeholder="Enter your email address"
-                  autoCapitalize="none"
-                  isError={errors.email}
-                  errorMessage={errors.email?.message}
-                />
-              )}
-              name="email"
-            />
-            <Controller
-              control={control}
-              render={({ field: { onChange, value } }) => (
-                <Input
-                  text={value}
-                  onChangeText={(text) => onChange(text)}
-                  placeholder="Enter a password"
-                  secureTextEntry
-                  isError={errors.password}
-                  errorMessage={errors?.password?.message}
-                />
-              )}
-              name="password"
-            />
-            <Controller
-              control={control}
-              render={({ field: { onChange, value } }) => (
-                <Input
-                  text={value}
-                  onChangeText={(text) => onChange(text)}
-                  placeholder="Confirm password"
-                  secureTextEntry
-                  isError={errors.confirmPassword}
-                  errorMessage={errors?.confirmPassword?.message}
-                />
-              )}
-              name="confirmPassword"
-            />
-            <Controller
-              control={control}
-              render={({ field: { onChange, value } }) => (
-                <Checkbox
-                  label="Accept terms & conditions"
-                  onValueChange={onChange}
-                  value={value}
-                  isError={errors.terms}
-                  errorMessage={errors?.terms?.message}
-                  errorAlign="left"
-                />
-              )}
-              name="terms"
-            />
-            <Button
-              onPress={handleSubmit(onSubmit)}
-              haptic="Medium"
-              isLoading={isSubmitting}
-            >
-              Sign up
-            </Button>
-          </Stack>
+    <MainScreenLayout>
+      <GoBack />
+      <Stack margin="12px">
+        <Stack gutter="15px">
+          <Controller
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <Input
+                text={value}
+                onChangeText={(text) => onChange(text)}
+                keyboardType="email-address"
+                placeholder="Enter your email address"
+                autoCapitalize="none"
+                isError={errors.email}
+                errorMessage={errors.email?.message}
+              />
+            )}
+            name="email"
+          />
+          <Controller
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <Input
+                text={value}
+                onChangeText={(text) => onChange(text)}
+                placeholder="Enter a password"
+                secureTextEntry
+                isError={errors.password}
+                errorMessage={errors?.password?.message}
+              />
+            )}
+            name="password"
+          />
+          <Controller
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <Input
+                text={value}
+                onChangeText={(text) => onChange(text)}
+                placeholder="Confirm password"
+                secureTextEntry
+                isError={errors.confirmPassword}
+                errorMessage={errors?.confirmPassword?.message}
+              />
+            )}
+            name="confirmPassword"
+          />
+          <Controller
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <Checkbox
+                label="Accept terms & conditions"
+                onValueChange={onChange}
+                value={value}
+                isError={errors.terms}
+                errorMessage={errors?.terms?.message}
+                errorAlign="left"
+              />
+            )}
+            name="terms"
+          />
+          <Button
+            onPress={handleSubmit(onSubmit)}
+            haptic="Medium"
+            isLoading={isSubmitting}
+          >
+            Sign up
+          </Button>
         </Stack>
-      </ScrollView>
-    </SafeAreaView>
+      </Stack>
+    </MainScreenLayout>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

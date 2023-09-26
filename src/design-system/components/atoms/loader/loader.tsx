@@ -7,8 +7,8 @@ import Animated, {
   withRepeat,
   withTiming,
 } from "react-native-reanimated";
-import { Box } from "@/design-system/components/atoms/box";
-import type { Variant } from "@/design-system/components/atoms/button/Button";
+import { Box } from "@/design-system/components";
+import type { Variant } from "@/design-system/components/atoms/button/button";
 import { radius } from "@/design-system/layouts/radius";
 import { tokens } from "@/design-system/theme/design-tokens";
 import { useEffectOnce } from "@/hooks/useEffectOnce";

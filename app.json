@@ -26,7 +26,19 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["@config-plugins/detox", "react-native-email-link"],
+    "plugins": [
+      "@config-plugins/detox",
+      "react-native-email-link",
+      [
+        "react-native-health",
+        {
+          "isClinicalDataEnabled": true,
+          "healthSharePermission": "Custom health share permission",
+          "healthUpdatePermission": "Custom health update permission",
+          "healthClinicalDescription": "Custom health share permission for clinical data"
+        }
+      ]
+    ],
     "extra": {
       "eas": {
         "projectId": "876ffebc-e79c-48e3-b6b5-85093d562da8"

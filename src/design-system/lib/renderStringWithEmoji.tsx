@@ -11,6 +11,12 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * Without this, the `line-height` goes off when
+ * an emoji is included in the text
+ * @param stringNode
+ * @returns React.JSX.Element
+ */
 export const renderStringWithEmoji = (stringNode: ReactNode) => {
   const strings = Array.isArray(stringNode) ? stringNode : [stringNode];
   return (

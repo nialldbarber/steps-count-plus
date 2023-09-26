@@ -1,5 +1,5 @@
-import { colors } from "../color/palettes";
-import { radius } from "../layouts/radius";
+import { colors } from "@/design-system/color/palettes";
+import { radius } from "@/design-system/layouts/radius";
 
 export const tokens = {
   /**

@@ -6,6 +6,12 @@ import AppleHealthKit, {
   HealthUnit,
 } from "react-native-health";
 
+/**
+ * TODO:
+ *
+ * * Does the data update every time the app is active?
+ */
+
 const { Permissions } = AppleHealthKit.Constants;
 const permissions: HealthKitPermissions = {
   permissions: {

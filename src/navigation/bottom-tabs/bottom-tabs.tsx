@@ -1,19 +1,21 @@
 import { useColorScheme } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Fatrows, People, Rank } from "iconsax-react-native";
+import { ScreenHeader } from "@/components/screen-header";
 import { tokens } from "@/design-system/theme/design-tokens";
 import { typeHierarchy } from "@/design-system/typography/font-size";
 import { ChallengeScreen } from "@/screens/challenges";
 import { CommunityScreen } from "@/screens/community";
 import { DashboardScreen } from "@/screens/dashboard";
 
-export type RootStackParamList = {
+export type RootBottomTabsParamList = {
   Dashboard: undefined;
   Challenges: undefined;
   Community: undefined;
 };
 
-const { Navigator, Screen } = createBottomTabNavigator<RootStackParamList>();
+const { Navigator, Screen } =
+  createBottomTabNavigator<RootBottomTabsParamList>();
 
 export default function Tabs() {
   const theme = useColorScheme();
@@ -22,10 +24,6 @@ export default function Tabs() {
     theme === "dark"
       ? tokens.mainBackgroundColorDark
       : tokens.mainBackgroundColor;
-
-  const options = {
-    headerShown: false,
-  };
 
   return (
     <Navigator
@@ -36,7 +34,7 @@ export default function Tabs() {
         name="Dashboard"
         component={DashboardScreen}
         options={{
-          ...options,
+          header: () => <ScreenHeader />,
           tabBarIcon: ({ focused }) => (
             <Fatrows
               size={28}
@@ -57,7 +55,7 @@ export default function Tabs() {
         name="Challenges"
         component={ChallengeScreen}
         options={{
-          ...options,
+          header: () => <ScreenHeader />,
           tabBarIcon: ({ focused }) => (
             <Rank
               size={28}
@@ -78,7 +76,7 @@ export default function Tabs() {
         name="Community"
         component={CommunityScreen}
         options={{
-          ...options,
+          header: () => <ScreenHeader />,
           tabBarIcon: ({ focused }) => (
             <People
               size={28}

@@ -34,6 +34,7 @@ export const tokens = {
   goBackStroke: colors.black,
   warningStroke: colors.destructive,
   warningText: colors.destructive,
+  closeStroke: colors.black,
   /**
    * @type Loader
    */

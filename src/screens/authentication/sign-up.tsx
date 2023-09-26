@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 //import { openInbox } from "react-native-email-link";
 import { z } from "zod";
-import GoBack from "@/components/go-back/go-back";
+import GoBack from "@/components/icons/go-back/go-back";
 import { supabase } from "@/database/supabase";
 import { Button } from "@/design-system/components/atoms/button";
 import { Checkbox } from "@/design-system/components/atoms/checkbox";

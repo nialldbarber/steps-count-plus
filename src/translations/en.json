@@ -2,7 +2,11 @@
   "heading": "StepsCount+",
   "hello": "yoyooyoyoyo",
   "screen": {
-    "dashboard": {},
+    "dashboard": {
+      "steps": "Steps: {{ steps }}",
+      "flights": "Flights: climbed {{ flights }}",
+      "distance": "Distance: {{ distance }}"
+    },
     "community": {},
     "challenges": {},
     "settings": {

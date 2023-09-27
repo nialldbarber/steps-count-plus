@@ -14,10 +14,11 @@ type CloseProps = {
    * Refer back to colors for a full list of options
    * @default "black"
    */
+  onPress?: (...args: any[]) => void;
   stroke?: Colors;
 };
 
-export default function Close({ stroke }: CloseProps) {
+export default function Close({ onPress, stroke }: CloseProps) {
   const { goBack } = useNavigation();
   const { theme } = useThemeStore();
 
@@ -32,7 +33,7 @@ export default function Close({ stroke }: CloseProps) {
 
   return (
     <Pressable
-      onPress={goBack}
+      onPress={onPress ?? goBack}
       hitSlop={hitSlopLarge}
       style={styles.container}
       haptics={{ type: "action", level: "Medium" }}

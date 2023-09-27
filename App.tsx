@@ -3,7 +3,7 @@ import "@formatjs/intl-pluralrules/polyfill";
 import "@formatjs/intl-pluralrules/locale-data/en";
 import "@formatjs/intl-pluralrules/locale-data/es";
 import { useEffect } from "react";
-import { useColorScheme } from "react-native";
+import { StyleSheet, useColorScheme } from "react-native";
 import {
   PlusJakartaSans_300Light,
   PlusJakartaSans_400Regular,
@@ -14,6 +14,7 @@ import {
   useFonts,
 } from "@expo-google-fonts/plus-jakarta-sans";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Navigation } from "@/navigation/navigation-container";
 import { useThemeStore } from "@/stores/theme";
 import "@/lib/i18n";
@@ -56,5 +57,15 @@ export default function App() {
     return null;
   }
 
-  return <Navigation />;
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+  });
+
+  return (
+    <GestureHandlerRootView style={styles.container}>
+      <Navigation />
+    </GestureHandlerRootView>
+  );
 }

@@ -2,6 +2,7 @@ import { useColorScheme } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { appTheme, tokens } from "@/design-system/theme/design-tokens";
 import { Tabs } from "@/navigation/bottom-tabs";
+import { PremiumScreen } from "@/screens/premium";
 import { SettingsModalScreen } from "@/screens/settings";
 import { useThemeStore } from "@/stores/theme";
 
@@ -14,6 +15,7 @@ export type RootStackParamList = {
   Authentication: undefined;
   SignUp: undefined;
   Settings: undefined;
+  Premium: undefined;
 };
 
 const { Navigator, Group, Screen } =
@@ -39,6 +41,11 @@ export default function Navigation() {
         <Screen
           name="Settings"
           component={SettingsModalScreen}
+          options={{ contentStyle, headerShown: false }}
+        />
+        <Screen
+          name="Premium"
+          component={PremiumScreen}
           options={{ contentStyle, headerShown: false }}
         />
       </Group>

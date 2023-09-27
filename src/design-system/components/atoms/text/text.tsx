@@ -52,6 +52,7 @@ export default function Text({
     <NativeText
       style={[styles.text, { ...style }]}
       maxFontSizeMultiplier={maxFontSizeMultiplier}
+      accessibilityRole={level === "heading" ? "header" : "text"}
     >
       {withEmoji ? renderStringWithEmoji(children) : children}
     </NativeText>

@@ -1,8 +1,9 @@
-import type { ReactNode } from "react";
+import type { ForwardedRef, ReactNode } from "react";
 import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
 import { Box } from "@/design-system/components/atoms/box";
 
 type MainScreenLayoutProps = {
+  ref?: ForwardedRef<unknown>;
   children: ReactNode;
 };
 

@@ -11,20 +11,25 @@ export type RadioButtonType = {
   status?: "checked" | "unchecked";
 };
 
-export type RadioButtonsProps = {
+export type RadioButtonsProps<T> = {
   options: Array<RadioButtonType>;
   defaultSelected: string;
-  onSelect: (checked: Theme) => void;
+  onSelect: (checked: T) => void;
 };
 
-interface RadioButtonProps
+interface RadioButtonProps<T>
   extends PressableProps,
     Pick<RadioButtonType, "label" | "value" | "status"> {
-  onSelect: (checked: Theme) => void;
+  onSelect: (checked: T) => void;
   isActive: boolean;
 }
 
-function RadioButton({ label, value, onSelect, isActive }: RadioButtonProps) {
+function RadioButton({
+  label,
+  value,
+  onSelect,
+  isActive,
+}: RadioButtonProps<Theme>) {
   const MODE_MAP: Record<string, string> = {
     system: "⚙️",
     light: "🌝",
@@ -57,7 +62,7 @@ export default function RadioButtons({
   options,
   defaultSelected,
   onSelect,
-}: RadioButtonsProps) {
+}: RadioButtonsProps<Theme>) {
   return (
     <Box flexDirection="row" justifyContent="space-between">
       {options.map(({ id, label, value, status }) => (

@@ -1,5 +1,6 @@
 import { StyleSheet, type ViewProps, type ViewStyle } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { shadow } from "@/design-system/color/shadow";
 import { Box } from "@/design-system/components/atoms/box";
 import { radius } from "@/design-system/layouts/radius";
 import { type Height, type Width } from "@/design-system/layouts/size";
@@ -52,14 +53,16 @@ export default function Card({
   });
 
   return cardType === "highlight" ? (
-    <LinearGradient
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 0 }}
-      colors={["#ef709b", "#fa9372"]}
-      style={styles.container}
-    >
-      {children}
-    </LinearGradient>
+    <Box borderRadius="large">
+      <LinearGradient
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        colors={["#ef709b", "#fa9372"]}
+        style={[styles.container, shadow]}
+      >
+        {children}
+      </LinearGradient>
+    </Box>
   ) : (
     <Box styles={styles.container}>{children}</Box>
   );

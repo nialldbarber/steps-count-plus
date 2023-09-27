@@ -11,6 +11,9 @@
     "challenges": {},
     "settings": {
       "heading": "Settings",
+      "premium": {
+        "heading": "Get Premium!"
+      },
       "theme": "App theme",
       "units": "Units"
     }

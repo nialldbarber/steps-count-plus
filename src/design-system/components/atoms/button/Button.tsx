@@ -40,6 +40,7 @@ export default function Button({
   ...rest
 }: ButtonProps) {
   const { theme } = useThemeStore();
+  const accessibilityLabel = `${children} button`;
 
   const buttonStyles: Record<Variant, ViewStyle> = {
     primary: {
@@ -119,6 +120,9 @@ export default function Button({
           }
         }}
         onPressOut={() => onPress("out")}
+        accessibilityRole="button"
+        accessibilityLabel={accessibilityLabel}
+        accessibilityState={{ disabled: isDisabled, busy: isLoading }}
       >
         <Box flexDirection="row">
           <Text style={styles.text} weight="bold">

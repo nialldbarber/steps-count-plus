@@ -1,8 +1,12 @@
 import { useMemo, type ReactNode } from "react";
 import { View } from "react-native";
 import { colors, type Colors } from "@/design-system/color/palettes";
-import { Height, heights, Width, widths } from "@/design-system/layouts/size";
-import { space, type Space } from "@/design-system/layouts/space";
+import type { Radius } from "@/design-system/layouts/radius";
+import { radius } from "@/design-system/layouts/radius";
+import { heights, widths } from "@/design-system/layouts/size";
+import type { Height, Width } from "@/design-system/layouts/size";
+import { space } from "@/design-system/layouts/space";
+import type { Space } from "@/design-system/layouts/space";
 
 function resolveToken<TokenName extends string, TokenValue, CustomValue>(
   scale: Record<TokenName, TokenValue>,
@@ -20,11 +24,11 @@ type BoxProps = {
   borderWidth?: number;
   borderStyle?: "none" | "dotted" | "dashed" | "solid";
   borderColor?: Colors;
-  borderRadius?: number;
-  borderTopLeftRadius?: number;
-  borderTopRightRadius?: number;
-  borderBottomLeftRadius?: number;
-  borderBottomRightRadius?: number;
+  borderRadius?: Radius;
+  borderTopLeftRadius?: Radius;
+  borderTopRightRadius?: Radius;
+  borderBottomLeftRadius?: Radius;
+  borderBottomRightRadius?: Radius;
   bottom?: Space;
   children?: ReactNode;
   flex?: number;
@@ -144,25 +148,25 @@ export default function Box({
       borderStyle,
       borderColor: colors[borderColor],
       borderBottomLeftRadius:
-        borderBottomLeftRadius ??
-        borderBottomRadius ??
-        borderLeftRadius ??
-        borderRadius,
+        radius[borderBottomLeftRadius] ??
+        radius[borderBottomRadius] ??
+        radius[borderLeftRadius] ??
+        radius[borderRadius],
       borderBottomRightRadius:
-        borderBottomRightRadius ??
-        borderBottomRadius ??
-        borderRightRadius ??
-        borderRadius,
+        radius[borderBottomRightRadius] ??
+        radius[borderBottomRadius] ??
+        radius[borderRightRadius] ??
+        radius[borderRadius],
       borderTopLeftRadius:
-        borderTopLeftRadius ??
-        borderTopRadius ??
-        borderLeftRadius ??
-        borderRadius,
+        radius[borderTopLeftRadius] ??
+        radius[borderTopRadius] ??
+        radius[borderLeftRadius] ??
+        radius[borderRadius],
       borderTopRightRadius:
-        borderTopRightRadius ??
-        borderTopRadius ??
-        borderRightRadius ??
-        borderRadius,
+        radius[borderTopRightRadius] ??
+        radius[borderTopRadius] ??
+        radius[borderRightRadius] ??
+        radius[borderRadius],
       flex,
       flexBasis,
       flexDirection,

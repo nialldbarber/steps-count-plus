@@ -13,23 +13,41 @@ import type { RadioButtonType } from "@/design-system/components/molecules/radio
 import { appTheme } from "@/design-system/theme/design-tokens";
 import { useThemeStore } from "@/stores/theme";
 import type { Theme } from "@/stores/theme";
+import { useUnitsStore } from "@/stores/units";
+import type { Units } from "@/stores/units";
+
+const themeOptions: Array<RadioButtonType> = [
+  { id: "theme_first", label: "System", value: "system" },
+  { id: "theme_second", label: "Light", value: "light" },
+  { id: "theme_third", label: "Dark", value: "dark" },
+];
+
+const unitsOptions: Array<any> = [
+  { id: "units_first", label: "km", value: "km" },
+  { id: "units_second", label: "miles", value: "miles" },
+];
 
 export default function SettingsModalScreen() {
   const systemTheme = useColorScheme();
   const { theme, setTheme } = useThemeStore();
+  const { units, setUnits } = useUnitsStore();
   const [selectedTheme, setSelectedTheme] = useState(theme);
 
-  const themeOptions: Array<RadioButtonType> = [
-    { id: "rb_first", label: "System", value: "system" },
-    { id: "rb_second", label: "Light", value: "light" },
-    { id: "rb_third", label: "Dark", value: "dark" },
-  ];
-
-  function handleSetTheme(item: Theme & "system") {
+  function handleHaptic() {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-    const _theme = item === "system" ? systemTheme : item;
-    setSelectedTheme(item);
+  }
+
+  function handleSetTheme(userSelectedTheme: Theme & "system") {
+    handleHaptic();
+    const _theme =
+      userSelectedTheme === "system" ? systemTheme : userSelectedTheme;
+    setSelectedTheme(userSelectedTheme);
     setTheme(_theme as Theme);
+  }
+
+  function handleSetUnits(userSelected: Units) {
+    handleHaptic();
+    setUnits(userSelected);
   }
 
   return (
@@ -54,8 +72,13 @@ export default function SettingsModalScreen() {
         <Spacer height="30px" />
         <Card>
           <Text level="heading" color={appTheme[theme].cardInfoColor}>
-            km / miles
+            Distance / Measurement
           </Text>
+          <RadioButtons
+            options={unitsOptions}
+            defaultSelected={units}
+            onSelect={handleSetUnits}
+          />
         </Card>
       </Stack>
     </MainScreenLayout>

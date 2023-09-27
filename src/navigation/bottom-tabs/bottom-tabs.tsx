@@ -1,5 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Fatrows, People, Rank } from "iconsax-react-native";
+import { CustomBottomTabs } from "@/components/bottom-tabs";
 import { ScreenHeader } from "@/components/screen-header";
 import { appTheme, tokens } from "@/design-system/theme/design-tokens";
 import { typeHierarchy } from "@/design-system/typography/font-size";
@@ -25,6 +26,7 @@ export default function Tabs() {
     <Navigator
       initialRouteName="Dashboard"
       sceneContainerStyle={{ backgroundColor }}
+      // tabBar={CustomBottomTabs}
     >
       <Screen
         name="Dashboard"

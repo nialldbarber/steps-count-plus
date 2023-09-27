@@ -28,7 +28,7 @@ export const tokens = {
   /**
    * @type Icon
    */
-  bottomTabsDashboardStroke: colors.primary,
+  bottomTabsDashboardStroke: colors.destructive,
   bottomTabsDashboardActiveStroke: colors.black,
   bottomTabsChallengesStroke: colors.primary,
   bottomTabsChallengesActiveStroke: colors.black,
@@ -78,7 +78,7 @@ export const tokensDark = {
   /**
    * @type Icon
    */
-  bottomTabsDashboardStroke: colors.primary,
+  bottomTabsDashboardStroke: colors.destructive,
   bottomTabsDashboardActiveStroke: colors.black,
   bottomTabsChallengesStroke: colors.primary,
   bottomTabsChallengesActiveStroke: colors.black,

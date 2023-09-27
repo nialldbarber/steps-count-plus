@@ -28,6 +28,7 @@ export function useHealthData(date: Date) {
   const [steps, setSteps] = useState(0);
   const [flights, setFlights] = useState(0);
   const [distance, setDistance] = useState(0);
+  const [activeEnergyBurned, setActiveEnergyBurned] = useState(0);
   const [hasPermissions, setHasPermission] = useState(false);
 
   useEffect(() => {
@@ -83,7 +84,24 @@ export function useHealthData(date: Date) {
       }
       setDistance(results.value);
     });
+
+    AppleHealthKit.getActiveEnergyBurned(options, (err, results) => {
+      if (err) {
+        console.log("Error getting the active energy burned:", err);
+        return;
+      }
+      console.log(results);
+      // setActiveEnergyBurned(results.values.);
+    });
+
+    AppleHealthKit.getAppleStandTime(options, (err, results) => {
+      if (err) {
+        console.log("Error getting the stand time:", err);
+        return;
+      }
+      // console.log(results.values)
+    });
   });
 
-  return { steps, flights, distance };
+  return { steps, flights, distance, activeEnergyBurned };
 }

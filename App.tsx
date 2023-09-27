@@ -1,3 +1,7 @@
+import "@formatjs/intl-locale/polyfill";
+import "@formatjs/intl-pluralrules/polyfill";
+import "@formatjs/intl-pluralrules/locale-data/en";
+import "@formatjs/intl-pluralrules/locale-data/es";
 import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 import {
@@ -12,6 +16,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Navigation } from "@/navigation/navigation-container";
 import { useThemeStore } from "@/stores/theme";
+import "@/lib/i18n";
 
 export default function App() {
   const systemTheme = useColorScheme();

@@ -1,5 +1,6 @@
 import { useMemo } from "react";
-import { useAnimatedStyle } from "react-native-reanimated";
+import { useTranslation } from "react-i18next";
+import { Box } from "@/design-system/components/atoms/box";
 import { Text } from "@/design-system/components/atoms/text";
 import { MainScreenLayout } from "@/design-system/components/layouts/main-screen";
 import { Stack } from "@/design-system/components/layouts/stack";
@@ -7,6 +8,7 @@ import { useHealthData } from "@/hooks/useHealthData";
 import { useUnitsStore } from "@/stores/units";
 
 export default function DashboardScreen() {
+  const { t } = useTranslation();
   const { units } = useUnitsStore();
   const { steps, flights, distance } = useHealthData(new Date());
 
@@ -16,16 +18,16 @@ export default function DashboardScreen() {
     }
 
     return `${(distance / 1609.34).toFixed(2)} miles`;
-  }, [units]);
-
-  const test = useAnimatedStyle(() => ({}));
+  }, [distance, units]);
 
   return (
     <MainScreenLayout>
       <Stack gutter="10px">
-        <Text level="heading" size="30px">
-          StepsCount+
-        </Text>
+        <Box flexDirection="row">
+          <Text level="heading">Day</Text>
+          <Text level="heading">Week</Text>
+          <Text level="heading">Month</Text>
+        </Box>
         <Text level="text" size="20px">
           Steps: {steps.toString()}
         </Text>

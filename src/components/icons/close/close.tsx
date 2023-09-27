@@ -1,7 +1,8 @@
-import { Pressable, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { CloseCircle } from "iconsax-react-native";
 import type { Colors } from "@/design-system/color/palettes";
+import Pressable from "@/design-system/components/common/pressable/pressable";
 import { space } from "@/design-system/layouts/space";
 import { zIndex } from "@/design-system/layouts/zIndex";
 import { appTheme } from "@/design-system/theme/design-tokens";
@@ -30,7 +31,12 @@ export default function Close({ stroke }: CloseProps) {
   });
 
   return (
-    <Pressable onPress={goBack} hitSlop={hitSlopLarge} style={styles.container}>
+    <Pressable
+      onPress={goBack}
+      hitSlop={hitSlopLarge}
+      style={styles.container}
+      haptics={{ type: "action", level: "Medium" }}
+    >
       <CloseCircle size={32} color={stroke ?? appTheme[theme].goBackStroke} />
     </Pressable>
   );

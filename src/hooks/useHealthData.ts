@@ -10,6 +10,8 @@ import AppleHealthKit, {
  * TODO:
  *
  * * Does the data update every time the app is active?
+ * -- yes it does appear to reset after 24 hours
+ * *
  */
 
 const { Permissions } = AppleHealthKit.Constants;
@@ -85,22 +87,22 @@ export function useHealthData(date: Date) {
       setDistance(results.value);
     });
 
-    AppleHealthKit.getActiveEnergyBurned(options, (err, results) => {
-      if (err) {
-        console.log("Error getting the active energy burned:", err);
-        return;
-      }
-      console.log(results);
-      // setActiveEnergyBurned(results.values.);
-    });
+    // AppleHealthKit.getActiveEnergyBurned(options, (err, results) => {
+    //   if (err) {
+    //     console.log("Error getting the active energy burned:", err);
+    //     return;
+    //   }
+    //   console.log(results);
+    //   // setActiveEnergyBurned(results.values.);
+    // });
 
-    AppleHealthKit.getAppleStandTime(options, (err, results) => {
-      if (err) {
-        console.log("Error getting the stand time:", err);
-        return;
-      }
-      // console.log(results.values)
-    });
+    // AppleHealthKit.getAppleStandTime(options, (err, results) => {
+    //   if (err) {
+    //     console.log("Error getting the stand time:", err);
+    //     return;
+    //   }
+    //   // console.log(results.values)
+    // });
   });
 
   return { steps, flights, distance, activeEnergyBurned };

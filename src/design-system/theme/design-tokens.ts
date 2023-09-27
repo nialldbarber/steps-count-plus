@@ -3,7 +3,11 @@ import { radius } from "@/design-system/layouts/radius";
 
 export const tokens = {
   /**
-   * @Screens
+   * @type Headers
+   */
+  mainHeaderBackgroundColor: colors.white,
+  /**
+   * @type Screens
    */
   mainBackgroundColor: colors.white,
   /**
@@ -38,7 +42,7 @@ export const tokens = {
   warningStroke: colors.destructive,
   warningText: colors.destructive,
   closeStroke: colors.black,
-  settingsStroke: colors.primary,
+  settingsStroke: colors.black,
   /**
    * @type Loader
    */
@@ -53,7 +57,11 @@ export const tokens = {
 
 export const tokensDark = {
   /**
-   * @Screens
+   * @type Headers
+   */
+  mainHeaderBackgroundColor: colors.black,
+  /**
+   * @type Screens
    */
   mainBackgroundColor: colors.black,
   /**
@@ -88,7 +96,7 @@ export const tokensDark = {
   warningStroke: colors.destructive,
   warningText: colors.destructive,
   closeStroke: colors.black,
-  settingsStroke: colors.primary,
+  settingsStroke: colors.white,
   /**
    * @type Loader
    */

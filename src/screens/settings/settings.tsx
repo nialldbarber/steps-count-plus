@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useColorScheme } from "react-native";
 import * as Haptics from "expo-haptics";
+import { useTranslation } from "react-i18next";
 import { Close } from "@/components/icons/close";
 import { Box } from "@/design-system/components/atoms/box";
 import { Card } from "@/design-system/components/atoms/card";
@@ -10,6 +11,7 @@ import { MainScreenLayout } from "@/design-system/components/layouts/main-screen
 import { Stack } from "@/design-system/components/layouts/stack";
 import { RadioButtons } from "@/design-system/components/molecules/radio-buttons";
 import type { RadioButtonType } from "@/design-system/components/molecules/radio-buttons/radio-buttons";
+import DebugLayout from "@/design-system/lib/debug-layout";
 import { appTheme } from "@/design-system/theme/design-tokens";
 import { useThemeStore } from "@/stores/theme";
 import type { Theme } from "@/stores/theme";
@@ -28,6 +30,7 @@ const unitsOptions: Array<any> = [
 ];
 
 export default function SettingsModalScreen() {
+  const { t } = useTranslation();
   const systemTheme = useColorScheme();
   const { theme, setTheme } = useThemeStore();
   const { units, setUnits } = useUnitsStore();
@@ -52,16 +55,30 @@ export default function SettingsModalScreen() {
 
   return (
     <MainScreenLayout>
-      <Close />
-      <Box margin="10px">
-        <Text level="heading" size="30px">
-          Settings
-        </Text>
-      </Box>
-      <Stack margin="10px">
-        <Card cardTypes="info">
+      <DebugLayout>
+        <Box
+          flexDirection="row"
+          alignItems="center"
+          justifyContent="space-between"
+          margin="10px"
+        >
+          <Text level="heading" size="30px">
+            {t("screen.settings.heading")}
+          </Text>
+          <Close />
+        </Box>
+      </DebugLayout>
+      <Card cardType="highlight">
+        <Box margin="10px">
           <Text level="heading" color={appTheme[theme].cardInfoColor}>
-            App theme (select your choice)
+            Get Premium!
+          </Text>
+        </Box>
+      </Card>
+      <Stack margin="10px">
+        <Card cardType="info">
+          <Text level="heading" color={appTheme[theme].cardInfoColor}>
+            {t("screen.settings.theme")}
           </Text>
           <RadioButtons
             options={themeOptions}
@@ -72,7 +89,7 @@ export default function SettingsModalScreen() {
         <Spacer height="30px" />
         <Card>
           <Text level="heading" color={appTheme[theme].cardInfoColor}>
-            Distance / Measurement
+            {t("screen.settings.units")}
           </Text>
           <RadioButtons
             options={unitsOptions}

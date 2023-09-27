@@ -1,0 +1,14 @@
+{
+  "heading": "StepsCount+",
+  "hello": "yoyooyoyoyo",
+  "screen": {
+    "dashboard": {},
+    "community": {},
+    "challenges": {},
+    "settings": {
+      "heading": "Settings",
+      "theme": "App theme",
+      "units": "Units"
+    }
+  }
+}

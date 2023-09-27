@@ -1,4 +1,5 @@
 import { StyleSheet, type ViewProps, type ViewStyle } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import { Box } from "@/design-system/components/atoms/box";
 import { radius } from "@/design-system/layouts/radius";
 import { type Height, type Width } from "@/design-system/layouts/size";
@@ -9,7 +10,7 @@ import { useThemeStore } from "@/stores/theme";
 type CardTypes = "info" | "warning" | "error" | "highlight";
 
 interface CardProps extends ViewProps {
-  cardTypes?: CardTypes;
+  cardType?: CardTypes;
   width?: Width;
   height?: Height;
 }
@@ -26,7 +27,7 @@ interface CardProps extends ViewProps {
  */
 
 export default function Card({
-  cardTypes = "info",
+  cardType = "info",
   width,
   height,
   children,
@@ -37,18 +38,29 @@ export default function Card({
     info: {
       backgroundColor: appTheme[theme].cardInfoBackgroundColor,
     },
+    highlight: {},
     warning: {},
     error: {},
-    highlight: {},
   };
 
   const styles = StyleSheet.create({
     container: {
       borderRadius: radius.large,
       padding: space["20px"],
-      ...cardStyles[cardTypes],
+      ...cardStyles[cardType],
     },
   });
 
-  return <Box styles={styles.container}>{children}</Box>;
+  return cardType === "highlight" ? (
+    <LinearGradient
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }}
+      colors={["#ef709b", "#fa9372"]}
+      style={styles.container}
+    >
+      {children}
+    </LinearGradient>
+  ) : (
+    <Box styles={styles.container}>{children}</Box>
+  );
 }

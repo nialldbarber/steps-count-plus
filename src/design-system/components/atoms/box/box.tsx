@@ -1,6 +1,7 @@
 import { useMemo, type ReactNode } from "react";
 import { View } from "react-native";
 import { colors, type Colors } from "@/design-system/color/palettes";
+import { shadow as dropShadow } from "@/design-system/color/shadow";
 import type { Radius } from "@/design-system/layouts/radius";
 import { radius } from "@/design-system/layouts/radius";
 import { heights, widths } from "@/design-system/layouts/size";
@@ -20,6 +21,7 @@ function resolveToken<TokenName extends string, TokenValue, CustomValue>(
 }
 
 type BoxProps = {
+  alignSelf?: "flex-start" | "flex-end" | "center" | "stretch";
   alignItems?: "flex-start" | "flex-end" | "center" | "stretch";
   borderWidth?: number;
   borderStyle?: "none" | "dotted" | "dashed" | "solid";
@@ -66,6 +68,7 @@ type BoxProps = {
   overflow?: "hidden" | "visible" | "scroll";
   backgroundColor?: Colors;
   styles?: any;
+  shadow?: boolean;
 } & (
   | {
       borderBottomRadius?: number;
@@ -92,6 +95,7 @@ type BoxProps = {
   );
 
 export default function Box({
+  alignSelf,
   alignItems,
   borderStyle,
   borderWidth,
@@ -137,12 +141,14 @@ export default function Box({
   overflow,
   backgroundColor,
   children,
+  shadow = false,
 }: BoxProps) {
   const width = resolveToken({ ...widths, ...space }, _width);
   const height = resolveToken({ ...heights, ...space }, _height);
 
   const styles = useMemo(() => {
     return {
+      alignSelf,
       alignItems,
       borderWidth,
       borderStyle,
@@ -199,6 +205,7 @@ export default function Box({
       backgroundColor: colors[backgroundColor],
     };
   }, [
+    alignSelf,
     flex,
     alignItems,
     borderWidth,
@@ -244,5 +251,15 @@ export default function Box({
     backgroundColor,
   ]);
 
-  return <View style={[styles, customStyles]}>{children}</View>;
+  return (
+    <View
+      style={[
+        styles,
+        customStyles,
+        shadow ? dropShadow({ elevation: 1, opacity: 0.15 }) : null,
+      ]}
+    >
+      {children}
+    </View>
+  );
 }

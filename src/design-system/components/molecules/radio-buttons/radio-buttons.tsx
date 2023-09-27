@@ -42,16 +42,17 @@ function RadioButton({
         padding="20px"
         marginVertical="15px"
         borderWidth={1}
-        borderColor="destructive"
-        borderStyle="dashed"
-        backgroundColor={isActive ? "destructive" : "white"}
+        borderColor={isActive ? "destructive" : "white"}
+        backgroundColor="white"
+        borderRadius="medium"
         width="104px"
+        shadow={isActive}
       >
         <Box alignItems="center">
           <Text withEmoji size="20px">
             {MODE_MAP[value]}
           </Text>
-          <Text color={isActive ? "white" : "black"}>{label}</Text>
+          <Text color="black">{label}</Text>
         </Box>
       </Box>
     </Pressable>

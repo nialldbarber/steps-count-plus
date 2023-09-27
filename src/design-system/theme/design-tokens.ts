@@ -53,6 +53,8 @@ export const tokens = {
    */
   cardInfoBackgroundColor: colors.greyFive,
   cardInfoColor: colors.black,
+  cardEncourageBackgroundColor: colors.orange_light,
+  cardEncourageBorderColor: colors.orange,
 } as const;
 
 export const tokensDark = {
@@ -107,6 +109,8 @@ export const tokensDark = {
    */
   cardInfoBackgroundColor: colors.greyFive,
   cardInfoColor: colors.black,
+  cardEncourageBackgroundColor: colors.orange_light,
+  cardEncourageBorderColor: colors.orange,
 } as const;
 
 export const appTheme = {

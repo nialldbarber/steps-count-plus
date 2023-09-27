@@ -8,7 +8,7 @@ import { space } from "@/design-system/layouts/space";
 import { appTheme } from "@/design-system/theme/design-tokens";
 import { useThemeStore } from "@/stores/theme";
 
-type CardTypes = "info" | "warning" | "error" | "highlight";
+type CardTypes = "info" | "encourage" | "warning" | "error" | "highlight";
 
 interface CardProps extends ViewProps {
   cardType?: CardTypes;
@@ -39,6 +39,11 @@ export default function Card({
     info: {
       backgroundColor: appTheme[theme].cardInfoBackgroundColor,
     },
+    encourage: {
+      backgroundColor: appTheme[theme].cardEncourageBackgroundColor,
+      borderColor: appTheme[theme].cardEncourageBorderColor,
+      borderWidth: 1,
+    },
     highlight: {},
     warning: {},
     error: {},
@@ -58,7 +63,7 @@ export default function Card({
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         colors={["#ef709b", "#fa9372"]}
-        style={[styles.container, shadow]}
+        style={[styles.container, shadow()]}
       >
         {children}
       </LinearGradient>

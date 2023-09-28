@@ -13,7 +13,9 @@ import { Box } from "@/design-system/components/atoms/box";
 import { Loader } from "@/design-system/components/atoms/loader";
 import { Text } from "@/design-system/components/atoms/text";
 import { space } from "@/design-system/layouts/space";
+import DebugLayout from "@/design-system/lib/debug-layout";
 import { appTheme } from "@/design-system/theme/design-tokens";
+import { hitSlopLarge } from "@/lib/hitSlop";
 import { useThemeStore } from "@/stores/theme";
 
 export type Variant =
@@ -73,6 +75,7 @@ export default function Button({
       position: "relative",
       alignItems: "center",
       height: space["60px"],
+      paddingHorizontal: space["20px"],
       justifyContent: "center",
       borderRadius: appTheme[theme].buttonBorderRadius,
       ...buttonStyles[variant],
@@ -130,11 +133,11 @@ export default function Button({
           </Text>
         </Box>
       </Pressable>
-      <Box position="absolute" right="20px" top="15px">
+      {/* <Box position="absolute" right="20px" top="15px">
         <Animated.View style={loaderStyle}>
           <Loader variant={variant} />
         </Animated.View>
-      </Box>
+      </Box> */}
     </Animated.View>
   );
 }

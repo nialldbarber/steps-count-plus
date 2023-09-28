@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useWindowDimensions } from "react-native";
 import * as haptics from "expo-haptics";
 import { LineChart } from "react-native-wagmi-charts";
@@ -6,7 +7,7 @@ type ChartProps = {
   data: any;
 };
 
-export default function Chart({ data }: ChartProps) {
+function Chart({ data }: ChartProps) {
   function invokeHaptic() {
     haptics.impactAsync(haptics.ImpactFeedbackStyle.Medium);
   }
@@ -31,3 +32,5 @@ export default function Chart({ data }: ChartProps) {
     </LineChart.Provider>
   );
 }
+
+export default memo(Chart);

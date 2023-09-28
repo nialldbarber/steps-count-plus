@@ -1,78 +1,126 @@
-import { useMemo } from "react";
+import { useRef } from "react";
+import { StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
-import { Chart } from "@/components/chart";
-import { Box } from "@/design-system/components/atoms/box";
-import { Text } from "@/design-system/components/atoms/text";
-import { MainScreenLayout } from "@/design-system/components/layouts/main-screen";
-import { Stack } from "@/design-system/components/layouts/stack";
+import PagerView from "react-native-pager-view";
+import Animated, {
+  Extrapolation,
+  interpolate,
+  useAnimatedStyle,
+  useEvent,
+  useHandler,
+  useSharedValue,
+} from "react-native-reanimated";
+import { Button } from "@/design-system/components/atoms/button";
+import { Row } from "@/design-system/components/layouts/row";
 import { useHealthData } from "@/hooks/useHealthData";
+import { hitSlopLarge } from "@/lib/hitSlop";
+import { DailySteps } from "@/screens/steps/daily";
+import { WeeklySteps } from "@/screens/steps/weekly";
 import { useUnitsStore } from "@/stores/units";
 
-const data = [
-  {
-    timestamp: 1679913600000,
-    value: 403,
-  },
-  {
-    timestamp: 1679827200000,
-    value: 6001,
-  },
-  {
-    timestamp: 1679740800000,
-    value: 10000,
-  },
-  {
-    timestamp: 1679654400000,
-    value: 2001,
-  },
-  {
-    timestamp: 1679568000000,
-    value: 200,
-  },
-  {
-    timestamp: 1679481600000,
-    value: 4001,
-  },
-  {
-    timestamp: 1679395200000,
-    value: 9000,
-  },
-];
+const AnimatedPager = Animated.createAnimatedComponent(PagerView);
+
+export function usePagerScrollHandler(handlers: any, dependencies?: any) {
+  const { context, doDependenciesDiffer } = useHandler(handlers, dependencies);
+  const subscriberForEvents = ["onPageScroll"];
+
+  return useEvent<any>(
+    (event) => {
+      "worklet";
+      const { onPageScroll } = handlers;
+      if (onPageScroll && event.eventName.endsWith("onPageScroll")) {
+        onPageScroll(event, context);
+      }
+    },
+    subscriberForEvents,
+    doDependenciesDiffer,
+  );
+}
 
 export default function DashboardScreen() {
+  const tabRef = useRef<PagerView>(null);
   const { t } = useTranslation();
   const { units } = useUnitsStore();
-  const { steps, flights, distance } = useHealthData(new Date());
 
-  const handleUnits = useMemo(() => {
-    if (units === "km") {
-      return `${(distance / 1000).toFixed(2)} km`;
-    }
+  const scrollOffset = useSharedValue(0);
 
-    return `${(distance / 1609.34).toFixed(2)} miles`;
-  }, [distance, units]);
+  const handler = usePagerScrollHandler({
+    onPageScroll: (e: any) => {
+      "worklet";
+      scrollOffset.value = e.offset + e.position;
+      //console.log(e.offset, e.position);
+    },
+  });
+
+  useHealthData(new Date());
+
+  // const handleUnits = useMemo(() => {
+  //   if (units === "km") {
+  //     return `${(distance / 1000).toFixed(2)} km`;
+  //   }
+
+  //   return `${(distance / 1609.34).toFixed(2)} miles`;
+  // }, [distance, units]);
+
+  const handleTabView = (key: number) => {
+    tabRef?.current?.setPage(key);
+  };
+
+  const styles = StyleSheet.create({
+    pagerView: {
+      flex: 1,
+    },
+  });
+
+  const animatedStyles = useAnimatedStyle(() => {
+    const scale = interpolate(scrollOffset.value, [0, 0.5, 1], [1, 0.8, 1], {
+      extrapolateRight: Extrapolation.CLAMP,
+      extrapolateLeft: Extrapolation.CLAMP,
+    });
+
+    const opacity = interpolate(scrollOffset.value, [0, 0.5, 1], [1, 0, 1], {
+      extrapolateRight: Extrapolation.CLAMP,
+      extrapolateLeft: Extrapolation.CLAMP,
+    });
+
+    return {
+      transform: [{ scale }],
+      opacity,
+    };
+  });
 
   return (
-    <MainScreenLayout>
-      <Stack gutter="10px">
-        <Box flexDirection="row">
-          <Text level="heading">Day</Text>
-          <Text level="heading">Week</Text>
-          <Text level="heading">Month</Text>
-        </Box>
-        <Text level="text" size="20px">
-          {t("screen.dashboard.steps", { steps: steps.toString() })}
-        </Text>
-        <Text level="text" size="20px">
-          {t("screen.dashboard.flights", { flights })}
-        </Text>
-        <Text level="text" size="20px">
-          {t("screen.dashboard.distance", { distance: handleUnits })}
-        </Text>
-        <Box width="full">
-          <Chart data={data} />
-        </Box>
-      </Stack>
-    </MainScreenLayout>
+    <>
+      <Row margin="15px" gutter="10px">
+        <Button
+          onPress={() => handleTabView(0)}
+          haptic="Medium"
+          hitSlop={hitSlopLarge}
+        >
+          Daily
+        </Button>
+        <Button
+          onPress={() => handleTabView(1)}
+          haptic="Medium"
+          hitSlop={hitSlopLarge}
+        >
+          Weekly
+        </Button>
+      </Row>
+      <AnimatedPager
+        style={styles.pagerView}
+        initialPage={0}
+        ref={tabRef}
+        overdrag
+        onPageScroll={handler}
+      >
+        <Animated.View key="1" style={animatedStyles}>
+          <DailySteps />
+        </Animated.View>
+        <Animated.View key="2" style={animatedStyles}>
+          <WeeklySteps />
+        </Animated.View>
+      </AnimatedPager>
+    </>
   );
 }

@@ -1,9 +1,9 @@
-import { Fatrows, People, Rank } from "iconsax-react-native";
+import { Award, Chart, ChemicalGlass, People } from "iconsax-react-native";
 import { Box } from "@/design-system/components/atoms/box";
 import { tokens } from "@/design-system/theme/design-tokens";
 
 type CustomBottomTabsIconProps = {
-  route: "Dashboard" | "Challenges" | "Community" | string;
+  route: "Stats" | "Goals" | "Insights" | "Community" | string;
   isFocused: boolean;
 };
 
@@ -15,25 +15,36 @@ export default function CustomBottomTabsIcon({
 
   const icon = () => {
     switch (route) {
-      case "Dashboard":
+      case "Stats":
         return (
-          <Fatrows
+          <Chart
             size={ICON_DIMENSIONS}
             color={
               isFocused
-                ? tokens.bottomTabsDashboardStroke
-                : tokens.bottomTabsDashboardActiveStroke
+                ? tokens.bottomTabsIconActiveStroke
+                : tokens.bottomTabsIconStroke
             }
           />
         );
-      case "Challenges":
+      case "Goals":
         return (
-          <Rank
+          <Award
             size={ICON_DIMENSIONS}
             color={
               isFocused
-                ? tokens.bottomTabsDashboardStroke
-                : tokens.bottomTabsDashboardActiveStroke
+                ? tokens.bottomTabsIconActiveStroke
+                : tokens.bottomTabsIconStroke
+            }
+          />
+        );
+      case "Insights":
+        return (
+          <ChemicalGlass
+            size={ICON_DIMENSIONS}
+            color={
+              isFocused
+                ? tokens.bottomTabsIconActiveStroke
+                : tokens.bottomTabsIconStroke
             }
           />
         );
@@ -43,8 +54,8 @@ export default function CustomBottomTabsIcon({
             size={ICON_DIMENSIONS}
             color={
               isFocused
-                ? tokens.bottomTabsDashboardStroke
-                : tokens.bottomTabsDashboardActiveStroke
+                ? tokens.bottomTabsIconActiveStroke
+                : tokens.bottomTabsIconStroke
             }
           />
         );

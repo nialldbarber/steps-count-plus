@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { CloseCircle } from "iconsax-react-native";
 import type { Colors } from "@/design-system/color/palettes";
-import Pressable from "@/design-system/components/common/pressable/pressable";
+import { Pressable } from "@/design-system/components/common/pressable";
 import { zIndex } from "@/design-system/layouts/zIndex";
 import { appTheme } from "@/design-system/theme/design-tokens";
 import { hitSlopLarge } from "@/lib/hitSlop";

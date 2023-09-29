@@ -1,5 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Fatrows, People, Rank } from "iconsax-react-native";
+import type { BottomTabBarProps } from "@react-navigation/bottom-tabs";
+import { Award, Chart, ChemicalGlass, People } from "iconsax-react-native";
+import { useTranslation } from "react-i18next";
 import { CustomBottomTabs } from "@/components/bottom-tabs";
 import { ScreenHeader } from "@/components/screen-header";
 import { appTheme, tokens } from "@/design-system/theme/design-tokens";
@@ -10,63 +12,92 @@ import { DashboardScreen } from "@/screens/dashboard";
 import { useThemeStore } from "@/stores/theme";
 
 export type RootBottomTabsParamList = {
-  Dashboard: undefined;
-  Challenges: undefined;
+  Stats: undefined;
+  Goals: undefined;
+  Insights: undefined;
   Community: undefined;
 };
 
 const { Navigator, Screen } =
   createBottomTabNavigator<RootBottomTabsParamList>();
+const CustomBottom = (props: BottomTabBarProps) => (
+  <CustomBottomTabs {...props} />
+);
 
 export default function Tabs() {
+  const { t } = useTranslation();
   const { theme } = useThemeStore();
   const backgroundColor = appTheme[theme].mainBackgroundColor;
 
   return (
     <Navigator
-      initialRouteName="Dashboard"
+      initialRouteName="Stats"
       sceneContainerStyle={{ backgroundColor }}
-      // tabBar={CustomBottomTabs}
+      tabBar={CustomBottom}
     >
       <Screen
-        name="Dashboard"
+        name="Stats"
         component={DashboardScreen}
         options={{
-          header: () => <ScreenHeader />,
+          header: () => <ScreenHeader title={t("screen.stats.title")} />,
           tabBarIcon: ({ focused }) => (
-            <Fatrows
+            <Chart
               size={28}
               color={
                 focused
-                  ? tokens.bottomTabsDashboardStroke
-                  : tokens.bottomTabsDashboardActiveStroke
+                  ? tokens.bottomTabsIconActiveStroke
+                  : tokens.bottomTabsIconStroke
               }
             />
           ),
           tabBarLabelStyle: {
             ...typeHierarchy.text["10px"],
-            fontWeight: "700",
+            fontWeight: "800",
+            color: tokens.bottomTabsTextColor,
           },
         }}
       />
       <Screen
-        name="Challenges"
+        name="Goals"
         component={ChallengeScreen}
         options={{
-          header: () => <ScreenHeader />,
+          header: () => <ScreenHeader title={t("screen.goals.title")} />,
           tabBarIcon: ({ focused }) => (
-            <Rank
+            <Award
               size={28}
               color={
                 focused
-                  ? tokens.bottomTabsDashboardStroke
-                  : tokens.bottomTabsDashboardActiveStroke
+                  ? tokens.bottomTabsIconActiveStroke
+                  : tokens.bottomTabsIconStroke
               }
             />
           ),
           tabBarLabelStyle: {
             ...typeHierarchy.text["10px"],
-            fontWeight: "700",
+            fontWeight: "800",
+            color: tokens.bottomTabsTextColor,
+          },
+        }}
+      />
+      <Screen
+        name="Insights"
+        component={ChallengeScreen}
+        options={{
+          header: () => <ScreenHeader title={t("screen.insights.title")} />,
+          tabBarIcon: ({ focused }) => (
+            <ChemicalGlass
+              size={28}
+              color={
+                focused
+                  ? tokens.bottomTabsIconActiveStroke
+                  : tokens.bottomTabsIconStroke
+              }
+            />
+          ),
+          tabBarLabelStyle: {
+            ...typeHierarchy.text["10px"],
+            fontWeight: "800",
+            color: tokens.bottomTabsTextColor,
           },
         }}
       />
@@ -74,20 +105,21 @@ export default function Tabs() {
         name="Community"
         component={CommunityScreen}
         options={{
-          header: () => <ScreenHeader />,
+          header: () => <ScreenHeader title={t("screen.community.title")} />,
           tabBarIcon: ({ focused }) => (
             <People
               size={28}
               color={
                 focused
-                  ? tokens.bottomTabsDashboardStroke
-                  : tokens.bottomTabsDashboardActiveStroke
+                  ? tokens.bottomTabsIconActiveStroke
+                  : tokens.bottomTabsIconStroke
               }
             />
           ),
           tabBarLabelStyle: {
             ...typeHierarchy.text["10px"],
-            fontWeight: "700",
+            fontWeight: "800",
+            color: tokens.bottomTabsTextColor,
           },
         }}
       />

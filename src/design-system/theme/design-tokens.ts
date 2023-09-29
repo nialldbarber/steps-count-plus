@@ -15,6 +15,11 @@ export const tokens = {
    */
   mainBodyTextColor: colors.black,
   /**
+   * @type Chip
+   */
+  chipInactiveBackgroundColor: colors.pureWhite,
+  chipActiveBackgroundColor: colors.primary,
+  /**
    * @type Button
    */
   buttonPrimaryBackgroundColor: colors.primary,
@@ -30,14 +35,17 @@ export const tokens = {
   inputBorderColor: colors.greyOne,
   inputDestructiveBorderColor: colors.destructive,
   /**
-   * @type Icon
+   * @type Bottoms tabs
    */
-  bottomTabsDashboardStroke: colors.destructive,
-  bottomTabsDashboardActiveStroke: colors.black,
-  bottomTabsChallengesStroke: colors.primary,
-  bottomTabsChallengesActiveStroke: colors.black,
-  bottomTabsCommunityStroke: colors.primary,
-  bottomTabsCommunityActiveStroke: colors.black,
+  bottomTabBackgroundColor: colors.pureWhite,
+  bottomTabActiveTabBorder: colors.primary,
+  bottomTabsIconStroke: colors.black,
+  bottomTabsIconActiveStroke: colors.primary,
+  bottomTabsTextColor: colors.black,
+  bottomTabsTextActiveColor: colors.primary,
+  /**
+   * @type Icons
+   */
   goBackStroke: colors.black,
   warningStroke: colors.destructive,
   warningText: colors.destructive,
@@ -51,10 +59,11 @@ export const tokens = {
   /**
    * @type Card
    */
-  cardInfoBackgroundColor: colors.greyFive,
+  cardInfoBackgroundColor: colors.secondary,
   cardInfoColor: colors.black,
   cardEncourageBackgroundColor: colors.orange_light,
   cardEncourageBorderColor: colors.orange,
+  cardEmphasiseBackgroundColor: colors.pureWhite,
 } as const;
 
 export const tokensDark = {
@@ -71,6 +80,11 @@ export const tokensDark = {
    */
   mainBodyTextColor: colors.white,
   /**
+   * @type Chip
+   */
+  chipInactiveBackgroundColor: colors.pureWhite,
+  chipActiveBackgroundColor: colors.primary,
+  /**
    * @type Button
    */
   buttonPrimaryBackgroundColor: colors.primary,
@@ -86,14 +100,17 @@ export const tokensDark = {
   inputBorderColor: colors.greyOne,
   inputDestructiveBorderColor: colors.destructive,
   /**
+   * @type Bottoms tabs
+   */
+  bottomTabBackgroundColor: colors.pureWhite,
+  bottomTabActiveTabBorder: colors.primary,
+  bottomTabsIconStroke: colors.black,
+  bottomTabsIconActiveStroke: colors.primary,
+  bottomTabsTextColor: colors.black,
+  bottomTabsTextActiveColor: colors.primary,
+  /**
    * @type Icon
    */
-  bottomTabsDashboardStroke: colors.destructive,
-  bottomTabsDashboardActiveStroke: colors.black,
-  bottomTabsChallengesStroke: colors.primary,
-  bottomTabsChallengesActiveStroke: colors.black,
-  bottomTabsCommunityStroke: colors.primary,
-  bottomTabsCommunityActiveStroke: colors.black,
   goBackStroke: colors.white,
   warningStroke: colors.destructive,
   warningText: colors.destructive,
@@ -107,10 +124,11 @@ export const tokensDark = {
   /**
    * @type Card
    */
-  cardInfoBackgroundColor: colors.greyFive,
+  cardInfoBackgroundColor: colors.secondary,
   cardInfoColor: colors.black,
   cardEncourageBackgroundColor: colors.orange_light,
   cardEncourageBorderColor: colors.orange,
+  cardEmphasiseBackgroundColor: colors.pureWhite,
 } as const;
 
 export const appTheme = {

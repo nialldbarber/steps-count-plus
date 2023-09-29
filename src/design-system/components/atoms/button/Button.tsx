@@ -36,6 +36,7 @@ export default function Button({
   haptic,
   isLoading = false,
   isDisabled = false,
+  isActive = false,
   children,
   ...rest
 }: ButtonProps) {

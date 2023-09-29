@@ -2,10 +2,10 @@ import { colors } from "@/design-system/color/palettes";
 
 export const shadow = ({
   width = 0,
-  height = 3,
-  opacity = 0.27,
-  radius = 4.22,
-  elevation = 6,
+  height = 1,
+  opacity = 0.07,
+  radius = 2.22,
+  elevation = 2,
 }: {
   width?: number;
   height?: number;

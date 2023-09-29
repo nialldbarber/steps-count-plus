@@ -12,7 +12,7 @@ import { Box } from "@/design-system/components/atoms/box";
 import { Card } from "@/design-system/components/atoms/card";
 import { Spacer } from "@/design-system/components/atoms/spacer";
 import { Text } from "@/design-system/components/atoms/text";
-import Pressable from "@/design-system/components/common/pressable/pressable";
+import { Pressable } from "@/design-system/components/common/pressable";
 import { MainScreenLayout } from "@/design-system/components/layouts/main-screen";
 import { Stack } from "@/design-system/components/layouts/stack";
 import { RadioButtons } from "@/design-system/components/molecules/radio-buttons";

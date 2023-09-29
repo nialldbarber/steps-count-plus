@@ -33,6 +33,7 @@ export const heights = {
   "56px": 56,
   "64px": 64,
   "68px": 68,
+  "90px": 90,
   full: "100%",
 } as const;
 

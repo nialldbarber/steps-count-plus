@@ -1,12 +1,9 @@
 import { Pressable as NativePressable } from "react-native";
-import type {
-  GestureResponderEvent,
-  PressableProps as NativePressableProps,
-} from "react-native";
+import type { PressableProps as NativePressableProps } from "react-native";
 import * as Haptics from "expo-haptics";
 
 interface PressableProps extends NativePressableProps {
-  onPress: ((event?: GestureResponderEvent) => void) | null | undefined;
+  onPress?: (...args: any[]) => any;
   haptics?: {
     type: "action" | "notification";
     level?: "Success" | "Warning" | "Error" | "Light" | "Medium" | "Heavy";

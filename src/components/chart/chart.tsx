@@ -16,7 +16,7 @@ function Chart({ data }: ChartProps) {
 
   return (
     <LineChart.Provider data={data}>
-      <LineChart width={width - 40} height={300}>
+      <LineChart width={width - 80} height={300}>
         <LineChart.Path color="#ef4444">
           <LineChart.Gradient />
         </LineChart.Path>

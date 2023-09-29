@@ -8,7 +8,13 @@ import { space } from "@/design-system/layouts/space";
 import { appTheme } from "@/design-system/theme/design-tokens";
 import { useThemeStore } from "@/stores/theme";
 
-type CardTypes = "info" | "encourage" | "warning" | "error" | "highlight";
+type CardTypes =
+  | "info"
+  | "encourage"
+  | "emphasise"
+  | "warning"
+  | "error"
+  | "highlight";
 
 interface CardProps extends ViewProps {
   cardType?: CardTypes;
@@ -43,6 +49,9 @@ export default function Card({
       backgroundColor: appTheme[theme].cardEncourageBackgroundColor,
       borderColor: appTheme[theme].cardEncourageBorderColor,
       borderWidth: 1,
+    },
+    emphasise: {
+      backgroundColor: appTheme[theme].cardEmphasiseBackgroundColor,
     },
     highlight: {},
     warning: {},

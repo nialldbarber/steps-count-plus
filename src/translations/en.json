@@ -8,13 +8,21 @@
     }
   },
   "screen": {
-    "dashboard": {
+    "stats": {
+      "title": "Stats",
       "steps": "Steps: {{ steps }}",
       "flights": "Flights: climbed {{ flights }}",
       "distance": "Distance: {{ distance }}"
     },
-    "community": {},
-    "challenges": {},
+    "goals": {
+      "title": "Goals"
+    },
+    "insights": {
+      "title": "Insights"
+    },
+    "community": {
+      "title": "Community"
+    },
     "settings": {
       "heading": "Settings",
       "premium": {

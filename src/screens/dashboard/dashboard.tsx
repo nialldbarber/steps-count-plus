@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { StyleSheet } from "react-native";
 import PagerView from "react-native-pager-view";
 import Animated, {
@@ -7,7 +7,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from "react-native-reanimated";
-import { Button } from "@/design-system/components/atoms/button";
+import Chip from "@/design-system/components/atoms/chip/chip";
 import { Row } from "@/design-system/components/layouts/row";
 import { useHealthData } from "@/hooks/useHealthData";
 import { usePagerScrollHandler } from "@/hooks/usePagerScrollHandler";
@@ -17,9 +17,17 @@ import { WeeklySteps } from "@/screens/steps/weekly";
 
 const AnimatedPager = Animated.createAnimatedComponent(PagerView);
 
+const chipOptions: Array<{ id: number; label: string; view: number }> = [
+  { id: 1, label: "24 hrs", view: 0 },
+  { id: 2, label: "7 days", view: 1 },
+  { id: 3, label: "30 days", view: 2 },
+  { id: 4, label: "1 year", view: 3 },
+];
+
 export default function DashboardScreen() {
   useHealthData(new Date());
 
+  const [activeChip, setActiveChip] = useState(0);
   const tabRef = useRef<PagerView>(null);
   const scrollOffset = useSharedValue(0);
   const handler = usePagerScrollHandler({
@@ -57,21 +65,21 @@ export default function DashboardScreen() {
 
   return (
     <>
-      <Row margin="15px" gutter="10px">
-        <Button
-          onPress={() => handleTabView(0)}
-          haptic="Medium"
-          hitSlop={hitSlopLarge}
-        >
-          Daily
-        </Button>
-        <Button
-          onPress={() => handleTabView(1)}
-          haptic="Medium"
-          hitSlop={hitSlopLarge}
-        >
-          Weekly
-        </Button>
+      <Row margin="15px" gutter="6px">
+        {chipOptions.map(({ id, label, view }, index) => {
+          return (
+            <Chip
+              key={id}
+              label={label}
+              onPress={() => {
+                setActiveChip(index);
+                handleTabView(view);
+              }}
+              hitSlop={hitSlopLarge}
+              isSelected={index === activeChip}
+            />
+          );
+        })}
       </Row>
       <AnimatedPager
         style={styles.pagerView}

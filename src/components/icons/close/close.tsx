@@ -3,7 +3,6 @@ import { useNavigation } from "@react-navigation/native";
 import { CloseCircle } from "iconsax-react-native";
 import type { Colors } from "@/design-system/color/palettes";
 import Pressable from "@/design-system/components/common/pressable/pressable";
-import { space } from "@/design-system/layouts/space";
 import { zIndex } from "@/design-system/layouts/zIndex";
 import { appTheme } from "@/design-system/theme/design-tokens";
 import { hitSlopLarge } from "@/lib/hitSlop";
@@ -24,9 +23,6 @@ export default function Close({ onPress, stroke }: CloseProps) {
 
   const styles = StyleSheet.create({
     container: {
-      position: "absolute",
-      top: space["20px"],
-      right: space["20px"],
       zIndex: zIndex["1px"],
     },
   });

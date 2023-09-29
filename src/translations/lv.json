@@ -1,3 +1,25 @@
 {
-  "hello": "čauuuuuuuuu"
+  "heading": "StepsCount+",
+  "hello": "yoyooyoyoyo",
+  "hooks": {
+    "km": "km",
+    "miles": "jūdzes"
+  },
+  "screen": {
+    "dashboard": {
+      "steps": "Steps: {{ steps }}",
+      "flights": "Flights: climbed {{ flights }}",
+      "distance": "Distance: {{ distance }}"
+    },
+    "community": {},
+    "challenges": {},
+    "settings": {
+      "heading": "Settings",
+      "premium": {
+        "heading": "Get Premium!"
+      },
+      "theme": "App theme",
+      "units": "Units"
+    }
+  }
 }

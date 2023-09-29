@@ -18,11 +18,12 @@ import { Stack } from "@/design-system/components/layouts/stack";
 import { RadioButtons } from "@/design-system/components/molecules/radio-buttons";
 import type { RadioButtonType } from "@/design-system/components/molecules/radio-buttons/radio-buttons";
 import { appTheme } from "@/design-system/theme/design-tokens";
+import { hitSlopLarge } from "@/lib/hitSlop";
+import { PremiumScreen } from "@/screens/premium";
 import { useThemeStore } from "@/stores/theme";
 import type { Theme } from "@/stores/theme";
 import { useUnitsStore } from "@/stores/units";
 import type { Units } from "@/stores/units";
-import { PremiumScreen } from "../premium";
 
 const themeOptions: Array<RadioButtonType> = [
   { id: "theme_first", label: "System", value: "system" },
@@ -81,7 +82,7 @@ export default function SettingsModalScreen() {
         </Box>
         <Box marginVertical="10px">
           <Card cardType="highlight">
-            <Pressable onPress={handlePresentModalPress}>
+            <Pressable onPress={handlePresentModalPress} hitSlop={hitSlopLarge}>
               <Box margin="10px">
                 <Text level="heading" color={appTheme[theme].cardInfoColor}>
                   {t("screen.settings.premium.heading")}

@@ -10,10 +10,8 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { Box } from "@/design-system/components/atoms/box";
-import { Loader } from "@/design-system/components/atoms/loader";
 import { Text } from "@/design-system/components/atoms/text";
 import { space } from "@/design-system/layouts/space";
-import DebugLayout from "@/design-system/lib/debug-layout";
 import { appTheme } from "@/design-system/theme/design-tokens";
 import { hitSlopLarge } from "@/lib/hitSlop";
 import { useThemeStore } from "@/stores/theme";

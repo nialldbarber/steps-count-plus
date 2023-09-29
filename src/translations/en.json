@@ -1,6 +1,12 @@
 {
   "heading": "StepsCount+",
   "hello": "yoyooyoyoyo",
+  "config": {
+    "units": {
+      "km": "km",
+      "miles": "miles"
+    }
+  },
   "screen": {
     "dashboard": {
       "steps": "Steps: {{ steps }}",

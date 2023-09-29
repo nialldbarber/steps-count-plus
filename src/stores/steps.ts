@@ -44,10 +44,12 @@ export const useStepsStore = create(
     setMonthlySteps: (steps: number, segments: Segments) =>
       set((state) => {
         state.monthlySteps = steps;
+        state.monthlySegments = segments;
       }),
     setYearlySteps: (steps: number, segments: Segments) =>
       set((state) => {
         state.yearlySteps = steps;
+        state.yearlySegments = segments;
       }),
   })),
 );

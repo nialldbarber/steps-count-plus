@@ -17,6 +17,7 @@ export default function Pressable({
   haptics = { type: "action" },
   onPress,
   children,
+  ...rest
 }: PressableProps) {
   const handleOnPress = () => {
     if (onPress === null) return;
@@ -28,5 +29,9 @@ export default function Pressable({
     }
   };
 
-  return <NativePressable onPress={handleOnPress}>{children}</NativePressable>;
+  return (
+    <NativePressable onPress={handleOnPress} {...rest}>
+      {children}
+    </NativePressable>
+  );
 }

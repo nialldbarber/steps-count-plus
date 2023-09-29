@@ -31,17 +31,13 @@ export default function SettingsIcon({ stroke }: SettingsIconProps) {
   const styles = StyleSheet.create({
     background: {
       ...shadow(),
+      backgroundColor: appTheme[theme].settingsStrokeBackground,
     },
   });
 
   return (
     <Pressable onPress={() => navigate("Settings")} hitSlop={hitSlopLarge}>
-      <Box
-        backgroundColor="pureWhite"
-        borderRadius="full"
-        padding="6px"
-        styles={styles.background}
-      >
+      <Box borderRadius="full" padding="6px" styles={styles.background}>
         <Setting2 size="32" color={stroke ?? appTheme[theme].settingsStroke} />
       </Box>
     </Pressable>

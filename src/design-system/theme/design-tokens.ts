@@ -51,6 +51,7 @@ export const tokens = {
   warningText: colors.destructive,
   closeStroke: colors.black,
   settingsStroke: colors.black,
+  settingsStrokeBackground: colors.pureWhite,
   /**
    * @type Loader
    */
@@ -59,7 +60,7 @@ export const tokens = {
   /**
    * @type Card
    */
-  cardInfoBackgroundColor: colors.secondary,
+  cardInfoBackgroundColor: colors.pureWhite,
   cardInfoColor: colors.black,
   cardEncourageBackgroundColor: colors.orange_light,
   cardEncourageBorderColor: colors.orange,
@@ -116,6 +117,7 @@ export const tokensDark = {
   warningText: colors.destructive,
   closeStroke: colors.black,
   settingsStroke: colors.white,
+  settingsStrokeBackground: colors.black,
   /**
    * @type Loader
    */
@@ -124,7 +126,7 @@ export const tokensDark = {
   /**
    * @type Card
    */
-  cardInfoBackgroundColor: colors.secondary,
+  cardInfoBackgroundColor: colors.pureWhite,
   cardInfoColor: colors.black,
   cardEncourageBackgroundColor: colors.orange_light,
   cardEncourageBorderColor: colors.orange,

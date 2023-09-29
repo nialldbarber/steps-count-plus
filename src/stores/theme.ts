@@ -1,26 +1,34 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
+import { zustandStorage } from "@/stores/middleware";
 
 export type Theme = "light" | "dark";
 
 type ThemeState = {
   theme: Theme;
   setTheme: (theme: Theme) => void;
-  initialiseTheme: () => Promise<void>;
+  initialiseTheme: () => void;
 };
 
-export const useThemeStore = create<ThemeState>((set) => ({
-  theme: "light",
-  setTheme: async (theme) => {
-    if (theme !== null) {
-      await AsyncStorage.setItem("app_theme", theme);
-      set({ theme });
-    }
-  },
-  initialiseTheme: async () => {
-    const savedTheme = await AsyncStorage.getItem("app_theme");
-    if (savedTheme) {
-      set({ theme: savedTheme as Theme });
-    }
-  },
-}));
+export const useThemeStore = create(
+  persist<ThemeState>(
+    (set, get) => ({
+      theme: "light",
+      setTheme: (theme) => {
+        if (theme !== null) {
+          zustandStorage.setItem("app_theme", theme);
+          set({ theme });
+        }
+      },
+      initialiseTheme: () => {
+        if (get().theme) {
+          set({ theme: get().theme });
+        }
+      },
+    }),
+    {
+      name: "app_theme",
+      storage: createJSONStorage(() => zustandStorage),
+    },
+  ),
+);

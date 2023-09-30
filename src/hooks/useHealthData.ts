@@ -23,18 +23,7 @@ const permissions: HealthKitPermissions = {
 };
 
 export function useHealthData(date: Date) {
-  // const { daily, weekly, monthly } = useHealthStore((state) => state);
-  const {
-    dailySteps,
-    weeklySteps,
-    monthlySteps,
-    setDailySteps,
-    setWeeklySteps,
-    setMonthlySteps,
-  } = useStepsStore();
-  const [flights, setFlights] = useState(0);
-  const [distance, setDistance] = useState(0);
-  const [activeEnergyBurned, setActiveEnergyBurned] = useState(0);
+  const { setDailySteps, setWeeklySteps, setMonthlySteps } = useStepsStore();
   const [hasPermissions, setHasPermission] = useState(false);
 
   useEffect(() => {
@@ -62,7 +51,12 @@ export function useHealthData(date: Date) {
   useEffect(() => {
     if (!hasPermissions) return;
 
-    // Daily steps
+    /**
+     * =====================================================================
+     * @type Steps
+     * @period Daily
+     * =====================================================================
+     */
     const dailyStepsOptions: HealthInputOptions = {
       date: date.toISOString(),
       includeManuallyAdded: false,
@@ -92,15 +86,34 @@ export function useHealthData(date: Date) {
     //   },
     // );
 
+    /**
+     * =====================================================================
+     * @type Steps
+     * @period Weekly
+     * =====================================================================
+     */
     getStepsFromPeriod(7, (error, totalSteps, segments) => {
       if (error) return;
       setWeeklySteps(totalSteps, segments);
     });
 
+    /**
+     * =====================================================================
+     * @type Steps
+     * @period Monthly
+     * =====================================================================
+     */
     getStepsFromPeriod(30, (error, totalSteps, segments) => {
       if (error) return;
       setMonthlySteps(totalSteps, segments);
     });
+
+    /**
+     * =====================================================================
+     * @type Distance
+     * @period Daily
+     * =====================================================================
+     */
 
     // AppleHealthKit.getFlightsClimbed(options, (err, results) => {
     //   if (err) {

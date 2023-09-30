@@ -3,7 +3,7 @@ import "@formatjs/intl-pluralrules/polyfill";
 import "@formatjs/intl-pluralrules/locale-data/en";
 import "@formatjs/intl-pluralrules/locale-data/es";
 import { useEffect } from "react";
-import { StyleSheet, useColorScheme } from "react-native";
+import { useColorScheme } from "react-native";
 import {
   PlusJakartaSans_300Light,
   PlusJakartaSans_400Regular,
@@ -13,18 +13,31 @@ import {
   PlusJakartaSans_800ExtraBold,
   useFonts,
 } from "@expo-google-fonts/plus-jakarta-sans";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Navigation } from "@/navigation/navigation-container";
 import { useThemeStore } from "@/stores/theme";
 import "@/lib/i18n";
+import { flexStyles } from "@/design-system/common-styles/flex";
+import { storage } from "@/lib/mmkv";
+
+const ANIMATION = require("./assets/intro.json");
 
 export default function App() {
+  /**
+   * TODO: permission?
+   * * ask for apple health/google health permission here?
+   *
+   * ? onboarding flow
+   * * allow notifications
+   * * set goals
+   * * explore communinty?
+   */
+
   const systemTheme = useColorScheme();
   const { theme, initialiseTheme, setTheme } = useThemeStore();
 
   async function getTheme() {
-    const savedTheme = await AsyncStorage.getItem("app_theme");
+    const savedTheme = storage.getString("app_theme");
 
     if (savedTheme) return;
     if (
@@ -42,6 +55,7 @@ export default function App() {
 
   useEffect(() => {
     getTheme();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [systemTheme]);
 
   let [fontsLoaded, fontError] = useFonts({
@@ -57,14 +71,8 @@ export default function App() {
     return null;
   }
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-    },
-  });
-
   return (
-    <GestureHandlerRootView style={styles.container}>
+    <GestureHandlerRootView style={flexStyles.container}>
       <Navigation />
     </GestureHandlerRootView>
   );

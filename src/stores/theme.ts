@@ -16,7 +16,6 @@ export const useThemeStore = create(
       theme: "light",
       setTheme: (theme) => {
         if (theme !== null) {
-          zustandStorage.setItem("app_theme", theme);
           set({ theme });
         }
       },

@@ -1,5 +1,4 @@
-import { useRef, useState } from "react";
-import { StyleSheet } from "react-native";
+import { useRef } from "react";
 import PagerView from "react-native-pager-view";
 import Animated, {
   Extrapolation,
@@ -7,8 +6,10 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from "react-native-reanimated";
-import Chip from "@/design-system/components/atoms/chip/chip";
+import { flexStyles } from "@/design-system/common-styles/flex";
+import { Chip } from "@/design-system/components/atoms/chip";
 import { Row } from "@/design-system/components/layouts/row";
+import { useActiveValue } from "@/hooks/useActiveValue";
 import { useHealthData } from "@/hooks/useHealthData";
 import { usePagerScrollHandler } from "@/hooks/usePagerScrollHandler";
 import { hitSlopLarge } from "@/lib/hitSlop";
@@ -27,7 +28,7 @@ const chipOptions: Array<{ id: number; label: string; view: number }> = [
 export default function DashboardScreen() {
   useHealthData(new Date());
 
-  const [activeChip, setActiveChip] = useState(0);
+  const { value, handleActiveValue } = useActiveValue();
   const tabRef = useRef<PagerView>(null);
   const scrollOffset = useSharedValue(0);
   const handler = usePagerScrollHandler({
@@ -57,12 +58,6 @@ export default function DashboardScreen() {
     };
   });
 
-  const styles = StyleSheet.create({
-    pagerView: {
-      flex: 1,
-    },
-  });
-
   return (
     <>
       <Row margin="15px" gutter="6px">
@@ -72,17 +67,17 @@ export default function DashboardScreen() {
               key={id}
               label={label}
               onPress={() => {
-                setActiveChip(index);
+                handleActiveValue(index);
                 handleTabView(view);
               }}
               hitSlop={hitSlopLarge}
-              isSelected={index === activeChip}
+              isSelected={index === value}
             />
           );
         })}
       </Row>
       <AnimatedPager
-        style={styles.pagerView}
+        style={flexStyles.container}
         initialPage={0}
         ref={tabRef}
         overdrag

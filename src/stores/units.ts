@@ -1,3 +1,4 @@
+// TODO: change to MMKV
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
 

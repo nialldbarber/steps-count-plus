@@ -7,18 +7,30 @@ import type { Space } from "@/design-system/layouts/space";
 interface RowProps extends ViewProps {
   margin?: Space;
   gutter?: Space;
+  justifyContent?:
+    | "flex-start"
+    | "flex-end"
+    | "center"
+    | "space-between"
+    | "space-around";
   children: ReactNode;
 }
 
 export default function Row({
   margin = "0px",
   gutter = "0px",
+  justifyContent,
   children: childProp,
 }: RowProps) {
   const children = flattenChildren(childProp);
 
   return (
-    <Box margin={margin} flexDirection="row" alignItems="center">
+    <Box
+      margin={margin}
+      flexDirection="row"
+      alignItems="center"
+      justifyContent={justifyContent}
+    >
       {Children.map(children, (child, index) => {
         const first = index === 0;
         const last = index === children.length - 1;

@@ -1,10 +1,11 @@
-import { Alert, SafeAreaView, ScrollView, StyleSheet } from "react-native";
+import { Alert, SafeAreaView, ScrollView } from "react-native";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { supabase } from "@/database/supabase";
+import { flexStyles } from "@/design-system/common-styles/flex";
 import { Box } from "@/design-system/components/atoms/box";
 import { Button } from "@/design-system/components/atoms/button";
 import { Input } from "@/design-system/components/atoms/input";
@@ -53,7 +54,7 @@ export default function Authentication() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={flexStyles.container}>
       <ScrollView>
         <Box alignItems="center" justifyContent="center">
           <Box height="1/2" width="1/2" backgroundColor="black" />
@@ -111,9 +112,3 @@ export default function Authentication() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

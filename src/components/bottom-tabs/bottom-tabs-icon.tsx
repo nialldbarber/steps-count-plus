@@ -1,9 +1,9 @@
-import { Award, Chart, ChemicalGlass, People } from "iconsax-react-native";
+import { Award, Chart, ChemicalGlass, StatusUp } from "iconsax-react-native";
 import { Box } from "@/design-system/components/atoms/box";
 import { tokens } from "@/design-system/theme/design-tokens";
 
 type CustomBottomTabsIconProps = {
-  route: "Stats" | "Goals" | "Insights" | "Community" | string;
+  route: "Stats" | "Goals" | "Insights" | "Challenges" | string;
   isFocused: boolean;
 };
 
@@ -48,9 +48,9 @@ export default function CustomBottomTabsIcon({
             }
           />
         );
-      case "Community":
+      case "Challenges":
         return (
-          <People
+          <StatusUp
             size={ICON_DIMENSIONS}
             color={
               isFocused

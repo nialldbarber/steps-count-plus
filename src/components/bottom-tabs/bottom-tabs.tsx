@@ -6,7 +6,6 @@ import Animated, {
   withSpring,
 } from "react-native-reanimated";
 import CustomBottomTabsIcon from "@/components/bottom-tabs/bottom-tabs-icon";
-import { colors } from "@/design-system/color/palettes";
 import { shadow } from "@/design-system/color/shadow";
 import { Text } from "@/design-system/components/atoms/text";
 import { Pressable } from "@/design-system/components/common/pressable";
@@ -31,8 +30,9 @@ const CustomBottomTab = ({
     transform: [
       {
         translateX: withSpring(TAB_WIDTH * state.index, {
-          damping: 15,
+          damping: 35,
           restSpeedThreshold: 10,
+          stiffness: 500,
         }),
       },
     ],

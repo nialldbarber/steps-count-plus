@@ -23,7 +23,7 @@ export interface TextProps extends NativeTextProps {
 }
 
 export default function Text({
-  weight = "medium",
+  weight = "bold",
   level = "text",
   size = level === "heading" ? "18px" : "16px",
   color,

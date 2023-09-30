@@ -1,5 +1,6 @@
 import type { ForwardedRef, ReactNode } from "react";
-import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
+import { SafeAreaView, ScrollView } from "react-native";
+import { flexStyles } from "@/design-system/common-styles/flex";
 import { Box } from "@/design-system/components/atoms/box";
 
 type MainScreenLayoutProps = {
@@ -8,16 +9,12 @@ type MainScreenLayoutProps = {
 };
 
 export default function MainScreenLayout({ children }: MainScreenLayoutProps) {
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-    },
-  });
-
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={flexStyles.container}>
       <ScrollView>
-        <Box padding="20px">{children}</Box>
+        <Box paddingTop="20px" paddingHorizontal="20px" paddingBottom="90px">
+          {children}
+        </Box>
       </ScrollView>
     </SafeAreaView>
   );

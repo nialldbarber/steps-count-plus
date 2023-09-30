@@ -1,21 +1,19 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import type { BottomTabBarProps } from "@react-navigation/bottom-tabs";
-import { Award, Chart, ChemicalGlass, People } from "iconsax-react-native";
 import { useTranslation } from "react-i18next";
 import { CustomBottomTabs } from "@/components/bottom-tabs";
 import { ScreenHeader } from "@/components/screen-header";
-import { appTheme, tokens } from "@/design-system/theme/design-tokens";
-import { typeHierarchy } from "@/design-system/typography/font-size";
+import { appTheme } from "@/design-system/theme/design-tokens";
 import { ChallengeScreen } from "@/screens/challenges";
-import { CommunityScreen } from "@/screens/community";
 import { DashboardScreen } from "@/screens/dashboard";
+import { GoalsScreen } from "@/screens/goals";
 import { useThemeStore } from "@/stores/theme";
 
 export type RootBottomTabsParamList = {
   Stats: undefined;
   Goals: undefined;
   Insights: undefined;
-  Community: undefined;
+  Challenges: undefined;
 };
 
 const { Navigator, Screen } =
@@ -40,43 +38,13 @@ export default function Tabs() {
         component={DashboardScreen}
         options={{
           header: () => <ScreenHeader title={t("screen.stats.title")} />,
-          tabBarIcon: ({ focused }) => (
-            <Chart
-              size={28}
-              color={
-                focused
-                  ? tokens.bottomTabsIconActiveStroke
-                  : tokens.bottomTabsIconStroke
-              }
-            />
-          ),
-          tabBarLabelStyle: {
-            ...typeHierarchy.text["10px"],
-            fontWeight: "800",
-            color: tokens.bottomTabsTextColor,
-          },
         }}
       />
       <Screen
         name="Goals"
-        component={ChallengeScreen}
+        component={GoalsScreen}
         options={{
           header: () => <ScreenHeader title={t("screen.goals.title")} />,
-          tabBarIcon: ({ focused }) => (
-            <Award
-              size={28}
-              color={
-                focused
-                  ? tokens.bottomTabsIconActiveStroke
-                  : tokens.bottomTabsIconStroke
-              }
-            />
-          ),
-          tabBarLabelStyle: {
-            ...typeHierarchy.text["10px"],
-            fontWeight: "800",
-            color: tokens.bottomTabsTextColor,
-          },
         }}
       />
       <Screen
@@ -84,43 +52,13 @@ export default function Tabs() {
         component={ChallengeScreen}
         options={{
           header: () => <ScreenHeader title={t("screen.insights.title")} />,
-          tabBarIcon: ({ focused }) => (
-            <ChemicalGlass
-              size={28}
-              color={
-                focused
-                  ? tokens.bottomTabsIconActiveStroke
-                  : tokens.bottomTabsIconStroke
-              }
-            />
-          ),
-          tabBarLabelStyle: {
-            ...typeHierarchy.text["10px"],
-            fontWeight: "800",
-            color: tokens.bottomTabsTextColor,
-          },
         }}
       />
       <Screen
-        name="Community"
-        component={CommunityScreen}
+        name="Challenges"
+        component={ChallengeScreen}
         options={{
-          header: () => <ScreenHeader title={t("screen.community.title")} />,
-          tabBarIcon: ({ focused }) => (
-            <People
-              size={28}
-              color={
-                focused
-                  ? tokens.bottomTabsIconActiveStroke
-                  : tokens.bottomTabsIconStroke
-              }
-            />
-          ),
-          tabBarLabelStyle: {
-            ...typeHierarchy.text["10px"],
-            fontWeight: "800",
-            color: tokens.bottomTabsTextColor,
-          },
+          header: () => <ScreenHeader title={t("screen.challenges.title")} />,
         }}
       />
     </Navigator>

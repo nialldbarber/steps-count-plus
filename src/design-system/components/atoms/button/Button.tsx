@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Pressable, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import type { PressableProps, TextStyle, ViewStyle } from "react-native";
 import type { ImpactFeedbackStyle } from "expo-haptics";
 import * as Haptics from "expo-haptics";
@@ -9,11 +9,12 @@ import Animated, {
   withSpring,
   withTiming,
 } from "react-native-reanimated";
+import { shadow } from "@/design-system/color/shadow";
 import { Box } from "@/design-system/components/atoms/box";
 import { Text } from "@/design-system/components/atoms/text";
+import { Pressable } from "@/design-system/components/common/pressable";
 import { space } from "@/design-system/layouts/space";
 import { appTheme } from "@/design-system/theme/design-tokens";
-import { hitSlopLarge } from "@/lib/hitSlop";
 import { useThemeStore } from "@/stores/theme";
 
 export type Variant =
@@ -48,7 +49,7 @@ export default function Button({
       backgroundColor: appTheme[theme].buttonPrimaryBackgroundColor,
     },
     secondary: {
-      backgroundColor: "transparent",
+      backgroundColor: appTheme[theme].buttonSecondaryBackgroundColor,
       borderColor: appTheme[theme].buttonSecondaryBackgroundColor,
       borderWidth: 2,
     },
@@ -78,6 +79,7 @@ export default function Button({
       justifyContent: "center",
       borderRadius: appTheme[theme].buttonBorderRadius,
       ...buttonStyles[variant],
+      ...shadow(),
     },
     text: {
       ...textStyles[variant],
@@ -95,7 +97,7 @@ export default function Button({
   }));
 
   const onPress = (direction: "in" | "out") => {
-    size.value = withSpring(direction === "in" ? 0.98 : 1, {
+    size.value = withSpring(direction === "in" ? 0.95 : 1, {
       overshootClamping: false,
       restDisplacementThreshold: 0.01,
       restSpeedThreshold: 2,
@@ -127,9 +129,7 @@ export default function Button({
         accessibilityState={{ disabled: isDisabled, busy: isLoading }}
       >
         <Box flexDirection="row">
-          <Text style={styles.text} weight="bold">
-            {children}
-          </Text>
+          <Text style={styles.text}>{children}</Text>
         </Box>
       </Pressable>
       {/* <Box position="absolute" right="20px" top="15px">

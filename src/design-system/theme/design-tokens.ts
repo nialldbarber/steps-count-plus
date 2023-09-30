@@ -19,6 +19,8 @@ export const tokens = {
    */
   chipInactiveBackgroundColor: colors.pureWhite,
   chipActiveBackgroundColor: colors.primary,
+  chipDarkInactiveBackgroundColor: colors.white,
+  chipDarkActiveBackgroundColor: colors.primary,
   /**
    * @type Button
    */
@@ -85,6 +87,8 @@ export const tokensDark = {
    */
   chipInactiveBackgroundColor: colors.pureWhite,
   chipActiveBackgroundColor: colors.primary,
+  chipDarkInactiveBackgroundColor: colors.white,
+  chipDarkActiveBackgroundColor: colors.primary,
   /**
    * @type Button
    */

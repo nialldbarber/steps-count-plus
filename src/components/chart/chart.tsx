@@ -9,7 +9,7 @@ type ChartProps = {
 
 function Chart({ data }: ChartProps) {
   function invokeHaptic() {
-    haptics.impactAsync(haptics.ImpactFeedbackStyle.Medium);
+    haptics.impactAsync(haptics.ImpactFeedbackStyle.Light);
   }
 
   const { width } = useWindowDimensions();

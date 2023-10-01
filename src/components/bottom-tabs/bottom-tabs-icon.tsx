@@ -11,7 +11,7 @@ export default function CustomBottomTabsIcon({
   route,
   isFocused,
 }: CustomBottomTabsIconProps) {
-  const ICON_DIMENSIONS = 28;
+  const ICON_DIMENSIONS = 20;
 
   const icon = () => {
     switch (route) {

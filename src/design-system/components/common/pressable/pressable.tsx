@@ -25,7 +25,7 @@ export default function Pressable({
     if (onPress === null) return;
     onPress && onPress();
     if (haptics?.type === "action") {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     } else {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     }

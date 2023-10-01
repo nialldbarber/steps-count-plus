@@ -46,14 +46,13 @@ const CustomBottomTab = ({
     tabBarContainer: {
       flex: 1,
       flexDirection: "row",
-      height: heights["90px"],
+      height: heights["68px"],
       position: "absolute",
       alignSelf: "center",
       alignItems: "center",
       justifyContent: "space-around",
       backgroundColor: appTheme[theme].bottomTabBackgroundColor,
       borderRadius: radius.full,
-      overflow: "hidden",
       ...shadow(),
     },
     slidingTabContainer: {
@@ -62,8 +61,8 @@ const CustomBottomTab = ({
       justifyContent: "center",
     },
     slidingTab: {
-      width: 75,
-      height: 75,
+      width: 65,
+      height: 65,
       backgroundColor: "rgba(209, 213, 219, 0.3)",
       borderRadius: radius.full,
       ...shadow(),
@@ -134,7 +133,7 @@ const CustomBottomTab = ({
                     ? appTheme[theme].bottomTabsTextActiveColor
                     : appTheme[theme].bottomTabsTextColor
                 }
-                size="11px"
+                size="10px"
                 weight="bold"
               >
                 {route.name}

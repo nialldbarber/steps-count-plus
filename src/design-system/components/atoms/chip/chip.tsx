@@ -6,6 +6,7 @@ import { Text } from "@/design-system/components/atoms/text";
 import { Pressable } from "@/design-system/components/common/pressable";
 import type { PressableProps } from "@/design-system/components/common/pressable/pressable";
 import { radius } from "@/design-system/layouts/radius";
+import { widths, type Width } from "@/design-system/layouts/size";
 import { space } from "@/design-system/layouts/space";
 import { tokens } from "@/design-system/theme/design-tokens";
 import type { FontSizes } from "@/design-system/typography/font-size";
@@ -17,6 +18,7 @@ interface ChipProps extends PressableProps {
   a11yLabel: string;
   label: string;
   isSelected?: boolean;
+  width?: Width;
 }
 
 export default function Chip({
@@ -24,6 +26,7 @@ export default function Chip({
   isSelected = false,
   size,
   label,
+  width,
   ...rest
 }: ChipProps) {
   const backgroundStyles: Record<ChipMode, ViewStyle> = {
@@ -41,13 +44,14 @@ export default function Chip({
 
   const styles = StyleSheet.create({
     container: {
-      ...backgroundStyles[mode],
       height: space["38px"],
       paddingHorizontal: space["15px"],
       borderRadius: radius.full,
       alignItems: "center",
       justifyContent: "center",
+      ...backgroundStyles[mode],
       ...shadow(),
+      width: widths[width],
     },
     text: {
       color: isSelected ? "white" : colors.black,

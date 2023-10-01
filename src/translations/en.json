@@ -64,6 +64,10 @@
   },
   "screen": {
     "stats": {
+      "tabs": {
+        "a11yLabel": "Press",
+        "a11yHint": "Press this button to change the period of time for each category"
+      },
       "title": "Stats",
       "steps": "Steps: {{ steps }}",
       "flights": "Flights: climbed {{ flights }}",

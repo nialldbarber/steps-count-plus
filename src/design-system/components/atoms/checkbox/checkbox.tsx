@@ -27,7 +27,7 @@ export default function Checkbox({
   ...rest
 }: CheckboxProps) {
   const handleValueChange = () => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     const newValue = !value;
     if (onValueChange) {
       onValueChange(newValue);

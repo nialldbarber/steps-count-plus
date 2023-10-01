@@ -140,7 +140,7 @@ export default function Authentication() {
           />
           <Button
             onPress={handleSubmit(onSubmit)}
-            haptic="Medium"
+            haptic="Light"
             isLoading={isSubmitting}
           >
             Sign up

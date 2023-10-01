@@ -20,20 +20,18 @@ export function WeeklySteps({}: WeeklyStepsProps) {
   }, [weeklySteps, weeklySegments]);
 
   return (
-    <MainScreenLayout>
-      <Stack gutter="10px">
-        <Card cardType="emphasise">
-          <Box flexDirection="row">
-            <Text level="heading" size="26px">
-              Weekly steps
-            </Text>
-          </Box>
-          <Text level="text" size="20px">
-            {t("screen.stats.steps", { steps: weeklySteps })}
+    <Stack gutter="10px">
+      <Card cardType="emphasise">
+        <Box flexDirection="row">
+          <Text level="heading" size="26px">
+            Weekly steps
           </Text>
-          {!loading && <Chart data={weeklySegments} />}
-        </Card>
-      </Stack>
-    </MainScreenLayout>
+        </Box>
+        <Text level="text" size="20px">
+          {t("screen.stats.steps", { steps: weeklySteps })}
+        </Text>
+        <Chart data={weeklySegments} />
+      </Card>
+    </Stack>
   );
 }

@@ -50,7 +50,7 @@ export default function SettingsModalScreen() {
   }, []);
 
   function invokeHaptic() {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   }
 
   function handleSetTheme(userSelectedTheme: Theme & "system") {

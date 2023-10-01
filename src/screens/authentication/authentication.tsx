@@ -102,7 +102,7 @@ export default function Authentication() {
               variant="secondary"
               onPress={() => navigate("SignUp")}
               testID="create-new-account"
-              haptic="Medium"
+              haptic="Light"
             >
               Create new account
             </Button>

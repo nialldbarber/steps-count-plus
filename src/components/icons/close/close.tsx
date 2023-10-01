@@ -32,7 +32,7 @@ export default function Close({ onPress, stroke }: CloseProps) {
       onPress={onPress ?? goBack}
       hitSlop={hitSlopLarge}
       style={styles.container}
-      haptics={{ type: "action", level: "Medium" }}
+      haptics={{ type: "action", level: "Light" }}
     >
       <CloseCircle size={32} color={stroke ?? appTheme[theme].goBackStroke} />
     </Pressable>

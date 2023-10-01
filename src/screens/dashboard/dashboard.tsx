@@ -1,6 +1,6 @@
-import { useRef } from "react";
-import { View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { useRef, useState } from "react";
+import { useRoute } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
 import PagerView from "react-native-pager-view";
 import Animated, {
   Extrapolation,
@@ -8,11 +8,12 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from "react-native-reanimated";
-import { flexStyles } from "@/design-system/common-styles/flex";
 import { Box } from "@/design-system/components/atoms/box";
 import { Chip } from "@/design-system/components/atoms/chip";
+import { Text } from "@/design-system/components/atoms/text";
 import { MainScreenLayout } from "@/design-system/components/layouts/main-screen";
 import { Row } from "@/design-system/components/layouts/row";
+import { Stack } from "@/design-system/components/layouts/stack";
 import { useActiveValue } from "@/hooks/useActiveValue";
 import { useHealthData } from "@/hooks/useHealthData";
 import { usePagerScrollHandler } from "@/hooks/usePagerScrollHandler";
@@ -21,21 +22,25 @@ import { DailyDistance } from "@/screens/distance/daily";
 import { DailySteps } from "@/screens/steps/daily";
 import { WeeklySteps } from "@/screens/steps/weekly";
 
-const AnimatedPager = Animated.createAnimatedComponent(PagerView);
-
-const chipOptions: Array<{ id: number; label: string; view: number }> = [
-  { id: 1, label: "24 hrs", view: 0 },
-  { id: 2, label: "7 days", view: 1 },
-  { id: 3, label: "30 days", view: 2 },
-  { id: 4, label: "1 year", view: 3 },
+const chipOptions: Array<{ id: number; label: string; view: string }> = [
+  { id: 1, label: "24 hrs", view: "TwentyFourHours" },
+  { id: 2, label: "7 days", view: "SevenDays" },
+  { id: 3, label: "30 days", view: "ThirtyDays" },
+  { id: 4, label: "1 year", view: "OneYear" },
 ];
+
+type FilterItems = "OneYear" | "SevenDays" | "ThirtyDays" | "TwentyFourHours";
 
 export default function DashboardScreen() {
   useHealthData(new Date());
-
-  const { value, handleActiveValue } = useActiveValue();
-  const tabRef = useRef<PagerView>(null);
+  const { t } = useTranslation();
   const scrollOffset = useSharedValue(0);
+  const { value, handleActiveValue } = useActiveValue();
+  const { params } = useRoute();
+  const [currentFilter, setCurrentFilter] = useState<FilterItems>(
+    params?.filter || "TwentyFourHours",
+  );
+
   const handler = usePagerScrollHandler({
     onPageScroll: (event: {
       eventName: "onPageScroll";
@@ -46,22 +51,21 @@ export default function DashboardScreen() {
       scrollOffset.value = event.offset + event.position;
     },
   });
-  const handleTabView = (key: number) => tabRef?.current?.setPage(key);
 
-  const animatedStyles = useAnimatedStyle(() => {
-    const scale = interpolate(scrollOffset.value, [0, 0.5, 1], [1, 0.8, 1], {
-      extrapolateRight: Extrapolation.CLAMP,
-      extrapolateLeft: Extrapolation.CLAMP,
-    });
-    const opacity = interpolate(scrollOffset.value, [0, 0.5, 1], [1, 0, 1], {
-      extrapolateRight: Extrapolation.CLAMP,
-      extrapolateLeft: Extrapolation.CLAMP,
-    });
-    return {
-      transform: [{ scale }],
-      opacity,
-    };
-  });
+  // const animatedStyles = useAnimatedStyle(() => {
+  //   const scale = interpolate(scrollOffset.value, [0, 0.5, 1], [1, 0.8, 1], {
+  //     extrapolateRight: Extrapolation.CLAMP,
+  //     extrapolateLeft: Extrapolation.CLAMP,
+  //   });
+  //   const opacity = interpolate(scrollOffset.value, [0, 0.5, 1], [1, 0, 1], {
+  //     extrapolateRight: Extrapolation.CLAMP,
+  //     extrapolateLeft: Extrapolation.CLAMP,
+  //   });
+  //   return {
+  //     transform: [{ scale }],
+  //     opacity,
+  //   };
+  // });
 
   return (
     <>
@@ -74,8 +78,10 @@ export default function DashboardScreen() {
                 label={label}
                 onPress={() => {
                   handleActiveValue(index);
-                  handleTabView(view);
+                  setCurrentFilter(view);
                 }}
+                a11yLabel={t("screen.stats.tabs.a11yLabel")}
+                a11yRole="menu"
                 hitSlop={hitSlopLarge}
                 isSelected={index === value}
               />
@@ -83,30 +89,22 @@ export default function DashboardScreen() {
           })}
         </Row>
       </Box>
-      <ScrollView contentContainerStyle={{ flex: 1 }}>
-        <AnimatedPager
-          scrollEnabled
-          style={flexStyles.container}
-          initialPage={0}
-          ref={tabRef}
-          overdrag
-          onPageScroll={handler}
-        >
-          <Animated.View key="1" style={animatedStyles}>
+      <MainScreenLayout>
+        {currentFilter === "TwentyFourHours" && (
+          <Stack gutter="10px">
             <DailySteps />
             <DailyDistance />
-            <DailySteps />
-            <DailyDistance />
-            <DailySteps />
-            <DailyDistance />
-            <DailySteps />
-            <DailyDistance />
-          </Animated.View>
-          <Animated.View key="2" style={animatedStyles}>
+          </Stack>
+        )}
+        {currentFilter === "SevenDays" && (
+          <Stack gutter="10px">
             <WeeklySteps />
-          </Animated.View>
-        </AnimatedPager>
-      </ScrollView>
+            <WeeklySteps />
+          </Stack>
+        )}
+        {currentFilter === "ThirtyDays" && <Text>ThirtyDays</Text>}
+        {currentFilter === "OneYear" && <Text>OneYear</Text>}
+      </MainScreenLayout>
     </>
   );
 }

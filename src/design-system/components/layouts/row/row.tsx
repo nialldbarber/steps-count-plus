@@ -1,5 +1,5 @@
 import { Children, type ReactNode } from "react";
-import type { ViewProps } from "react-native";
+import { ScrollView, type ViewProps } from "react-native";
 import flattenChildren from "react-flatten-children";
 import { Box } from "@/design-system/components/atoms/box";
 import type { Space } from "@/design-system/layouts/space";
@@ -8,6 +8,7 @@ import type { A11y } from "@/types/a11y";
 interface RowProps extends ViewProps, Partial<A11y> {
   margin?: Space;
   gutter?: Space;
+  scroll?: boolean;
   justifyContent?:
     | "flex-start"
     | "flex-end"
@@ -17,7 +18,7 @@ interface RowProps extends ViewProps, Partial<A11y> {
   children: ReactNode;
 }
 
-export default function Row({
+function InnerRow({
   margin = "0px",
   gutter = "0px",
   justifyContent,
@@ -27,7 +28,6 @@ export default function Row({
   children: childProp,
 }: RowProps) {
   const children = flattenChildren(childProp);
-
   return (
     <Box
       margin={margin}
@@ -51,5 +51,42 @@ export default function Row({
         );
       })}
     </Box>
+  );
+}
+
+export default function Row({
+  margin = "0px",
+  gutter = "0px",
+  scroll = false,
+  justifyContent,
+  a11yLabel,
+  a11yHint,
+  a11yRole,
+  children,
+}: RowProps) {
+  return scroll ? (
+    <ScrollView scrollEnabled={scroll} horizontal>
+      <InnerRow
+        margin={margin}
+        gutter={gutter}
+        justifyContent={justifyContent}
+        a11yLabel={a11yLabel}
+        a11yHint={a11yHint}
+        a11yRole={a11yRole}
+      >
+        {children}
+      </InnerRow>
+    </ScrollView>
+  ) : (
+    <InnerRow
+      margin={margin}
+      gutter={gutter}
+      justifyContent={justifyContent}
+      a11yLabel={a11yLabel}
+      a11yHint={a11yHint}
+      a11yRole={a11yRole}
+    >
+      {children}
+    </InnerRow>
   );
 }

@@ -4,3 +4,5 @@
  * @returns string
  */
 export const formatNumber = (num: number) => Intl.NumberFormat().format(num);
+
+export const roundDown = (num: number) => Math.round(num);

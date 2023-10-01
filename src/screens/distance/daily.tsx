@@ -5,40 +5,42 @@ import { Card } from "@/design-system/components/atoms/card";
 import { Text } from "@/design-system/components/atoms/text";
 import { Stack } from "@/design-system/components/layouts/stack";
 import { formatNumber } from "@/lib/numbers";
+import { useDistanceStore } from "@/stores/distance";
 import { useGoalsStore } from "@/stores/goals";
-import { useStepsStore } from "@/stores/steps";
+import { useUnitsStore } from "@/stores/units";
 
-type DailyStepsProps = {};
+type DailyDistanceProps = {};
 
-export function DailySteps({}: DailyStepsProps) {
+export function DailyDistance({}: DailyDistanceProps) {
   const { t } = useTranslation();
-  const { dailySteps } = useStepsStore();
-  const { stepsGoal } = useGoalsStore();
+  const { dailyDistance } = useDistanceStore();
+  const { distanceGoal } = useGoalsStore();
+  const { units } = useUnitsStore();
 
-  const stepsRemainingToGoal = useMemo(() => {
-    const remainingSteps = stepsGoal - dailySteps;
+  const distanceRemainingToGoal = useMemo(() => {
+    const remainingSteps = distanceGoal - dailyDistance;
     if (remainingSteps <= 0) {
       return `0 remaining, nice work!`;
     }
 
-    return `Steps left to goal: ${formatNumber(remainingSteps)}`;
-  }, [stepsGoal, dailySteps]);
+    return `${units} left to goal: ${remainingSteps}`;
+  }, [distanceGoal, dailyDistance, units]);
 
   return (
     <Stack gutter="10px">
       <Card cardType="emphasise">
         <Box alignItems="center">
           <Text level="heading" size="26px" weight="bold">
-            Steps
+            Distance
           </Text>
           <Text level="text" size="20px">
-            {t("screen.stats.steps", { steps: formatNumber(dailySteps) })}
+            {t("screen.stats.steps", { steps: formatNumber(dailyDistance) })}
           </Text>
           <Text level="text" size="20px">
-            Current goal: {formatNumber(stepsGoal)}
+            Current goal: {dailyDistance}
           </Text>
           <Text level="text" size="20px">
-            {stepsRemainingToGoal}
+            {distanceRemainingToGoal}
           </Text>
         </Box>
       </Card>

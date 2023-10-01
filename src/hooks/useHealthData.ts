@@ -5,7 +5,10 @@ import AppleHealthKit, {
   HealthUnit,
 } from "react-native-health";
 import type { HealthInputOptions, HealthValue } from "react-native-health";
+import { roundDown } from "@/lib/numbers";
 import { getStepsFromPeriod } from "@/lib/steps";
+import { convertMetersToKm } from "@/lib/units";
+import { useDistanceStore } from "@/stores/distance";
 import { useHealthStore } from "@/stores/health";
 import { useStepsStore } from "@/stores/steps";
 
@@ -24,6 +27,7 @@ const permissions: HealthKitPermissions = {
 
 export function useHealthData(date: Date) {
   const { setDailySteps, setWeeklySteps, setMonthlySteps } = useStepsStore();
+  const { setDailyDistance } = useDistanceStore();
   const [hasPermissions, setHasPermission] = useState(false);
 
   useEffect(() => {
@@ -114,6 +118,21 @@ export function useHealthData(date: Date) {
      * @period Daily
      * =====================================================================
      */
+    const dailyDistanceAmount: HealthInputOptions = {
+      date: date.toISOString(),
+      includeManuallyAdded: false,
+    };
+    AppleHealthKit.getDistanceWalkingRunning(
+      dailyDistanceAmount,
+      (err, results) => {
+        if (err) {
+          console.log("Error getting the steps:", err);
+          return;
+        }
+        const value = convertMetersToKm(results.value).toFixed(2);
+        setDailyDistance(Number(value));
+      },
+    );
 
     // AppleHealthKit.getFlightsClimbed(options, (err, results) => {
     //   if (err) {
@@ -121,14 +140,6 @@ export function useHealthData(date: Date) {
     //     return;
     //   }
     //   setFlights(results.value);
-    // });
-
-    // AppleHealthKit.getDistanceWalkingRunning(options, (err, results) => {
-    //   if (err) {
-    //     console.log("Error getting the steps:", err);
-    //     return;
-    //   }
-    //   setDistance(results.value);
     // });
 
     // AppleHealthKit.getActiveEnergyBurned(options, (err, results) => {

@@ -1,5 +1,6 @@
 import { useMemo, type ReactNode } from "react";
 import { View } from "react-native";
+import type { AccessibilityRole } from "react-native";
 import { colors, type Colors } from "@/design-system/color/palettes";
 import { shadow as dropShadow } from "@/design-system/color/shadow";
 import type { Radius } from "@/design-system/layouts/radius";
@@ -8,6 +9,7 @@ import { heights, widths } from "@/design-system/layouts/size";
 import type { Height, Width } from "@/design-system/layouts/size";
 import { space } from "@/design-system/layouts/space";
 import type { Space } from "@/design-system/layouts/space";
+import { A11y } from "@/types/a11y";
 
 function resolveToken<TokenName extends string, TokenValue, CustomValue>(
   scale: Record<TokenName, TokenValue>,
@@ -21,6 +23,7 @@ function resolveToken<TokenName extends string, TokenValue, CustomValue>(
 }
 
 type BoxProps = {
+  a11yRole?: AccessibilityRole;
   alignSelf?: "flex-start" | "flex-end" | "center" | "stretch";
   alignItems?: "flex-start" | "flex-end" | "center" | "stretch";
   borderWidth?: number;
@@ -92,9 +95,13 @@ type BoxProps = {
         background: Colors;
         //shadow: Shadow;
       }
-  );
+  ) &
+  Partial<A11y>;
 
 export default function Box({
+  a11yRole,
+  a11yLabel,
+  a11yHint,
   alignSelf,
   alignItems,
   borderStyle,
@@ -258,6 +265,9 @@ export default function Box({
         customStyles,
         shadow ? dropShadow({ elevation: 1, opacity: 0.15 }) : null,
       ]}
+      accessibilityRole={a11yRole}
+      accessibilityLabel={a11yLabel}
+      accessibilityHint={a11yHint}
     >
       {children}
     </View>

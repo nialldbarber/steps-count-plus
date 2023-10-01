@@ -1,4 +1,5 @@
 import { useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import Animated from "react-native-reanimated";
 import { Box } from "@/design-system/components/atoms/box";
 import { Button } from "@/design-system/components/atoms/button";
@@ -35,8 +36,9 @@ export default function GoalsCard({
   goalCallback,
   options,
 }: GoalsCardProps) {
+  const { t } = useTranslation();
   const timerRef = useRef(null);
-  const { value, handleActiveValue } = useActiveValue(-1);
+  const { handleActiveValue } = useActiveValue(-1);
   const { handleShakeAnimation, useShakeAnimationStyles } = useShakeAnimation();
 
   function handleMinusGoal() {
@@ -82,6 +84,11 @@ export default function GoalsCard({
             variant="secondary"
             onPress={handleMinusGoal}
             onLongPress={handleMinusGoal}
+            a11yLabel={t("components.goals.chip.decrease.a11yLabel")}
+            a11yHint={t("components.goals.chip.decrease.a11yHint", {
+              goalType: title.toLowerCase(),
+              amount: decrementBy,
+            })}
           >
             {`-${decrementBy}`}
           </Button>
@@ -93,7 +100,15 @@ export default function GoalsCard({
               </Text>
             </Text>
           </Animated.View>
-          <Button variant="secondary" onPress={handlePlusGoal}>
+          <Button
+            variant="secondary"
+            onPress={handlePlusGoal}
+            a11yLabel={t("components.goals.chip.increase.a11yLabel")}
+            a11yHint={t("components.goals.chip.increase.a11yHint", {
+              goalType: title.toLowerCase(),
+              amount: incrementBy,
+            })}
+          >
             {`+${incrementBy}`}
           </Button>
         </Box>
@@ -113,8 +128,14 @@ export default function GoalsCard({
                     handleActiveValue(index);
                     goalCallback(chipValue);
                   }}
+                  a11yLabel={t("components.goals.chip.setAmounts.a11yLabel")}
+                  a11yHint={t("components.goals.chip.setAmounts.a11yHint", {
+                    goalType: title.toLowerCase(),
+                    amount: chipValue,
+                  })}
                   hitSlop={hitSlopLarge}
                   isSelected={chipValue === goalAmount}
+                  a11yState={{ selected: chipValue === goalAmount }}
                   size="14px"
                   mode="dark"
                 />

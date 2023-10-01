@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
-import type { PressableProps, ViewStyle } from "react-native";
+import type { ViewStyle } from "react-native";
 import { colors } from "@/design-system/color/palettes";
 import { shadow } from "@/design-system/color/shadow";
 import { Text } from "@/design-system/components/atoms/text";
 import { Pressable } from "@/design-system/components/common/pressable";
+import type { PressableProps } from "@/design-system/components/common/pressable/pressable";
 import { radius } from "@/design-system/layouts/radius";
 import { space } from "@/design-system/layouts/space";
 import { tokens } from "@/design-system/theme/design-tokens";
@@ -13,6 +14,7 @@ type ChipMode = "light" | "dark";
 interface ChipProps extends PressableProps {
   mode?: ChipMode;
   size?: FontSizes;
+  a11yLabel: string;
   label: string;
   isSelected?: boolean;
 }

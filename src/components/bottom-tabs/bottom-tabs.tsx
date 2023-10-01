@@ -7,6 +7,7 @@ import Animated, {
 } from "react-native-reanimated";
 import CustomBottomTabsIcon from "@/components/bottom-tabs/bottom-tabs-icon";
 import { shadow } from "@/design-system/color/shadow";
+import { Box } from "@/design-system/components/atoms/box";
 import { Text } from "@/design-system/components/atoms/text";
 import { Pressable } from "@/design-system/components/common/pressable";
 import { radius } from "@/design-system/layouts/radius";
@@ -76,8 +77,12 @@ const CustomBottomTab = ({
   });
 
   return (
-    <View
-      style={[styles.tabBarContainer, { width: TAB_BAR_WIDTH, bottom: MARGIN }]}
+    <Box
+      styles={[
+        styles.tabBarContainer,
+        { width: TAB_BAR_WIDTH, bottom: MARGIN },
+      ]}
+      a11yRole="menu"
     >
       <Animated.View
         style={[
@@ -86,7 +91,7 @@ const CustomBottomTab = ({
           translateAnimation,
         ]}
       >
-        <View style={styles.slidingTab} />
+        <Box styles={styles.slidingTab} />
       </Animated.View>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
@@ -113,13 +118,13 @@ const CustomBottomTab = ({
         return (
           <Pressable
             key={index}
-            accessibilityRole="button"
-            accessibilityState={isFocused ? { selected: true } : {}}
-            accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarTestID}
+            a11yState={isFocused ? { selected: true } : {}}
+            a11yLabel={options.tabBarAccessibilityLabel || ""}
+            a11yRole="menuitem"
             onPress={onPress}
             onLongPress={onLongPress}
             style={styles.button}
+            testID={options.tabBarTestID}
           >
             <View style={styles.contentContainer}>
               <CustomBottomTabsIcon route={route.name} isFocused={isFocused} />
@@ -138,7 +143,7 @@ const CustomBottomTab = ({
           </Pressable>
         );
       })}
-    </View>
+    </Box>
   );
 };
 

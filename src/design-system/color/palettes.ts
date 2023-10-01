@@ -39,3 +39,6 @@ export const colors = {
   ...greyColors,
   ...tonalColors,
 };
+
+// yellow: #ffe66b
+// black: #222222

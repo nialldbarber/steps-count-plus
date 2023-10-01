@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { StyleSheet } from "react-native";
-import type { PressableProps, TextStyle, ViewStyle } from "react-native";
+import type { TextStyle, ViewStyle } from "react-native";
 import type { ImpactFeedbackStyle } from "expo-haptics";
 import * as Haptics from "expo-haptics";
 import Animated, {
@@ -13,6 +13,7 @@ import { shadow } from "@/design-system/color/shadow";
 import { Box } from "@/design-system/components/atoms/box";
 import { Text } from "@/design-system/components/atoms/text";
 import { Pressable } from "@/design-system/components/common/pressable";
+import type { PressableProps } from "@/design-system/components/common/pressable/pressable";
 import { space } from "@/design-system/layouts/space";
 import { appTheme } from "@/design-system/theme/design-tokens";
 import { useThemeStore } from "@/stores/theme";

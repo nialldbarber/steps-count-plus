@@ -3,8 +3,9 @@ import type { ViewProps } from "react-native";
 import flattenChildren from "react-flatten-children";
 import { Box } from "@/design-system/components/atoms/box";
 import type { Space } from "@/design-system/layouts/space";
+import type { A11y } from "@/types/a11y";
 
-interface RowProps extends ViewProps {
+interface RowProps extends ViewProps, Partial<A11y> {
   margin?: Space;
   gutter?: Space;
   justifyContent?:
@@ -20,6 +21,9 @@ export default function Row({
   margin = "0px",
   gutter = "0px",
   justifyContent,
+  a11yLabel,
+  a11yHint,
+  a11yRole,
   children: childProp,
 }: RowProps) {
   const children = flattenChildren(childProp);
@@ -30,6 +34,9 @@ export default function Row({
       flexDirection="row"
       alignItems="center"
       justifyContent={justifyContent}
+      a11yRole={a11yRole}
+      a11yLabel={a11yLabel}
+      a11yHint={a11yHint}
     >
       {Children.map(children, (child, index) => {
         const first = index === 0;

@@ -20,6 +20,7 @@ export interface TextProps extends NativeTextProps {
   color?: Colors | string;
   style?: TextStyle;
   withEmoji?: boolean;
+  a11yHint?: string;
 }
 
 export default function Text({
@@ -28,6 +29,7 @@ export default function Text({
   size = level === "heading" ? "18px" : "16px",
   color,
   withEmoji = false,
+  a11yHint,
   style,
   children,
 }: TextProps) {
@@ -53,6 +55,7 @@ export default function Text({
       style={[styles.text, { ...style }]}
       maxFontSizeMultiplier={maxFontSizeMultiplier}
       accessibilityRole={level === "heading" ? "header" : "text"}
+      accessibilityHint={a11yHint}
     >
       {withEmoji ? renderStringWithEmoji(children) : children}
     </NativeText>

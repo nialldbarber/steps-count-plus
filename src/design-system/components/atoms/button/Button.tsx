@@ -6,7 +6,6 @@ import * as Haptics from "expo-haptics";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
-  withSpring,
   withTiming,
 } from "react-native-reanimated";
 import { shadow } from "@/design-system/color/shadow";
@@ -16,6 +15,7 @@ import { Pressable } from "@/design-system/components/common/pressable";
 import type { PressableProps } from "@/design-system/components/common/pressable/pressable";
 import { space } from "@/design-system/layouts/space";
 import { appTheme } from "@/design-system/theme/design-tokens";
+import { useButtonAnimation } from "@/hooks/useButtonAnimation";
 import { useThemeStore } from "@/stores/theme";
 
 export type Variant =
@@ -43,6 +43,7 @@ export default function Button({
   ...rest
 }: ButtonProps) {
   const { theme } = useThemeStore();
+  const { onPress, animatedStyle } = useButtonAnimation();
   const accessibilityLabel = `${children} button`;
 
   const buttonStyles: Record<Variant, ViewStyle> = {
@@ -88,22 +89,10 @@ export default function Button({
   });
 
   const loader = useSharedValue(0);
-  const size = useSharedValue(1);
 
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: size.value }],
-  }));
   const loaderStyle = useAnimatedStyle(() => ({
     opacity: loader.value,
   }));
-
-  const onPress = (direction: "in" | "out") => {
-    size.value = withSpring(direction === "in" ? 0.95 : 1, {
-      overshootClamping: false,
-      restDisplacementThreshold: 0.01,
-      restSpeedThreshold: 2,
-    });
-  };
 
   useEffect(() => {
     if (isLoading) {

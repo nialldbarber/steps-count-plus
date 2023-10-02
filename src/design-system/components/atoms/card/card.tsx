@@ -61,7 +61,7 @@ export default function Card({
   const styles = StyleSheet.create({
     container: {
       borderRadius: radius.large,
-      padding: space["20px"],
+      padding: space["28px"],
       ...cardStyles[cardType],
     },
   });

@@ -4,15 +4,7 @@ import "@formatjs/intl-pluralrules/locale-data/en";
 import "@formatjs/intl-pluralrules/locale-data/es";
 import { useEffect } from "react";
 import { useColorScheme } from "react-native";
-import {
-  PlusJakartaSans_300Light,
-  PlusJakartaSans_400Regular,
-  PlusJakartaSans_500Medium,
-  PlusJakartaSans_600SemiBold,
-  PlusJakartaSans_700Bold,
-  PlusJakartaSans_800ExtraBold,
-  useFonts,
-} from "@expo-google-fonts/plus-jakarta-sans";
+import { useFonts } from "expo-font";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Navigation } from "@/navigation/navigation-container";
 import { useThemeStore } from "@/stores/theme";
@@ -58,16 +50,17 @@ export default function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [systemTheme]);
 
-  let [fontsLoaded, fontError] = useFonts({
-    PlusJakartaSans_300Light,
-    PlusJakartaSans_400Regular,
-    PlusJakartaSans_500Medium,
-    PlusJakartaSans_600SemiBold,
-    PlusJakartaSans_700Bold,
-    PlusJakartaSans_800ExtraBold,
+  const [fontsLoaded] = useFonts({
+    "PlusJakartaSans-Bold": require("./assets/fonts/PlusJakartaSans-Bold.ttf"),
+    "PlusJakartaSans-ExtraBold": require("./assets/fonts/PlusJakartaSans-ExtraBold.ttf"),
+    "PlusJakartaSans-ExtraLight": require("./assets/fonts/PlusJakartaSans-ExtraLight.ttf"),
+    "PlusJakartaSans-Light": require("./assets/fonts/PlusJakartaSans-Light.ttf"),
+    "PlusJakartaSans-Medium": require("./assets/fonts/PlusJakartaSans-Medium.ttf"),
+    "PlusJakartaSans-Regular": require("./assets/fonts/PlusJakartaSans-Regular.ttf"),
+    "PlusJakartaSans-SemiBold": require("./assets/fonts/PlusJakartaSans-SemiBold.ttf"),
   });
 
-  if (!fontsLoaded && !fontError) {
+  if (!fontsLoaded) {
     return null;
   }
 

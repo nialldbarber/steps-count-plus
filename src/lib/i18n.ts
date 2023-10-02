@@ -20,7 +20,7 @@ i18n
   .use(initReactI18next)
   .use(ChainedBackend)
   .init({
-    debug: true,
+    debug: false,
     fallbackLng: "en",
     lng: "en",
     interpolation: {

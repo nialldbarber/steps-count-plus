@@ -7,6 +7,10 @@ import type { A11y } from "@/types/a11y";
 
 interface RowProps extends ViewProps, Partial<A11y> {
   margin?: Space;
+  marginTop?: Space;
+  marginBottom?: Space;
+  marginVertical?: Space;
+  marginHorizontal?: Space;
   gutter?: Space;
   scroll?: boolean;
   justifyContent?:
@@ -20,6 +24,10 @@ interface RowProps extends ViewProps, Partial<A11y> {
 
 function InnerRow({
   margin = "0px",
+  marginVertical,
+  marginHorizontal,
+  marginTop,
+  marginBottom,
   gutter = "0px",
   justifyContent,
   a11yLabel,
@@ -31,6 +39,10 @@ function InnerRow({
   return (
     <Box
       margin={margin}
+      marginVertical={marginVertical}
+      marginHorizontal={marginHorizontal}
+      marginTop={marginTop}
+      marginBottom={marginBottom}
       flexDirection="row"
       alignItems="center"
       justifyContent={justifyContent}
@@ -56,6 +68,10 @@ function InnerRow({
 
 export default function Row({
   margin = "0px",
+  marginVertical,
+  marginHorizontal,
+  marginTop,
+  marginBottom,
   gutter = "0px",
   scroll = false,
   justifyContent,
@@ -68,6 +84,10 @@ export default function Row({
     <ScrollView scrollEnabled={scroll} horizontal>
       <InnerRow
         margin={margin}
+        marginVertical={marginVertical}
+        marginHorizontal={marginHorizontal}
+        marginTop={marginTop}
+        marginBottom={marginBottom}
         gutter={gutter}
         justifyContent={justifyContent}
         a11yLabel={a11yLabel}

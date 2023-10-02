@@ -17,7 +17,7 @@ function Chart({ data }: ChartProps) {
   return (
     <LineChart.Provider data={data}>
       <LineChart width={width - 80} height={300}>
-        <LineChart.Path color="#ef4444">
+        <LineChart.Path color="#00D632">
           <LineChart.Gradient />
         </LineChart.Path>
         <LineChart.CursorCrosshair

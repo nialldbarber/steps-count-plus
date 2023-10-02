@@ -1,10 +1,10 @@
 export const fontWeight = {
-  light: "PlusJakartaSans_300Light",
-  regular: "PlusJakartaSans_400Regular",
-  medium: "PlusJakartaSans_500Medium",
-  semiBold: "PlusJakartaSans_600SemiBold",
-  bold: "PlusJakartaSans_700Bold",
-  extraBold: "PlusJakartaSans_800ExtraBold",
+  light: "PlusJakartaSans-Light",
+  regular: "PlusJakartaSans-Regular",
+  medium: "PlusJakartaSans-Medium",
+  semiBold: "PlusJakartaSans-SemiBold",
+  bold: "PlusJakartaSans-Bold",
+  extraBold: "PlusJakartaSans-ExtraBold",
 } as const;
 
 export type FontWeight = keyof typeof fontWeight;

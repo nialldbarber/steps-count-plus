@@ -1,8 +1,6 @@
 import AppleHealthKit from "react-native-health";
 import type { HealthInputOptions } from "react-native-health";
-import type { Segments } from "@/stores/steps";
-
-type DaysPrevious = 7 | 30 | 365;
+import type { DaysPrevious } from "@/types/stats";
 
 export function getStepsFromPeriod(
   daysPrevious: DaysPrevious,
@@ -52,8 +50,6 @@ export function getStepsFromPeriod(
       }
       return total + result?.value;
     }, 0);
-
-    console.log(totalSteps);
 
     callback(null, Math.round(totalSteps), segments);
   });

@@ -5,6 +5,7 @@ import AppleHealthKit, {
   HealthUnit,
 } from "react-native-health";
 import type { HealthInputOptions, HealthValue } from "react-native-health";
+import { getDistanceFromPeriod } from "@/lib/distance";
 import { roundDown } from "@/lib/numbers";
 import { getStepsFromPeriod } from "@/lib/steps";
 import { convertMetersToKm } from "@/lib/units";
@@ -26,10 +27,16 @@ const permissions: HealthKitPermissions = {
 };
 
 export function useHealthData(date: Date) {
-  const { setDailySteps, setWeeklySteps, setMonthlySteps } = useStepsStore();
-  const { setDailyDistance } = useDistanceStore();
+  const { setDailySteps, setWeeklySteps, setMonthlySteps, setYearlySteps } =
+    useStepsStore();
+  const { setDailyDistance, setWeeklyDistance } = useDistanceStore();
   const [hasPermissions, setHasPermission] = useState(false);
 
+  /**
+   * =====================================================================
+   * @type Initialisaton
+   * =====================================================================
+   */
   useEffect(() => {
     if (Platform.OS !== "ios") return;
 
@@ -73,23 +80,6 @@ export function useHealthData(date: Date) {
       },
     );
 
-    // Weekly steps
-    // const weeklyStepsOptions: HealthInputOptions = {
-    //   startDate: new Date(2023, 8, 25).toISOString(),
-    //   endDate: new Date().toISOString(),
-    //   includeManuallyAdded: true,
-    // };
-    // AppleHealthKit.getDailyStepCountSamples(
-    //   weeklyStepsOptions,
-    //   (error, results) => {
-    //     if (error) return;
-    //     console.log("================ start ==============");
-    //     console.log(JSON.stringify(results, null, 2));
-    //     console.log("================ end ==============");
-    //     // setWeeklySteps(results);
-    //   },
-    // );
-
     /**
      * =====================================================================
      * @type Steps
@@ -114,6 +104,17 @@ export function useHealthData(date: Date) {
 
     /**
      * =====================================================================
+     * @type Steps
+     * @period Yearly
+     * =====================================================================
+     */
+    getStepsFromPeriod(365, (error, totalSteps, segments) => {
+      if (error) return;
+      setYearlySteps(totalSteps, segments);
+    });
+
+    /**
+     * =====================================================================
      * @type Distance
      * @period Daily
      * =====================================================================
@@ -133,6 +134,17 @@ export function useHealthData(date: Date) {
         setDailyDistance(Number(value));
       },
     );
+
+    /**
+     * =====================================================================
+     * @type Distance
+     * @period Weekly
+     * =====================================================================
+     */
+    getDistanceFromPeriod(7, (error, totalDistance, segments) => {
+      if (error) return;
+      setWeeklyDistance(totalDistance, segments);
+    });
 
     // AppleHealthKit.getFlightsClimbed(options, (err, results) => {
     //   if (err) {
@@ -158,5 +170,11 @@ export function useHealthData(date: Date) {
     //   }
     //   // console.log(results.values)
     // });
-  }, [hasPermissions, setDailySteps, setWeeklySteps]);
+  }, [
+    hasPermissions,
+    setDailySteps,
+    setWeeklySteps,
+    setMonthlySteps,
+    setDailyDistance,
+  ]);
 }

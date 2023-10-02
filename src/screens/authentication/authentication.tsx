@@ -95,7 +95,7 @@ export default function Authentication() {
             />
             {isSubmitting && <Text>Loading...</Text>}
             <Spacer height="20px" />
-            <Button onPress={handleSubmit(onSubmit)} haptic="Medium">
+            <Button onPress={handleSubmit(onSubmit)} haptic="Light">
               Log in
             </Button>
             <Button

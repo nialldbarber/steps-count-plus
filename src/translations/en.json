@@ -64,6 +64,7 @@
   },
   "screen": {
     "stats": {
+      "filterText": "Filter by last:",
       "tabs": {
         "a11yLabel": "Press",
         "a11yHint": "Press this button to change the period of time for each category"
@@ -71,10 +72,42 @@
       "title": "Stats",
       "steps": "Steps: {{ steps }}",
       "flights": "Flights: climbed {{ flights }}",
-      "distance": "Distance: {{ distance }}"
+      "distance": "Distance: {{ distance }}",
+      "24hrs": {
+        "steps": {
+          "title": "Steps",
+          "amount": "Steps: {{ steps }}",
+          "currentGoal": "Goal: {{ goal }}",
+          "remaining": "<bold>{{ remaining }}</bold> step left to hit goal",
+          "remainingMultiple": "<bold>{{ remaining }}</bold> steps left to hit goal"
+        },
+        "distance": {
+          "title": "Distance",
+          "amount": "Distance: {{ distance }}{{ unit }}",
+          "currentGoal": "Current goal: {{ goal }}{{ unit }}",
+          "remaining": "<bold>{{ remaining }}</bold> {{ unit }} left to hit goal",
+          "remainingMultiple": "<bold>{{ remaining }}</bold> {{ unit }} left to hit goal"
+        }
+      },
+      "7days": {
+        "steps": {
+          "title": "Steps"
+        }
+      },
+      "30days": {
+        "steps": {
+          "title": "Steps"
+        }
+      },
+      "1year": {
+        "steps": {
+          "title": "Steps"
+        }
+      }
     },
     "goals": {
-      "title": "Goals"
+      "title": "Goals",
+      "introText": "Set your <bold>daily goals</bold> here 💪"
     },
     "insights": {
       "title": "Insights"

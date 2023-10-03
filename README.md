@@ -21,3 +21,7 @@ NEXT UP:
 ## Config
 
 [ ] - Set up `.env` files
+
+## Push notifications
+
+[ ] - People find these annoying, consider limits

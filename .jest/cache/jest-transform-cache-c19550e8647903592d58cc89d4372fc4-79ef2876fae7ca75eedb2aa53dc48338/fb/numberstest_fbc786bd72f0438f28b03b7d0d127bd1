@@ -1,0 +1,10 @@
+3fbac8bbc020453bc6eef0fb1279200b
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const numbers_1 = require("./numbers");
+describe("lib -> numbers", () => {
+    describe("formatNumber", () => {
+        expect((0, numbers_1.formatNumber)(2000)).toBe("2,000");
+    });
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL25pYWxsYmFyYmVyL0RldmVsb3Blci9wZXJzb25hbC9zdGVwLWNvdW50LXBsdXMvc3JjL2xpYi9udW1iZXJzLnRlc3QudHMiLCJtYXBwaW5ncyI6Ijs7QUFBQSx1Q0FBeUM7QUFFekMsUUFBUSxDQUFDLGdCQUFnQixFQUFFLEdBQUcsRUFBRTtJQUM5QixRQUFRLENBQUMsY0FBYyxFQUFFLEdBQUcsRUFBRTtRQUM1QixNQUFNLENBQUMsSUFBQSxzQkFBWSxFQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxDQUFDO0lBQzNDLENBQUMsQ0FBQyxDQUFDO0FBQ0wsQ0FBQyxDQUFDLENBQUMiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL25pYWxsYmFyYmVyL0RldmVsb3Blci9wZXJzb25hbC9zdGVwLWNvdW50LXBsdXMvc3JjL2xpYi9udW1iZXJzLnRlc3QudHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgZm9ybWF0TnVtYmVyIH0gZnJvbSBcIi4vbnVtYmVyc1wiO1xuXG5kZXNjcmliZShcImxpYiAtPiBudW1iZXJzXCIsICgpID0+IHtcbiAgZGVzY3JpYmUoXCJmb3JtYXROdW1iZXJcIiwgKCkgPT4ge1xuICAgIGV4cGVjdChmb3JtYXROdW1iZXIoMjAwMCkpLnRvQmUoXCIyLDAwMFwiKTtcbiAgfSk7XG59KTtcbiJdLCJ2ZXJzaW9uIjozfQ==

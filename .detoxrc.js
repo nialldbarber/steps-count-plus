@@ -24,6 +24,13 @@ module.exports = {
       binaryPath:
         "ios/build/Build/Products/Release-iphonesimulator/stepcountplus.app",
     },
+    "ios.debug": {
+      type: "ios.app",
+      binaryPath:
+        "ios/build/Build/Products/Debug-iphonesimulator/stepcountplus.app",
+      build:
+        "xcodebuild -workspace ios/stepcountplus.xcworkspace -scheme stepcountplus -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+    },
     "android.release": {
       type: "android.apk",
       build:

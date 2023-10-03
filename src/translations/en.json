@@ -107,7 +107,7 @@
     },
     "goals": {
       "title": "Goals",
-      "introText": "Set your <bold>daily goals</bold> here 💪"
+      "introText": "Set your <modal><bold>daily goals</bold></modal> here 💪"
     },
     "insights": {
       "title": "Insights"

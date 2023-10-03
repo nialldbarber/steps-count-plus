@@ -8,6 +8,7 @@ const config: JestConfigWithTsJest = {
   clearMocks: true,
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
   setupFilesAfterEnv: ["@testing-library/jest-native/extend-expect"],
+  moduleDirectories: ["node_modules", "<rootDir>"],
   testPathIgnorePatterns: ["\\.snap$", "<rootDir>/node_modules/"],
   testRegex: "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
   transform: {

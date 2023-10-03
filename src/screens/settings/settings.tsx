@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useColorScheme } from "react-native";
 import {
   BottomSheetBackdrop,
@@ -18,6 +18,7 @@ import { Stack } from "@/design-system/components/layouts/stack";
 import { RadioButtons } from "@/design-system/components/molecules/radio-buttons";
 import type { RadioButtonType } from "@/design-system/components/molecules/radio-buttons/radio-buttons";
 import { appTheme } from "@/design-system/theme/design-tokens";
+import { useBottomSheet } from "@/hooks/useBottomSheet";
 import { hitSlopLarge } from "@/lib/hitSlop";
 import { PremiumScreen } from "@/screens/premium";
 import { useThemeStore } from "@/stores/theme";
@@ -42,12 +43,10 @@ export default function SettingsModalScreen() {
   const { theme, setTheme } = useThemeStore();
   const { units, setUnits } = useUnitsStore();
   const [selectedTheme, setSelectedTheme] = useState(theme);
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const snapPoints = useMemo(() => ["25%", "50%"], []);
 
-  const handlePresentModalPress = useCallback(() => {
-    bottomSheetModalRef.current?.present();
-  }, []);
+  const bottomSheetModalRef = useRef(null);
+  const { snapPoints, handlePresentModalPress } =
+    useBottomSheet(bottomSheetModalRef);
 
   function invokeHaptic() {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -106,6 +105,28 @@ export default function SettingsModalScreen() {
           <Card>
             <Text level="heading" color={appTheme[theme].cardInfoColor}>
               {t("screen.settings.units")}
+            </Text>
+            <RadioButtons
+              options={unitsOptions}
+              defaultSelected={units}
+              onSelect={handleSetUnits}
+            />
+          </Card>
+          <Spacer height="30px" />
+          <Card>
+            <Text level="heading" color={appTheme[theme].cardInfoColor}>
+              Notifications
+            </Text>
+            <RadioButtons
+              options={unitsOptions}
+              defaultSelected={units}
+              onSelect={handleSetUnits}
+            />
+          </Card>
+          <Spacer height="30px" />
+          <Card>
+            <Text level="heading" color={appTheme[theme].cardInfoColor}>
+              Stats screen
             </Text>
             <RadioButtons
               options={unitsOptions}

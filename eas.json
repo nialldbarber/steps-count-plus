@@ -1,4 +1,7 @@
 {
+  "expo": {
+    "plugins": ["@config-plugins/detox"]
+  },
   "cli": {
     "version": ">= 5.2.0"
   },

@@ -9,6 +9,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Navigation } from "@/navigation/navigation-container";
 import { useThemeStore } from "@/stores/theme";
 import "@/lib/i18n";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { flexStyles } from "@/design-system/common-styles/flex";
 import { storage } from "@/lib/mmkv";
 
@@ -66,7 +67,9 @@ export default function App() {
 
   return (
     <GestureHandlerRootView style={flexStyles.container}>
-      <Navigation />
+      <BottomSheetModalProvider>
+        <Navigation />
+      </BottomSheetModalProvider>
     </GestureHandlerRootView>
   );
 }

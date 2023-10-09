@@ -28,6 +28,7 @@
     "@reduxjs/toolkit": "^1.9.6",
     "@shopify/react-native-skia": "^0.1.210",
     "@supabase/supabase-js": "^2.36.0",
+    "d3": "^7.8.5",
     "expo": "~49.0.11",
     "expo-dev-client": "~2.4.11",
     "expo-font": "~11.4.0",

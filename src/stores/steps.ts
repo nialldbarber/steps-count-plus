@@ -1,10 +1,11 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
-export type Segments = Array<{
+export type Segment = {
   timestamp: number;
   value: number;
-}>;
+};
+export type Segments = Array<Segment>;
 
 type StepsState = {
   dailySteps: number;

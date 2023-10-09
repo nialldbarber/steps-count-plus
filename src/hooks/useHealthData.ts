@@ -29,7 +29,12 @@ const permissions: HealthKitPermissions = {
 export function useHealthData(date: Date) {
   const { setDailySteps, setWeeklySteps, setMonthlySteps, setYearlySteps } =
     useStepsStore();
-  const { setDailyDistance, setWeeklyDistance } = useDistanceStore();
+  const {
+    setDailyDistance,
+    setWeeklyDistance,
+    setMonthlyDistance,
+    setYearlyDistance,
+  } = useDistanceStore();
   const [hasPermissions, setHasPermission] = useState(false);
 
   /**
@@ -119,21 +124,27 @@ export function useHealthData(date: Date) {
      * @period Daily
      * =====================================================================
      */
-    const dailyDistanceAmount: HealthInputOptions = {
-      date: date.toISOString(),
-      includeManuallyAdded: false,
-    };
-    AppleHealthKit.getDistanceWalkingRunning(
-      dailyDistanceAmount,
-      (err, results) => {
-        if (err) {
-          console.log("Error getting the steps:", err);
-          return;
-        }
-        const value = convertMetersToKm(results.value).toFixed(2);
-        setDailyDistance(Number(value));
-      },
-    );
+    // const dailyDistanceAmount: HealthInputOptions = {
+    //   date: date.toISOString(),
+    //   includeManuallyAdded: false,
+    // };
+    // AppleHealthKit.getDistanceWalkingRunning(
+    //   dailyDistanceAmount,
+    //   (err, results) => {
+    //     if (err) {
+    //       console.log("Error getting the steps:", err);
+    //       return;
+    //     }
+    //     const value = convertMetersToKm(results.value);
+    //     setDailyDistance(Number(value));
+    //   },
+    // );
+
+    getDistanceFromPeriod(1, (error, totalDistance, segments) => {
+      if (error) return;
+      console.log({ totalDistance, segments });
+      setDailyDistance(totalDistance, segments);
+    });
 
     /**
      * =====================================================================
@@ -146,6 +157,27 @@ export function useHealthData(date: Date) {
       setWeeklyDistance(totalDistance, segments);
     });
 
+    /**
+     * =====================================================================
+     * @type Distance
+     * @period Monthly
+     * =====================================================================
+     */
+    getDistanceFromPeriod(30, (error, totalDistance, segments) => {
+      if (error) return;
+      setMonthlyDistance(totalDistance, segments);
+    });
+
+    /**
+     * =====================================================================
+     * @type Distance
+     * @period Yearly
+     * =====================================================================
+     */
+    getDistanceFromPeriod(365, (error, totalDistance, segments) => {
+      if (error) return;
+      setYearlyDistance(totalDistance, segments);
+    });
     // AppleHealthKit.getFlightsClimbed(options, (err, results) => {
     //   if (err) {
     //     console.log("Error getting the steps:", err);

@@ -54,6 +54,7 @@ export const tokens = {
   closeStroke: colors.black,
   settingsStroke: colors.black,
   settingsStrokeBackground: colors.pureWhite,
+  plusStroke: colors.black,
   /**
    * @type Loader
    */
@@ -122,6 +123,7 @@ export const tokensDark = {
   closeStroke: colors.black,
   settingsStroke: colors.white,
   settingsStrokeBackground: colors.black,
+  plusStroke: colors.black,
   /**
    * @type Loader
    */

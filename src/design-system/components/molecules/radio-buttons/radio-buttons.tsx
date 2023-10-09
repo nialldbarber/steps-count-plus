@@ -3,6 +3,7 @@ import type { PressableProps } from "react-native";
 import { Box } from "@/design-system/components/atoms/box";
 import { Text } from "@/design-system/components/atoms/text";
 import type { Theme } from "@/stores/theme";
+import { Units } from "@/stores/units";
 
 export type RadioButtonType = {
   id: string;
@@ -63,7 +64,7 @@ export default function RadioButtons({
   options,
   defaultSelected,
   onSelect,
-}: RadioButtonsProps<Theme>) {
+}: RadioButtonsProps<Theme | Units>) {
   return (
     <Box flexDirection="row" justifyContent="space-between">
       {options.map(({ id, label, value, status }) => (

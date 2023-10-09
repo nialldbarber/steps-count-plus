@@ -1,7 +1,7 @@
 import AppleHealthKit from "react-native-health";
 import type { HealthInputOptions } from "react-native-health";
-import { convertMetersToKm } from "@/lib/units";
 import type { DaysPrevious } from "@/types/stats";
+import { convertMetersToKm } from "./units";
 
 export function getDistanceFromPeriod(
   daysPrevious: DaysPrevious,
@@ -18,7 +18,7 @@ export function getDistanceFromPeriod(
   const options: HealthInputOptions = {
     startDate: startDate.toISOString(),
     endDate: new Date().toISOString(),
-    period: period ?? 1444,
+    // period: period ?? 1444,
     ascending: true,
   };
 
@@ -41,10 +41,8 @@ export function getDistanceFromPeriod(
 
       const segments = results.map((value) => ({
         timestamp: new Date().getTime(),
-        value: convertMetersToKm(value?.value).toFixed(2),
+        value: convertMetersToKm(value?.value),
       }));
-
-      console.log("SEGMENTS", segments);
 
       const totalDistance = results.reduce((total, result) => {
         if (!result) {
@@ -54,9 +52,7 @@ export function getDistanceFromPeriod(
         return total + result?.value;
       }, 0);
 
-      console.log(totalDistance);
-
-      // callback(null, Math.round(totalSteps), segments);
+      callback(null, Math.round(totalDistance), segments);
     },
   );
 }

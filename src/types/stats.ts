@@ -1,1 +1,1 @@
-export type DaysPrevious = 7 | 30 | 365;
+export type DaysPrevious = 1 | 7 | 30 | 365;

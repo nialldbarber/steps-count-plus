@@ -47,7 +47,7 @@ export default function Checkbox({
               height="20px"
               backgroundColor={value ? "black" : "white"}
               borderWidth={2}
-              borderRadius={5}
+              borderRadius="small"
               borderColor="black"
               marginRight="10px"
             />

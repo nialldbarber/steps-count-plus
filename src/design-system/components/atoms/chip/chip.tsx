@@ -74,7 +74,7 @@ export default function Chip({
   }
 
   return (
-    <Pressable style={styles.container} {...rest} onPress={handleOnPress}>
+    <Pressable style={styles.container} onPress={handleOnPress} {...rest}>
       <Text style={styles.text} weight="bold" size={size}>
         {label}
       </Text>

@@ -7,6 +7,7 @@ import { appTheme } from "@/design-system/theme/design-tokens";
 import { ChallengeScreen } from "@/screens/challenges";
 import { DashboardScreen } from "@/screens/dashboard";
 import { GoalsScreen } from "@/screens/goals";
+import { InsightsScreen } from "@/screens/insights";
 import { useThemeStore } from "@/stores/theme";
 
 export type RootBottomTabsParamList = {
@@ -49,7 +50,7 @@ export default function Tabs() {
       />
       <Screen
         name="Insights"
-        component={ChallengeScreen}
+        component={InsightsScreen}
         options={{
           header: () => <ScreenHeader title={t("screen.insights.title")} />,
         }}

@@ -11,6 +11,9 @@ import { useActiveValue } from "@/hooks/useActiveValue";
 import { useHealthData } from "@/hooks/useHealthData";
 import { hitSlopLarge } from "@/lib/hitSlop";
 import { DailyDistance } from "@/screens/distance/daily";
+import { MonthlyDistance } from "@/screens/distance/monthly";
+import { WeeklyDistance } from "@/screens/distance/weekly";
+import { YearlyDistance } from "@/screens/distance/yearly";
 import { DailySteps } from "@/screens/steps/daily";
 import { MonthlySteps } from "@/screens/steps/monthly";
 import { WeeklySteps } from "@/screens/steps/weekly";
@@ -92,7 +95,7 @@ export default function DashboardScreen() {
             </Box>
             <Stack gutter="10px">
               <WeeklySteps />
-              <WeeklySteps />
+              <WeeklyDistance />
             </Stack>
           </>
         )}
@@ -105,6 +108,7 @@ export default function DashboardScreen() {
             </Box>
             <Stack gutter="10px">
               <MonthlySteps />
+              <MonthlyDistance />
             </Stack>
           </>
         )}
@@ -117,6 +121,7 @@ export default function DashboardScreen() {
             </Box>
             <Stack gutter="10px">
               <YearlySteps />
+              <YearlyDistance />
             </Stack>
           </>
         )}

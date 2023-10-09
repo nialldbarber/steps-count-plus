@@ -28,6 +28,7 @@ export const space = {
   "80px": 80,
   "90px": 90,
   "104px": 104,
+  "115px": 115,
 } as const;
 
 export const negativeSpace = {
@@ -58,7 +59,7 @@ export const negativeSpace = {
   "-72px": -72,
   "-80px": -80,
   "-90px": -90,
-  "-104px": -104,
+  "-115px": -115,
 } as const;
 
 export type Space = keyof typeof space;

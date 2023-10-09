@@ -1,4 +1,5 @@
-import { Children, type ReactNode } from "react";
+import { Children } from "react";
+import type { ReactNode } from "react";
 import type { ViewProps } from "react-native";
 import flattenChildren from "react-flatten-children";
 import { Box } from "@/design-system/components/atoms/box";

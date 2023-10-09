@@ -9,6 +9,7 @@ import { Text } from "@/design-system/components/atoms/text";
 import { Stack } from "@/design-system/components/layouts/stack";
 import { space } from "@/design-system/layouts/space";
 import { useRemainingCount } from "@/hooks/useRemainingCount";
+import { hasGoalBeenMet } from "@/lib/goal";
 import { formatNumber } from "@/lib/numbers";
 import { useGoalsStore } from "@/stores/goals";
 import { useStepsStore } from "@/stores/steps";
@@ -31,8 +32,6 @@ export function DailySteps({}: DailyStepsProps) {
       marginVertical: space["20px"],
     },
   });
-
-  //const percentageComplete = 0.25;
 
   const calculatePercentage = useMemo(() => {
     return dailySteps / stepsGoal;
@@ -69,17 +68,23 @@ export function DailySteps({}: DailyStepsProps) {
               })}
             />
           </View>
-          <Text size="20px">
-            <Trans
-              components={{
-                bold: <Text color="primary" size="20px" weight="bold" />,
-              }}
-            >
-              {t("screen.stats.24hrs.steps.remaining", {
-                remaining: countRemainingToGoal,
-              })}
-            </Trans>
-          </Text>
+          {hasGoalBeenMet(dailySteps, stepsGoal) ? (
+            <Text size="20px" withEmoji>
+              You've reached your goal! 🎉
+            </Text>
+          ) : (
+            <Text size="20px">
+              <Trans
+                components={{
+                  bold: <Text color="primary" size="20px" weight="bold" />,
+                }}
+              >
+                {t("screen.stats.24hrs.steps.remaining", {
+                  remaining: countRemainingToGoal,
+                })}
+              </Trans>
+            </Text>
+          )}
         </Box>
       </Card>
     </Stack>

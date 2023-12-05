@@ -6,6 +6,7 @@
     "quotes": "off",
     "curly": "off",
     "react/react-in-jsx-scope": "off",
-    "react/no-unstable-nested-components": "off"
+    "react/no-unstable-nested-components": "off",
+    "@typescript-eslint/consistent-type-imports": "warn"
   }
 }

@@ -1,11 +1,7 @@
-import type { ReactNode } from "react";
+import type { PropsWithChildren } from "react";
 import { StyleSheet, View } from "react-native";
 
-type DebugLayoutProps = {
-  children: ReactNode;
-};
-
-export default function DebugLayout({ children }: DebugLayoutProps) {
+export default function DebugLayout({ children }: PropsWithChildren) {
   const styles = StyleSheet.create({
     container: {
       ...StyleSheet.absoluteFillObject,

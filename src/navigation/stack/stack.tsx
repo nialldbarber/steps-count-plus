@@ -1,6 +1,5 @@
-import { useColorScheme } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { appTheme, tokens } from "@/design-system/theme/design-tokens";
+import { appTheme } from "@/design-system/theme/design-tokens";
 import { Tabs } from "@/navigation/bottom-tabs";
 import { NewChallenge } from "@/screens/new-challenge";
 import { PremiumScreen } from "@/screens/premium";
@@ -39,7 +38,7 @@ export default function Navigation() {
           options={{ contentStyle, headerShown: false }}
         />
       </Group>
-      <Group screenOptions={{ presentation: "modal" }}>
+      <Group screenOptions={{ presentation: "fullScreenModal" }}>
         <Screen
           name="Settings"
           component={SettingsModalScreen}
@@ -53,7 +52,7 @@ export default function Navigation() {
         <Screen
           name="NewChallenge"
           component={NewChallenge}
-          options={{ contentStyle, headerShown: false }}
+          options={{ contentStyle, headerShown: true }}
         />
       </Group>
       {/* {session && session.user ? (

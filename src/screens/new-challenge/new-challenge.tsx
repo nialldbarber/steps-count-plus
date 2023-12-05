@@ -10,6 +10,11 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import type { Region } from "react-native-maps";
 import MapView from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 import { Close } from "@/components/icons/close";
 import { colors } from "@/design-system/color/palettes";
 import { Box } from "@/design-system/components/atoms/box";
@@ -20,8 +25,9 @@ import { MainScreenLayout } from "@/design-system/components/layouts/main-screen
 import { Row } from "@/design-system/components/layouts/row";
 import DebugLayout from "@/design-system/lib/debug-layout";
 import { useActiveValue } from "@/hooks/useActiveValue";
+import { useEffectIgnoreDeps } from "@/hooks/useEffectIgnoreDeps";
 import { hitSlopLarge } from "@/lib/hitSlop";
-import { formatKms } from "@/lib/units";
+import { convertMinutes, formatKms } from "@/lib/units";
 
 const activeChallenges = [];
 
@@ -68,6 +74,7 @@ export function ChallengeSearch({
 
   return (
     <Box>
+      <Text style={styles.searchText}>{direction}:</Text>
       <GooglePlacesAutocomplete
         placeholder={`Search ${direction}:`}
         fetchDetails
@@ -128,6 +135,7 @@ export default function NewChallengeScreen({}: NewChallengeScreenProps) {
 
   const mapRef = useRef<MapView>(null);
   const [distance, setDistance] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   const { t } = useTranslation();
   const { params } = useRoute();
@@ -142,6 +150,26 @@ export default function NewChallengeScreen({}: NewChallengeScreenProps) {
     distanceFrom.longitude !== 0 &&
     distanceTo.latitude !== 0 &&
     distanceTo.longitude !== 0;
+
+  const mapLoading = useSharedValue(0);
+  const textLoading = useSharedValue(1);
+
+  const mapLoadingStyles = useAnimatedStyle(() => ({
+    opacity: mapLoading.value,
+  }));
+  const textLoadingStyles = useAnimatedStyle(() => ({
+    opacity: textLoading.value,
+  }));
+
+  useEffectIgnoreDeps(() => {
+    if (isDistanceSet) {
+      mapLoading.value = withTiming(1);
+      textLoading.value = withTiming(0);
+    } else {
+      mapLoading.value = withTiming(0);
+      textLoading.value = withTiming(1);
+    }
+  }, [isDistanceSet]);
 
   return (
     <>
@@ -184,77 +212,88 @@ export default function NewChallengeScreen({}: NewChallengeScreenProps) {
           </Row>
         </Box>
 
-        <DebugLayout>
-          <Box>
-            {currentFilter === "Distance" && (
+        <Box>
+          {currentFilter === "Distance" && (
+            <Box>
               <Box>
-                <Box>
-                  <ChallengeSearch
-                    direction="from"
-                    handleSetDistance={handleSetDistanceFrom}
-                  />
-                </Box>
-                <Spacer height="20px" />
-                <Box>
-                  <ChallengeSearch
-                    direction="to"
-                    handleSetDistance={handleSetDistanceTo}
-                  />
-                </Box>
+                <ChallengeSearch
+                  direction="from"
+                  handleSetDistance={handleSetDistanceFrom}
+                />
               </Box>
-            )}
-          </Box>
-          <Box>{currentFilter === "Flights" && <Text>Flights</Text>}</Box>
-        </DebugLayout>
+              <Spacer height="20px" />
+              <Box>
+                <ChallengeSearch
+                  direction="to"
+                  handleSetDistance={handleSetDistanceTo}
+                />
+              </Box>
+            </Box>
+          )}
+        </Box>
+        <Box>{currentFilter === "Flights" && <Text>Flights</Text>}</Box>
 
         <DebugLayout>
           <Text>Distance: {formatKms(distance)}</Text>
+          <Text>Duration: {convertMinutes(duration)}</Text>
         </DebugLayout>
 
         <DebugLayout>
-          <Box styles={{ height: height / 2 }}>
-            <MapView
-              ref={mapRef}
-              initialRegion={{
-                latitude: distanceFrom.latitude,
-                longitude: distanceFrom.longitude,
-                latitudeDelta: distanceTo.latitude,
-                longitudeDelta: distanceTo.longitude,
-              }}
-              style={StyleSheet.absoluteFill}
-            >
-              {isDistanceSet && (
-                <MapViewDirections
-                  // @ts-expect-error
-                  apikey={process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY}
-                  origin={{
-                    latitude: distanceFrom.latitude,
-                    longitude: distanceFrom.longitude,
-                  }}
-                  destination={{
-                    latitude: distanceTo.latitude,
-                    longitude: distanceTo.longitude,
-                  }}
-                  mode="WALKING"
-                  onReady={(result) => {
-                    setDistance(result.distance);
-                    mapRef.current?.fitToCoordinates(result.coordinates, {
-                      edgePadding: {
-                        right: width / 20,
-                        bottom: height / 20,
-                        left: width / 20,
-                        top: height / 20,
-                      },
-                    });
-                  }}
-                  strokeColor={colors.primary}
-                  strokeWidth={6}
-                />
-              )}
-            </MapView>
-          </Box>
+          <Animated.View style={textLoadingStyles}>
+            <Text>Loading...</Text>
+          </Animated.View>
+          <Animated.View style={mapLoadingStyles}>
+            <Box styles={{ height: height / 2 }}>
+              <MapView
+                ref={mapRef}
+                initialRegion={{
+                  latitude: distanceFrom.latitude,
+                  longitude: distanceFrom.longitude,
+                  latitudeDelta: distanceTo.latitude,
+                  longitudeDelta: distanceTo.longitude,
+                }}
+                style={StyleSheet.absoluteFill}
+              >
+                {isDistanceSet && (
+                  <MapViewDirections
+                    // @ts-expect-error
+                    apikey={process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY}
+                    origin={{
+                      latitude: distanceFrom.latitude,
+                      longitude: distanceFrom.longitude,
+                    }}
+                    destination={{
+                      latitude: distanceTo.latitude,
+                      longitude: distanceTo.longitude,
+                    }}
+                    mode="WALKING"
+                    onReady={(result) => {
+                      setDistance(result.distance);
+                      setDuration(result.duration);
+                      mapRef.current?.fitToCoordinates(result.coordinates, {
+                        edgePadding: {
+                          right: width / 20,
+                          bottom: height / 20,
+                          left: width / 20,
+                          top: height / 20,
+                        },
+                      });
+                    }}
+                    strokeColor={colors.primary}
+                    strokeWidth={6}
+                  />
+                )}
+              </MapView>
+            </Box>
+          </Animated.View>
         </DebugLayout>
       </MainScreenLayout>
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  searchText: {
+    textTransform: "capitalize",
+  },
+});

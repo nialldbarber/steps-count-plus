@@ -38,7 +38,7 @@ export default function Navigation() {
           options={{ contentStyle, headerShown: false }}
         />
       </Group>
-      <Group screenOptions={{ presentation: "fullScreenModal" }}>
+      <Group screenOptions={{ presentation: "modal" }}>
         <Screen
           name="Settings"
           component={SettingsModalScreen}
@@ -52,7 +52,7 @@ export default function Navigation() {
         <Screen
           name="NewChallenge"
           component={NewChallenge}
-          options={{ contentStyle, headerShown: true }}
+          options={{ contentStyle, headerShown: false }}
         />
       </Group>
       {/* {session && session.user ? (

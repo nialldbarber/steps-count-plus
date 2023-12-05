@@ -1,15 +1,18 @@
-import { useMemo, type ReactNode } from "react";
-import { View } from "react-native";
+import type { PropsWithChildren } from "react";
+import { useMemo } from "react";
 import type { AccessibilityRole } from "react-native";
+import { View } from "react-native";
 import { colors, type Colors } from "@/design-system/color/palettes";
 import { shadow as dropShadow } from "@/design-system/color/shadow";
 import type { Radius } from "@/design-system/layouts/radius";
 import { radius } from "@/design-system/layouts/radius";
-import { heights, widths } from "@/design-system/layouts/size";
 import type { Height, Width } from "@/design-system/layouts/size";
-import { space } from "@/design-system/layouts/space";
+import { heights, widths } from "@/design-system/layouts/size";
 import type { Space } from "@/design-system/layouts/space";
-import { A11y } from "@/types/a11y";
+import { space } from "@/design-system/layouts/space";
+import type { NegativeZIndex, ZIndex } from "@/design-system/layouts/zIndex";
+import { zIndex } from "@/design-system/layouts/zIndex";
+import type { A11y } from "@/types/a11y";
 
 function resolveToken<TokenName extends string, TokenValue, CustomValue>(
   scale: Record<TokenName, TokenValue>,
@@ -35,7 +38,6 @@ type BoxProps = {
   borderBottomLeftRadius?: Radius;
   borderBottomRightRadius?: Radius;
   bottom?: Space;
-  children?: ReactNode;
   flex?: number;
   flexBasis?: 0;
   flexDirection?: "row" | "row-reverse" | "column";
@@ -72,6 +74,7 @@ type BoxProps = {
   backgroundColor?: Colors;
   styles?: any;
   shadow?: boolean;
+  zIndex?: ZIndex | NegativeZIndex;
 } & (
   | {
       borderBottomRadius?: number;
@@ -147,9 +150,10 @@ export default function Box({
   height: _height,
   overflow,
   backgroundColor,
-  children,
+  zIndex: _zIndex,
   shadow = false,
-}: BoxProps) {
+  children,
+}: PropsWithChildren<BoxProps>) {
   const width = resolveToken({ ...widths, ...space }, _width);
   const height = resolveToken({ ...heights, ...space }, _height);
 
@@ -210,6 +214,7 @@ export default function Box({
       width,
       overflow,
       backgroundColor: colors[backgroundColor],
+      zIndex: zIndex[_zIndex],
     };
   }, [
     alignSelf,
@@ -256,6 +261,7 @@ export default function Box({
     width,
     overflow,
     backgroundColor,
+    _zIndex,
   ]);
 
   return (

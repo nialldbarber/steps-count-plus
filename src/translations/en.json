@@ -107,7 +107,10 @@
     },
     "goals": {
       "title": "Goals",
-      "introText": "Set your <modal><bold>daily goals</bold></modal> here 💪"
+      "introText": "Set your <modal><bold>daily goals</bold></modal> here 💪",
+      "card": {
+        "subheader": "Current goal"
+      }
     },
     "insights": {
       "title": "Insights"

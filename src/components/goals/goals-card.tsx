@@ -72,7 +72,7 @@ export default function GoalsCard({
         </Box>
         <Box alignItems="center">
           <Text level="text" weight="bold">
-            Current goal
+            {t("screen.goals.card.subheader")}
           </Text>
         </Box>
         <Box

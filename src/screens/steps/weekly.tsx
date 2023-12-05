@@ -23,7 +23,7 @@ export function WeeklySteps({}: WeeklyStepsProps) {
         <Text level="text" size="20px">
           {t("screen.stats.steps", { steps: weeklySteps })}
         </Text>
-        <Chart data={weeklySegments} />
+        {weeklySegments && <Chart data={weeklySegments} />}
       </Card>
     </Stack>
   );

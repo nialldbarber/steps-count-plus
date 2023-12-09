@@ -78,6 +78,7 @@ export function ChallengeSearch({
       <GooglePlacesAutocomplete
         placeholder={`Search ${direction}:`}
         fetchDetails
+        debounce={500}
         query={{
           key: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY,
           language: "en",
@@ -114,6 +115,7 @@ function calculateMidPoint(
 const { width, height } = Dimensions.get("window");
 
 export default function NewChallengeScreen({}: NewChallengeScreenProps) {
+  const mapRef = useRef<MapView>(null);
   const [distanceFrom, setDistanceFrom] = useState<Location>({
     latitude: 0,
     longitude: 0,
@@ -122,18 +124,6 @@ export default function NewChallengeScreen({}: NewChallengeScreenProps) {
     latitude: 0,
     longitude: 0,
   });
-
-  function handleSetDistanceFrom({ latitude, longitude }: Location) {
-    setDistanceFrom({ latitude, longitude });
-  }
-  function handleSetDistanceTo({ latitude, longitude }: Location) {
-    setDistanceTo({ latitude, longitude });
-  }
-
-  // this is what should add the challenge to global/persisted state
-  function handleSetDistanceChallenge() {}
-
-  const mapRef = useRef<MapView>(null);
   const [distance, setDistance] = useState(0);
   const [duration, setDuration] = useState(0);
 
@@ -144,6 +134,16 @@ export default function NewChallengeScreen({}: NewChallengeScreenProps) {
     // if user comes through deep link, use the params
     params?.filter || "Distance",
   );
+
+  function handleSetDistanceFrom({ latitude, longitude }: Location) {
+    setDistanceFrom({ latitude, longitude });
+  }
+  function handleSetDistanceTo({ latitude, longitude }: Location) {
+    setDistanceTo({ latitude, longitude });
+  }
+
+  // this is what should add the challenge to global/persisted state
+  function handleSetDistanceChallenge() {}
 
   const isDistanceSet =
     distanceFrom.latitude !== 0 &&

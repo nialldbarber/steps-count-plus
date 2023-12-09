@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { StyleSheet } from "react-native";
 import { useRoute } from "@react-navigation/native";
+import { BlurView } from "expo-blur";
 import { useTranslation } from "react-i18next";
 import { Box } from "@/design-system/components/atoms/box";
 import { Chip } from "@/design-system/components/atoms/chip";
@@ -43,7 +45,7 @@ export default function DashboardScreen() {
           {t("screen.stats.filterText")}
         </Text>
       </Box>
-      <Box>
+      <BlurView intensity={80} style={styles.blurView}>
         <Row
           marginHorizontal="15px"
           marginTop="12px"
@@ -71,7 +73,7 @@ export default function DashboardScreen() {
             );
           })}
         </Row>
-      </Box>
+      </BlurView>
       <MainScreenLayout>
         {currentFilter === "TwentyFourHours" && (
           <>
@@ -129,3 +131,10 @@ export default function DashboardScreen() {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  blurView: {
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+  },
+});

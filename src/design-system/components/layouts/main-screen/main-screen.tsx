@@ -1,4 +1,4 @@
-import type { ForwardedRef, ReactNode } from "react";
+import type { ForwardedRef, PropsWithChildren } from "react";
 import { SafeAreaView, ScrollView } from "react-native";
 import { flexStyles } from "@/design-system/common-styles/flex";
 import { Box } from "@/design-system/components/atoms/box";
@@ -6,10 +6,9 @@ import { Box } from "@/design-system/components/atoms/box";
 type MainScreenLayoutProps = {
   scroll?: boolean;
   ref?: ForwardedRef<unknown>;
-  children: ReactNode;
 };
 
-function InnerScreenLayout({ children }: { children: ReactNode }) {
+function InnerScreenLayout({ children }: PropsWithChildren) {
   return (
     <Box paddingTop="20px" paddingHorizontal="20px" paddingBottom="90px">
       {children}
@@ -20,7 +19,7 @@ function InnerScreenLayout({ children }: { children: ReactNode }) {
 export default function MainScreenLayout({
   scroll = true,
   children,
-}: MainScreenLayoutProps) {
+}: PropsWithChildren<MainScreenLayoutProps>) {
   if (scroll) {
     return (
       <SafeAreaView style={flexStyles.container}>

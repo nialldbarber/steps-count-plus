@@ -1,3 +1,1 @@
-const maxFontSizeMultiplier = 1.6;
-
-export default maxFontSizeMultiplier;
+export const maxFontSizeMultiplier = 1.6;

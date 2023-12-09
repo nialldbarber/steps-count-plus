@@ -1,14 +1,14 @@
-import { Text as NativeText, StyleSheet } from "react-native";
 import type { TextProps as NativeTextProps, TextStyle } from "react-native";
-import maxFontSizeMultiplier from "@/constants/maxFontSizeMultiplier";
+import { Text as NativeText, StyleSheet } from "react-native";
+import { maxFontSizeMultiplier } from "@/constants/maxFontSizeMultiplier";
 import { colors, type Colors } from "@/design-system/color/palettes";
 import { renderStringWithEmoji } from "@/design-system/lib/renderStringWithEmoji";
 import { appTheme } from "@/design-system/theme/design-tokens";
-import { typeHierarchy } from "@/design-system/typography/font-size";
 import type {
   FontSizes,
   TextTypes,
 } from "@/design-system/typography/font-size";
+import { typeHierarchy } from "@/design-system/typography/font-size";
 import type { FontWeight } from "@/design-system/typography/font-weight";
 import { fontWeight } from "@/design-system/typography/font-weight";
 import { useThemeStore } from "@/stores/theme";

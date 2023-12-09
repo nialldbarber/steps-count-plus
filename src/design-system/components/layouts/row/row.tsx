@@ -1,4 +1,5 @@
-import { Children, type ReactNode } from "react";
+import type { PropsWithChildren } from "react";
+import { Children } from "react";
 import { ScrollView, type ViewProps } from "react-native";
 import flattenChildren from "react-flatten-children";
 import { Box } from "@/design-system/components/atoms/box";
@@ -19,7 +20,6 @@ interface RowProps extends ViewProps, Partial<A11y> {
     | "center"
     | "space-between"
     | "space-around";
-  children: ReactNode;
 }
 
 function InnerRow({
@@ -34,7 +34,7 @@ function InnerRow({
   a11yHint,
   a11yRole,
   children: childProp,
-}: RowProps) {
+}: PropsWithChildren<RowProps>) {
   const children = flattenChildren(childProp);
   return (
     <Box

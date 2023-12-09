@@ -1,5 +1,5 @@
+import type { PropsWithChildren } from "react";
 import { Children } from "react";
-import type { ReactNode } from "react";
 import type { ViewProps } from "react-native";
 import flattenChildren from "react-flatten-children";
 import { Box } from "@/design-system/components/atoms/box";
@@ -8,14 +8,13 @@ import type { Space } from "@/design-system/layouts/space";
 interface StackProps extends ViewProps {
   margin?: Space;
   gutter?: Space;
-  children: ReactNode;
 }
 
 export default function Stack({
   margin = "0px",
   gutter = "0px",
   children: childProp,
-}: StackProps) {
+}: PropsWithChildren<StackProps>) {
   const children = flattenChildren(childProp);
 
   return (

@@ -1,7 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { appTheme } from "@/design-system/theme/design-tokens";
 import { Tabs } from "@/navigation/bottom-tabs";
-import { NewChallenge } from "@/screens/new-challenge";
 import { PremiumScreen } from "@/screens/premium";
 import { SettingsModalScreen } from "@/screens/settings";
 import { useThemeStore } from "@/stores/theme";
@@ -47,11 +46,6 @@ export default function Navigation() {
         <Screen
           name="Premium"
           component={PremiumScreen}
-          options={{ contentStyle, headerShown: false }}
-        />
-        <Screen
-          name="NewChallenge"
-          component={NewChallenge}
           options={{ contentStyle, headerShown: false }}
         />
       </Group>

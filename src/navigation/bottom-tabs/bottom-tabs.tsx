@@ -4,11 +4,11 @@ import { useTranslation } from "react-i18next";
 import { CustomBottomTabs } from "@/components/bottom-tabs";
 import { ScreenHeader } from "@/components/screen-header";
 import { appTheme } from "@/design-system/theme/design-tokens";
-import { ChallengeScreen } from "@/screens/challenges";
 import { DashboardScreen } from "@/screens/dashboard";
 import { GoalsScreen } from "@/screens/goals";
 import { InsightsScreen } from "@/screens/insights";
 import { useThemeStore } from "@/stores/theme";
+import { ChallengesStack } from "../challenges-stack";
 
 export type RootBottomTabsParamList = {
   Stats: undefined;
@@ -57,7 +57,7 @@ export default function Tabs() {
       />
       <Screen
         name="Challenges"
-        component={ChallengeScreen}
+        component={ChallengesStack}
         options={{
           header: () => <ScreenHeader title={t("screen.challenges.title")} />,
         }}

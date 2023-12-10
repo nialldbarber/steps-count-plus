@@ -1,16 +1,20 @@
 import { useRef, useState } from "react";
 import { Dimensions, StyleSheet } from "react-native";
 import { useRoute } from "@react-navigation/native";
+import {
+  ArrangeVertical,
+  Location,
+  NotificationCircle,
+} from "iconsax-react-native";
 import { useTranslation } from "react-i18next";
 import type {
   GooglePlaceData,
   GooglePlaceDetail,
 } from "react-native-google-places-autocomplete";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import type MapView from "react-native-maps";
 import type { Region } from "react-native-maps";
-import MapView from "react-native-maps";
-import MapViewDirections from "react-native-maps-directions";
-import Animated, {
+import {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -21,13 +25,10 @@ import { Box } from "@/design-system/components/atoms/box";
 import { Chip } from "@/design-system/components/atoms/chip";
 import { Spacer } from "@/design-system/components/atoms/spacer";
 import { Text } from "@/design-system/components/atoms/text";
-import { MainScreenLayout } from "@/design-system/components/layouts/main-screen";
 import { Row } from "@/design-system/components/layouts/row";
-import DebugLayout from "@/design-system/lib/debug-layout";
 import { useActiveValue } from "@/hooks/useActiveValue";
 import { useEffectIgnoreDeps } from "@/hooks/useEffectIgnoreDeps";
 import { hitSlopLarge } from "@/lib/hitSlop";
-import { convertMinutes, formatKms } from "@/lib/units";
 
 const activeChallenges = [];
 
@@ -73,19 +74,32 @@ export function ChallengeSearch({
   }
 
   return (
-    <Box>
-      <Text style={styles.searchText}>{direction}:</Text>
-      <GooglePlacesAutocomplete
-        placeholder={`Search ${direction}:`}
-        fetchDetails
-        debounce={500}
-        query={{
-          key: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY,
-          language: "en",
-        }}
-        onPress={handleInvokeSearch}
-      />
-    </Box>
+    <GooglePlacesAutocomplete
+      placeholder={direction}
+      fetchDetails
+      debounce={500}
+      query={{
+        key: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY,
+        language: "en",
+      }}
+      styles={{
+        listView: {
+          position: "absolute",
+          top: direction === "from" ? 120 : 60,
+          borderRadius: 10,
+        },
+        textInput: {
+          height: 50,
+          borderRadius: 100,
+          fontWeight: "600",
+          paddingHorizontal: 20,
+        },
+      }}
+      textInputProps={{
+        placeholderTextColor: colors.greyFour,
+      }}
+      onPress={handleInvokeSearch}
+    />
   );
 }
 
@@ -173,15 +187,10 @@ export default function NewChallengeScreen({}: NewChallengeScreenProps) {
 
   return (
     <>
-      <Box position="absolute" top="15px" right="15px" zIndex="10px">
+      <Box position="absolute" top="15px" left="15px" zIndex="10px">
         <Close />
       </Box>
-      <MainScreenLayout>
-        <Box alignItems="center" paddingTop="30px">
-          <Text level="heading" size="23px" color="black">
-            Choose a measurement
-          </Text>
-        </Box>
+      <>
         <Box alignItems="center">
           <Row
             marginHorizontal="15px"
@@ -212,33 +221,54 @@ export default function NewChallengeScreen({}: NewChallengeScreenProps) {
           </Row>
         </Box>
 
-        <Box>
+        <Box position="absolute" width="full" top="60px">
           {currentFilter === "Distance" && (
-            <Box>
-              <Box>
-                <ChallengeSearch
-                  direction="from"
-                  handleSetDistance={handleSetDistanceFrom}
-                />
+            <Box flexDirection="row" alignItems="center" width="full">
+              <Box width="44px" alignItems="center">
+                <Box marginBottom="3px">
+                  <NotificationCircle size={18} color={colors.black} />
+                </Box>
+                {Array.from({ length: 3 }).map((_, index) => (
+                  <Box
+                    key={index}
+                    width="4px"
+                    height="4px"
+                    marginVertical="3px"
+                    borderRadius="full"
+                    backgroundColor="black"
+                  />
+                ))}
+                <Box marginTop="3px">
+                  <Location size={20} color={colors.destructive} />
+                </Box>
               </Box>
-              <Spacer height="20px" />
-              <Box>
-                <ChallengeSearch
-                  direction="to"
-                  handleSetDistance={handleSetDistanceTo}
-                />
+              <Box flex={1}>
+                <Box>
+                  <ChallengeSearch
+                    direction="from"
+                    handleSetDistance={handleSetDistanceFrom}
+                  />
+                  <Spacer height="5px" />
+                  <ChallengeSearch
+                    direction="to"
+                    handleSetDistance={handleSetDistanceTo}
+                  />
+                </Box>
+              </Box>
+              <Box width="44px" alignItems="center">
+                <ArrangeVertical size={25} color={colors.black} />
               </Box>
             </Box>
           )}
         </Box>
         <Box>{currentFilter === "Flights" && <Text>Flights</Text>}</Box>
 
-        <DebugLayout>
+        {/* <DebugLayout>
           <Text>Distance: {formatKms(distance)}</Text>
           <Text>Duration: {convertMinutes(duration)}</Text>
-        </DebugLayout>
+        </DebugLayout> */}
 
-        <DebugLayout>
+        {/* <DebugLayout>
           <Animated.View style={textLoadingStyles}>
             <Text>Loading...</Text>
           </Animated.View>
@@ -256,8 +286,9 @@ export default function NewChallengeScreen({}: NewChallengeScreenProps) {
               >
                 {isDistanceSet && (
                   <MapViewDirections
-                    // @ts-expect-error
-                    apikey={process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY}
+                    apikey={
+                      process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY as string
+                    }
                     origin={{
                       latitude: distanceFrom.latitude,
                       longitude: distanceFrom.longitude,
@@ -286,8 +317,8 @@ export default function NewChallengeScreen({}: NewChallengeScreenProps) {
               </MapView>
             </Box>
           </Animated.View>
-        </DebugLayout>
-      </MainScreenLayout>
+        </DebugLayout> */}
+      </>
     </>
   );
 }

@@ -8,7 +8,7 @@ type MainScreenLayoutProps = {
   ref?: ForwardedRef<unknown>;
 };
 
-function InnerScreenLayout({ children }: PropsWithChildren) {
+export function InnerScreenLayout({ children }: PropsWithChildren) {
   return (
     <Box paddingTop="20px" paddingHorizontal="20px" paddingBottom="90px">
       {children}

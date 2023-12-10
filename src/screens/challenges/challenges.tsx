@@ -1,16 +1,16 @@
 import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Add } from "iconsax-react-native";
 import { Box } from "@/design-system/components/atoms/box";
 import { Text } from "@/design-system/components/atoms/text";
 import { Pressable } from "@/design-system/components/common/pressable";
 import { MainScreenLayout } from "@/design-system/components/layouts/main-screen";
 import { appTheme } from "@/design-system/theme/design-tokens";
-import { RootStackParamList } from "@/navigation/stack/stack";
+import type { ChallengesStackParamList } from "@/navigation/challenges-stack/challenges-stack";
 import { useThemeStore } from "@/stores/theme";
 
 type ChallengesNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
+  ChallengesStackParamList,
   "NewChallenge"
 >;
 

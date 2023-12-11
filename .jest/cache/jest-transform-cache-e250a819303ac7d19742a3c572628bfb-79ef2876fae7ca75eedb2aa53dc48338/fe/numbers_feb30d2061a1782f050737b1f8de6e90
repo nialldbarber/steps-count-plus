@@ -1,0 +1,14 @@
+7c3d7a554ff0ac5afa3a7f526a4db171
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.roundDown = exports.formatNumber = void 0;
+/**
+ * Example: // 3500 -> '3,500' if in US English locale
+ * @param num
+ * @returns string
+ */
+const formatNumber = (num) => Intl.NumberFormat().format(num);
+exports.formatNumber = formatNumber;
+const roundDown = (num) => Math.round(num);
+exports.roundDown = roundDown;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL25pYWxsYmFyYmVyL0RldmVsb3Blci9zdGVwcy1jb3VudC1wbHVzL3NyYy9saWIvbnVtYmVycy50cyIsIm1hcHBpbmdzIjoiOzs7QUFBQTs7OztHQUlHO0FBQ0ksTUFBTSxZQUFZLEdBQUcsQ0FBQyxHQUFXLEVBQUUsRUFBRSxDQUFDLElBQUksQ0FBQyxZQUFZLEVBQUUsQ0FBQyxNQUFNLENBQUMsR0FBRyxDQUFDLENBQUM7QUFBaEUsUUFBQSxZQUFZLGdCQUFvRDtBQUV0RSxNQUFNLFNBQVMsR0FBRyxDQUFDLEdBQVcsRUFBRSxFQUFFLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztBQUE3QyxRQUFBLFNBQVMsYUFBb0MiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL25pYWxsYmFyYmVyL0RldmVsb3Blci9zdGVwcy1jb3VudC1wbHVzL3NyYy9saWIvbnVtYmVycy50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIEV4YW1wbGU6IC8vIDM1MDAgLT4gJzMsNTAwJyBpZiBpbiBVUyBFbmdsaXNoIGxvY2FsZVxuICogQHBhcmFtIG51bVxuICogQHJldHVybnMgc3RyaW5nXG4gKi9cbmV4cG9ydCBjb25zdCBmb3JtYXROdW1iZXIgPSAobnVtOiBudW1iZXIpID0+IEludGwuTnVtYmVyRm9ybWF0KCkuZm9ybWF0KG51bSk7XG5cbmV4cG9ydCBjb25zdCByb3VuZERvd24gPSAobnVtOiBudW1iZXIpID0+IE1hdGgucm91bmQobnVtKTtcbiJdLCJ2ZXJzaW9uIjozfQ==

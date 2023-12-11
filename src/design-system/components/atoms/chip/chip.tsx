@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
 import type { ViewStyle } from "react-native";
+import { StyleSheet } from "react-native";
 import * as Haptics from "expo-haptics";
 import { colors } from "@/design-system/color/palettes";
 import { shadow } from "@/design-system/color/shadow";
@@ -7,8 +7,8 @@ import { Text } from "@/design-system/components/atoms/text";
 import { Pressable } from "@/design-system/components/common/pressable";
 import type { PressableProps } from "@/design-system/components/common/pressable/pressable";
 import { radius } from "@/design-system/layouts/radius";
-import { heights, widths } from "@/design-system/layouts/size";
 import type { Height, Width } from "@/design-system/layouts/size";
+import { heights, widths } from "@/design-system/layouts/size";
 import { space } from "@/design-system/layouts/space";
 import { tokens } from "@/design-system/theme/design-tokens";
 import type { FontSizes } from "@/design-system/typography/font-size";

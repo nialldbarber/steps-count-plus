@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { StyleSheet } from "react-native";
 import type { TextStyle, ViewStyle } from "react-native";
+import { StyleSheet } from "react-native";
 import type { ImpactFeedbackStyle } from "expo-haptics";
 import * as Haptics from "expo-haptics";
 import Animated, {
@@ -10,6 +10,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { shadow } from "@/design-system/color/shadow";
 import { Box } from "@/design-system/components/atoms/box";
+import { Loader } from "@/design-system/components/atoms/loader";
 import { Text } from "@/design-system/components/atoms/text";
 import { Pressable } from "@/design-system/components/common/pressable";
 import type { PressableProps } from "@/design-system/components/common/pressable/pressable";
@@ -122,11 +123,11 @@ export default function Button({
           <Text style={styles.text}>{children}</Text>
         </Box>
       </Pressable>
-      {/* <Box position="absolute" right="20px" top="15px">
+      <Box position="absolute" right="20px" top="15px">
         <Animated.View style={loaderStyle}>
           <Loader variant={variant} />
         </Animated.View>
-      </Box> */}
+      </Box>
     </Animated.View>
   );
 }

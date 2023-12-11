@@ -6,6 +6,7 @@ import { colors } from "@/design-system/color/palettes";
 import { tokens } from "@/design-system/theme/design-tokens";
 
 type GoBackProps = {
+  size?: string | number;
   /**
    * Refer back to colors for a full list of options
    * @default "black"
@@ -13,7 +14,7 @@ type GoBackProps = {
   stroke?: Colors;
 };
 
-export default function GoBack({ stroke }: GoBackProps) {
+export default function GoBack({ size, stroke }: GoBackProps) {
   const { goBack } = useNavigation();
 
   const getStrokeColor = () => {
@@ -27,7 +28,7 @@ export default function GoBack({ stroke }: GoBackProps) {
 
   return (
     <Pressable onPress={goBack}>
-      <ArrowLeft2 size="32" color={strokeColor} />
+      <ArrowLeft2 size={size ?? "32"} color={strokeColor} />
     </Pressable>
   );
 }

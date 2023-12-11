@@ -1,7 +1,8 @@
-import { StyleSheet, TextInput } from "react-native";
 import type { TextInputProps } from "react-native";
+import { StyleSheet, TextInput } from "react-native";
 import { Warning2 } from "iconsax-react-native";
 import type { FieldError } from "react-hook-form";
+import { shadow } from "@/design-system/color/shadow";
 import { Box } from "@/design-system/components/atoms/box";
 import { Spacer } from "@/design-system/components/atoms/spacer";
 import { Text } from "@/design-system/components/atoms/text";
@@ -29,6 +30,7 @@ export default function Input({
       padding: space["20px"],
       borderColor: isError ? tokens.inputDestructiveBorderColor : "transparent",
       borderRadius: space["15px"],
+      ...shadow(),
     },
     placeholderText: {
       color: tokens.inputPlaceholderColor,

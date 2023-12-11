@@ -1,0 +1,17 @@
+75e7fb33421b5115a9ac51d15ffb8315
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.shadow = void 0;
+const palettes_1 = require("@/design-system/color/palettes");
+const shadow = ({ width = 0, height = 1, opacity = 0.07, radius = 2.22, elevation = 2, } = {}) => ({
+    shadowColor: palettes_1.colors.black,
+    shadowOffset: {
+        width,
+        height,
+    },
+    shadowOpacity: opacity,
+    shadowRadius: radius,
+    elevation,
+});
+exports.shadow = shadow;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL25pYWxsYmFyYmVyL0RldmVsb3Blci9zdGVwcy1jb3VudC1wbHVzL3NyYy9kZXNpZ24tc3lzdGVtL2NvbG9yL3NoYWRvdy50cyIsIm1hcHBpbmdzIjoiOzs7QUFBQSw2REFBd0Q7QUFFakQsTUFBTSxNQUFNLEdBQUcsQ0FBQyxFQUNyQixLQUFLLEdBQUcsQ0FBQyxFQUNULE1BQU0sR0FBRyxDQUFDLEVBQ1YsT0FBTyxHQUFHLElBQUksRUFDZCxNQUFNLEdBQUcsSUFBSSxFQUNiLFNBQVMsR0FBRyxDQUFDLE1BT1gsRUFBRSxFQUFFLEVBQUUsQ0FBQyxDQUFDO0lBQ1YsV0FBVyxFQUFFLGlCQUFNLENBQUMsS0FBSztJQUN6QixZQUFZLEVBQUU7UUFDWixLQUFLO1FBQ0wsTUFBTTtLQUNQO0lBQ0QsYUFBYSxFQUFFLE9BQU87SUFDdEIsWUFBWSxFQUFFLE1BQU07SUFDcEIsU0FBUztDQUNWLENBQUMsQ0FBQztBQXJCVSxRQUFBLE1BQU0sVUFxQmhCIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbIi9Vc2Vycy9uaWFsbGJhcmJlci9EZXZlbG9wZXIvc3RlcHMtY291bnQtcGx1cy9zcmMvZGVzaWduLXN5c3RlbS9jb2xvci9zaGFkb3cudHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgY29sb3JzIH0gZnJvbSBcIkAvZGVzaWduLXN5c3RlbS9jb2xvci9wYWxldHRlc1wiO1xuXG5leHBvcnQgY29uc3Qgc2hhZG93ID0gKHtcbiAgd2lkdGggPSAwLFxuICBoZWlnaHQgPSAxLFxuICBvcGFjaXR5ID0gMC4wNyxcbiAgcmFkaXVzID0gMi4yMixcbiAgZWxldmF0aW9uID0gMixcbn06IHtcbiAgd2lkdGg/OiBudW1iZXI7XG4gIGhlaWdodD86IG51bWJlcjtcbiAgb3BhY2l0eT86IG51bWJlcjtcbiAgcmFkaXVzPzogbnVtYmVyO1xuICBlbGV2YXRpb24/OiBudW1iZXI7XG59ID0ge30pID0+ICh7XG4gIHNoYWRvd0NvbG9yOiBjb2xvcnMuYmxhY2ssXG4gIHNoYWRvd09mZnNldDoge1xuICAgIHdpZHRoLFxuICAgIGhlaWdodCxcbiAgfSxcbiAgc2hhZG93T3BhY2l0eTogb3BhY2l0eSxcbiAgc2hhZG93UmFkaXVzOiByYWRpdXMsXG4gIGVsZXZhdGlvbixcbn0pO1xuIl0sInZlcnNpb24iOjN9

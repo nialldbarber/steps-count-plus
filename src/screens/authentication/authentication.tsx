@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Alert, SafeAreaView, ScrollView } from "react-native";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
@@ -29,6 +30,7 @@ const signInSchema = z.object({
 type SignInSchema = z.infer<typeof signInSchema>;
 
 export default function Authentication() {
+  const [isLoginLoading, setIsLoginLoading] = useState(false);
   const { navigate } = useNavigation<SignUpScreenNavigationProp>();
   const {
     control,
@@ -38,19 +40,25 @@ export default function Authentication() {
     resolver: zodResolver(signInSchema),
   });
 
-  async function onSubmit({
+  async function invokeSignInToApp({
     email,
     password,
   }: {
     email: string;
     password: string;
   }) {
+    setIsLoginLoading(true);
+
+    await new Promise((res) => setTimeout(res, 500));
+
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
-
-    if (error) Alert.alert(error.message);
+    if (error) {
+      Alert.alert(error.message);
+      setIsLoginLoading(false);
+    }
   }
 
   return (
@@ -95,7 +103,11 @@ export default function Authentication() {
             />
             {isSubmitting && <Text>Loading...</Text>}
             <Spacer height="20px" />
-            <Button onPress={handleSubmit(onSubmit)} haptic="Light">
+            <Button
+              onPress={handleSubmit(invokeSignInToApp)}
+              haptic="Light"
+              isLoading={isLoginLoading}
+            >
               Log in
             </Button>
             <Button

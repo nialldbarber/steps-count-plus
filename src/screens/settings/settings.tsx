@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { useColorScheme } from "react-native";
+import { Alert, useColorScheme } from "react-native";
 import {
   BottomSheetBackdrop,
   BottomSheetModal,
@@ -8,7 +8,9 @@ import {
 import * as Haptics from "expo-haptics";
 import { useTranslation } from "react-i18next";
 import { Close } from "@/components/icons/close";
+import { supabase } from "@/database/supabase";
 import { Box } from "@/design-system/components/atoms/box";
+import { Button } from "@/design-system/components/atoms/button";
 import { Card } from "@/design-system/components/atoms/card";
 import { Spacer } from "@/design-system/components/atoms/spacer";
 import { Text } from "@/design-system/components/atoms/text";
@@ -21,10 +23,10 @@ import { appTheme } from "@/design-system/theme/design-tokens";
 import { useBottomSheet } from "@/hooks/useBottomSheet";
 import { hitSlopLarge } from "@/lib/hitSlop";
 import { PremiumScreen } from "@/screens/premium";
-import { useThemeStore } from "@/stores/theme";
 import type { Theme } from "@/stores/theme";
-import { useUnitsStore } from "@/stores/units";
+import { useThemeStore } from "@/stores/theme";
 import type { Units } from "@/stores/units";
+import { useUnitsStore } from "@/stores/units";
 
 const themeOptions: Array<RadioButtonType> = [
   { id: "theme_first", label: "System", value: "system" },
@@ -63,6 +65,14 @@ export default function SettingsModalScreen() {
   function handleSetUnits(userSelected: Units) {
     invokeHaptic();
     setUnits(userSelected);
+  }
+
+  async function invokeSignOutOfApp() {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      Alert.alert(error.message);
+    }
   }
 
   return (
@@ -134,6 +144,9 @@ export default function SettingsModalScreen() {
               onSelect={handleSetUnits}
             />
           </Card>
+          <Box>
+            <Button onPress={invokeSignOutOfApp}>Sign out!</Button>
+          </Box>
         </Stack>
       </MainScreenLayout>
       <BottomSheetModal

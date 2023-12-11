@@ -1,0 +1,12 @@
+df20a98c9ff4d3fac041ce44ad92a441
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.radius = void 0;
+exports.radius = {
+    none: 0,
+    small: 4,
+    medium: 8,
+    large: 12,
+    full: 100,
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL25pYWxsYmFyYmVyL0RldmVsb3Blci9zdGVwcy1jb3VudC1wbHVzL3NyYy9kZXNpZ24tc3lzdGVtL2xheW91dHMvcmFkaXVzLnRzIiwibWFwcGluZ3MiOiI7OztBQUFhLFFBQUEsTUFBTSxHQUFHO0lBQ3BCLElBQUksRUFBRSxDQUFDO0lBQ1AsS0FBSyxFQUFFLENBQUM7SUFDUixNQUFNLEVBQUUsQ0FBQztJQUNULEtBQUssRUFBRSxFQUFFO0lBQ1QsSUFBSSxFQUFFLEdBQUc7Q0FDRCxDQUFDIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbIi9Vc2Vycy9uaWFsbGJhcmJlci9EZXZlbG9wZXIvc3RlcHMtY291bnQtcGx1cy9zcmMvZGVzaWduLXN5c3RlbS9sYXlvdXRzL3JhZGl1cy50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgY29uc3QgcmFkaXVzID0ge1xuICBub25lOiAwLFxuICBzbWFsbDogNCxcbiAgbWVkaXVtOiA4LFxuICBsYXJnZTogMTIsXG4gIGZ1bGw6IDEwMCxcbn0gYXMgY29uc3Q7XG5cbmV4cG9ydCB0eXBlIFJhZGl1cyA9IGtleW9mIHR5cGVvZiByYWRpdXM7XG4iXSwidmVyc2lvbiI6M30=

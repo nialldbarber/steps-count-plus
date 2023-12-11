@@ -2,6 +2,7 @@ export const baseColors = {
   black: "#343434",
   white: "#f5f5f5",
   pureWhite: "#fff",
+  transparent: "transparent",
 } as const;
 
 export const greyColors = {
@@ -15,7 +16,7 @@ export const greyColors = {
 
 export const coreColors = {
   primary: "#00D632",
-  primaryDark: "#045fd1",
+  primaryDark: "#02b52b",
   secondary: "#f5f5f5",
   tertiary: "",
   destructive: "#ef4444",
